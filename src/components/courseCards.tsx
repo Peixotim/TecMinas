@@ -3,8 +3,6 @@ import Image from "next/image";
 import { PlusCircle } from "lucide-react";
 import { slugify } from "@/utils/slugify";
 
-// --- Interface de Props ---
-// ADIÇÃO: Adicionei a prop 'flag' para tornar a etiqueta dinâmica
 export interface CourseCardProps {
   title: string;
   subTitle: string; // A categoria do curso

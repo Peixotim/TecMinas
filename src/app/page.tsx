@@ -5,6 +5,10 @@ import CardsMain from "@/utils/cardsMain";
 import { useState } from "react";
 import SearchSection from "@/components/search";
 import { Header } from "@/components/header";
+import { SobreNosTecMinas } from "@/components/sobrenos";
+import Depoiments from "@/components/depoiments";
+import Footer from "@/components/footer";
+import { FinalCTA } from "@/components/finalcta";
 export default function Home() {
   const cardProps = CardsMain();
 
@@ -43,8 +47,10 @@ export default function Home() {
       <div id="inicio">
         <HeroSection />
       </div>
-
-      <div className="my-32 lg:my-40" />
+      <div className="my-38 lg:my-40" />
+      <div id="sobrenos">
+        <SobreNosTecMinas />
+      </div>
       {/* Passando as props e as funções para o componente SearchSection */}
       <SearchSection
         searchTerm={searchTerm}
@@ -67,6 +73,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Depoiments />
+      <Footer />
     </>
   );
 }
