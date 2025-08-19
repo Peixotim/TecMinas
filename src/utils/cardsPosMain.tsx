@@ -5,8 +5,8 @@ import { CourseCardProps } from "../components/courseCards";
 export default function CardsPosMain(): CourseCardProps[] {
   return [
     {
-      title: "Técnico em Agente Comunitário de Saúde",
-      subTitle: "Saúde", // Revertido para o original
+      title: "Técnico em Agente Comunitário de Saúde - por competência",
+      subTitle: "Saúde",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/8942125/pexels-photo-8942125.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -14,8 +14,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Análises Clínicas",
-      subTitle: "Saúde", // Revertido para o original
+      title: "Técnico em Análises Clínicas - por competência",
+      subTitle: "Saúde",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/3993243/pexels-photo-3993243.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -23,8 +23,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Cuidados de Idosos",
-      subTitle: "Saúde", // Revertido para o original
+      title: "Técnico em Cuidados de Idosos - por competência",
+      subTitle: "Saúde",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/4061442/pexels-photo-4061442.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -32,8 +32,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Enfermagem",
-      subTitle: "Saúde", // Revertido para o original
+      title: "Técnico em Enfermagem - por competência",
+      subTitle: "Saúde",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/3786126/pexels-photo-3786126.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -41,8 +41,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Equipamentos Biomédicos",
-      subTitle: "Saúde", // Revertido para o original
+      title: "Técnico em Equipamentos Biomédicos - por competência",
+      subTitle: "Saúde",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -50,8 +50,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Estética",
-      subTitle: "Saúde", // Revertido para o original
+      title: "Técnico em Estética - por competência",
+      subTitle: "Saúde",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/3762875/pexels-photo-3762875.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -59,8 +59,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Farmácia",
-      subTitle: "Saúde", // Revertido para o original
+      title: "Técnico em Farmácia - por competência",
+      subTitle: "Saúde",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/7615469/pexels-photo-7615469.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -68,8 +68,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Gerência em Saúde",
-      subTitle: "Saúde", // Revertido para o original
+      title: "Técnico em Gerência em Saúde - por competência",
+      subTitle: "Saúde",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -77,8 +77,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Nutrição e Dietética",
-      subTitle: "Saúde", // Revertido para o original
+      title: "Técnico em Nutrição e Dietética - por competência",
+      subTitle: "Saúde",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -86,8 +86,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Radiologia",
-      subTitle: "Saúde", // Revertido para o original
+      title: "Técnico em Radiologia - por competência",
+      subTitle: "Saúde",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/2280568/pexels-photo-2280568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -95,8 +95,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Saúde Bucal",
-      subTitle: "Saúde", // Revertido para o original
+      title: "Técnico em Saúde Bucal - por competência",
+      subTitle: "Saúde",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/6528859/pexels-photo-6528859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -104,8 +104,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Veterinária",
-      subTitle: "Saúde", // Revertido para o original
+      title: "Técnico em Veterinária - por competência",
+      subTitle: "Saúde",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/6235116/pexels-photo-6235116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -113,8 +113,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Administração",
-      subTitle: "Finanças", // Revertido para o original
+      title: "Técnico em Administração - por competência",
+      subTitle: "Finanças",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -122,8 +122,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Contabilidade",
-      subTitle: "Finanças", // Revertido para o original
+      title: "Técnico em Contabilidade - por competência",
+      subTitle: "Finanças",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/7567433/pexels-photo-7567433.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -131,8 +131,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Marketing",
-      subTitle: "Finanças", // Revertido para o original
+      title: "Técnico em Marketing - por competência",
+      subTitle: "Finanças",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -140,8 +140,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Qualidade",
-      subTitle: "Serviços Gerais", // Revertido para o original
+      title: "Técnico em Qualidade - por competência",
+      subTitle: "Serviços Gerais",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/3807744/pexels-photo-3807744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -149,8 +149,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Recursos Humanos",
-      subTitle: "Finanças", // Revertido para o original
+      title: "Técnico em Recursos Humanos - por competência",
+      subTitle: "Finanças",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/3184454/pexels-photo-3184454.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -158,8 +158,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Secretaria Escolar",
-      subTitle: "Serviços Gerais", // Revertido para o original
+      title: "Técnico em Secretaria Escolar - por competência",
+      subTitle: "Serviços Gerais",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/5212353/pexels-photo-5212353.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -167,8 +167,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Segurança do Trabalho",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Segurança do Trabalho - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/1216559/pexels-photo-1216559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -176,8 +176,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Serviços Jurídicos",
-      subTitle: "Serviços Gerais", // Revertido para o original
+      title: "Técnico em Serviços Jurídicos - por competência",
+      subTitle: "Serviços Gerais",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/5816283/pexels-photo-5816283.jpeg",
@@ -185,8 +185,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Transações Imobiliárias",
-      subTitle: "Finanças", // Revertido para o original
+      title: "Técnico em Transações Imobiliárias - por competência",
+      subTitle: "Finanças",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/101808/pexels-photo-101808.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -194,8 +194,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Vendas",
-      subTitle: "Finanças", // Revertido para o original
+      title: "Técnico em Vendas - por competência",
+      subTitle: "Finanças",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -203,8 +203,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Curso Técnico em Eventos",
-      subTitle: "Serviços Gerais", // Revertido para o original
+      title: "Curso Técnico em Eventos - por competência",
+      subTitle: "Serviços Gerais",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/2747901/pexels-photo-2747901.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -212,8 +212,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Biotecnologia",
-      subTitle: "Tecnologia", // Revertido para o original
+      title: "Técnico em Biotecnologia - por competência",
+      subTitle: "Tecnologia",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -221,8 +221,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Design Gráfico",
-      subTitle: "Tecnologia", // Revertido para o original
+      title: "Técnico em Design Gráfico - por competência",
+      subTitle: "Tecnologia",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -230,8 +230,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Desenvolvimento de Sistemas",
-      subTitle: "Tecnologia", // Revertido para o original
+      title: "Técnico em Desenvolvimento de Sistemas - por competência",
+      subTitle: "Tecnologia",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -239,8 +239,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Informática para Internet",
-      subTitle: "Tecnologia", // Revertido para o original
+      title: "Técnico em Informática para Internet - por competência",
+      subTitle: "Tecnologia",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -248,8 +248,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Redes de Computadores",
-      subTitle: "Tecnologia", // Revertido para o original
+      title: "Técnico em Redes de Computadores - por competência",
+      subTitle: "Tecnologia",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/5380649/pexels-photo-5380649.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -257,8 +257,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Sistemas de Energia Renovável",
-      subTitle: "Tecnologia", // Revertido para o original
+      title: "Técnico em Sistemas de Energia Renovável - por competência",
+      subTitle: "Tecnologia",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -266,8 +266,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Telecomunicações",
-      subTitle: "Tecnologia", // Revertido para o original
+      title: "Técnico em Telecomunicações - por competência",
+      subTitle: "Tecnologia",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/4099099/pexels-photo-4099099.jpeg",
@@ -275,8 +275,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Tradução e Interpretação de Libras",
-      subTitle: "Serviços Gerais", // Revertido para o original
+      title: "Técnico em Tradução e Interpretação de Libras - por competência",
+      subTitle: "Serviços Gerais",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/4342401/pexels-photo-4342401.jpeg",
@@ -284,8 +284,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Automação Industrial",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Automação Industrial - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/4513940/pexels-photo-4513940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -293,8 +293,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Eletromecânica",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Eletromecânica - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/8346066/pexels-photo-8346066.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -302,8 +302,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Eletrotécnica",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Eletrotécnica - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/5849572/pexels-photo-5849572.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -311,8 +311,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Eletrônica",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Eletrônica - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -320,8 +320,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Manutenção de Máquinas Industriais",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Manutenção de Máquinas Industriais - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/4474043/pexels-photo-4474043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -329,8 +329,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Máquinas Pesadas",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Máquinas Pesadas - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/1078884/pexels-photo-1078884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -338,8 +338,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Metalurgia",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Metalurgia - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -347,8 +347,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Refrigeração e Climatização",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Refrigeração e Climatização - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/585419/pexels-photo-585419.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -356,8 +356,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Soldagem",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Soldagem - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/209230/pexels-photo-209230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -365,8 +365,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Manutenção de Máquinas Navais",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Manutenção de Máquinas Navais - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/2115367/pexels-photo-2115367.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -374,8 +374,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Agrimensura",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Agrimensura - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/431722/pexels-photo-431722.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -383,8 +383,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Edificações",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Edificações - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/3139612/pexels-photo-3139612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -392,8 +392,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Mineração",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Mineração - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/8593455/pexels-photo-8593455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -401,8 +401,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Prevenção e Combate ao Incêndio",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Técnico em Prevenção e Combate ao Incêndio - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/69934/firefighters-fire-flames-outside-69934.jpeg",
@@ -410,8 +410,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Curso Técnico em Defesa Civil",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Curso Técnico em Defesa Civil - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/933624/pexels-photo-933624.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -419,8 +419,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Curso Técnico em Trânsito",
-      subTitle: "Infraestrutura", // Revertido para o original
+      title: "Curso Técnico em Trânsito - por competência",
+      subTitle: "Infraestrutura",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/2244746/pexels-photo-2244746.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -428,8 +428,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Agricultura",
-      subTitle: "Meio Ambiente", // Revertido para o original
+      title: "Técnico em Agricultura - por competência",
+      subTitle: "Meio Ambiente",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/2132126/pexels-photo-2132126.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -437,8 +437,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Agropecuária",
-      subTitle: "Meio Ambiente", // Revertido para o original
+      title: "Técnico em Agropecuária - por competência",
+      subTitle: "Meio Ambiente",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/33325761/pexels-photo-33325761.jpeg",
@@ -446,8 +446,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Agroindústria",
-      subTitle: "Meio Ambiente", // Revertido para o original
+      title: "Técnico em Agroindústria - por competência",
+      subTitle: "Meio Ambiente",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/289387/pexels-photo-289387.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -455,8 +455,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Aquicultura",
-      subTitle: "Meio Ambiente", // Revertido para o original
+      title: "Técnico em Aquicultura - por competência",
+      subTitle: "Meio Ambiente",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/816198/pexels-photo-816198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -464,8 +464,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Meio Ambiente",
-      subTitle: "Meio Ambiente", // Revertido para o original
+      title: "Técnico em Meio Ambiente - por competência",
+      subTitle: "Meio Ambiente",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/159397/solar-panel-array-power-sun-electricity-159397.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -473,8 +473,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Gastronomia",
-      subTitle: "Serviços Gerais", // Revertido para o original
+      title: "Técnico em Gastronomia - por competência",
+      subTitle: "Serviços Gerais",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/3217157/pexels-photo-3217157.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -482,8 +482,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Óptica",
-      subTitle: "Serviços Gerais", // Revertido para o original
+      title: "Técnico em Óptica - por competência",
+      subTitle: "Serviços Gerais",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/5215017/pexels-photo-5215017.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -491,8 +491,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Curso Técnico em Designer de Interiores",
-      subTitle: "Serviços Gerais", // Revertido para o original
+      title: "Curso Técnico em Designer de Interiores - por competência",
+      subTitle: "Serviços Gerais",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -500,8 +500,8 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Curso Técnico no Guia em Turismo",
-      subTitle: "Serviços Gerais", // Revertido para o original
+      title: "Curso Técnico no Guia em Turismo - por competência",
+      subTitle: "Serviços Gerais",
       rating: 5,
       img: {
         src: "https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",

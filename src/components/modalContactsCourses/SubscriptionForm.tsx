@@ -4,11 +4,11 @@
 import { useState } from "react";
 import { Send, ChevronDown, CheckCircle, Loader2 } from "lucide-react";
 
-// --- Componente para o estado de Carregamento (Loading) ---
-// Este é um componente interno, usado apenas dentro deste arquivo.
+// Componente de Loading enviando
 const LoadingState = () => (
   <div className="flex flex-col items-center justify-center h-80 text-center">
-    <Loader2 className="h-12 w-12 text-green-500 animate-spin" />
+    <Loader2 className="h-12 w-12 text-green-500 animate-spin" />{" "}
+    {/*Animacao de spin carregando */}
     <p className="mt-4 text-lg font-medium text-slate-600">
       Enviando sua inscrição...
     </p>
@@ -33,8 +33,10 @@ const SuccessState = ({ onClose }: { onClose: () => void }) => (
       className="mt-8 w-full sm:w-auto px-8 py-3 bg-slate-800 text-white font-semibold rounded-lg hover:bg-slate-700 transition-colors"
     >
       Voltar para a página
+
     </button>
   </div>
+
 );
 
 //--- Componente Principal do Formulário ---
@@ -155,7 +157,7 @@ export default function SubscriptionForm({
               {/*Em cada campo desse colocar o nome que for para definir no banco de dados*/}
               <select
                 id="interestArea"
-                name="interestArea"
+                name="interestArea" //NomeBancoDeDados
                 required
                 defaultValue=""
                 className="w-full appearance-none px-4 py-3 bg-slate-100 border-2 border-transparent rounded-lg focus:outline-none focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all duration-300"
@@ -183,6 +185,7 @@ export default function SubscriptionForm({
           >
             Cancelar
           </button>
+
           <button
             type="submit"
             className="w-full flex-1 px-6 py-3 flex items-center justify-center gap-2 bg-green-600 text-white font-bold rounded-lg shadow-lg shadow-green-500/20 hover:bg-green-700 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-500/40 transition-all duration-300 ease-in-out"

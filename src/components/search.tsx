@@ -1,25 +1,20 @@
 // SearchSection.tsx
 
-import { Search, List, Flame, Star } from "lucide-react";
-// 1. Importe o componente TextEffect
+import { Search } from "lucide-react";
 import { TextEffect } from "@/components/ui/text-effect";
 
+// As props 'activeFilter' e 'onFilterChange' foram removidas.
 interface SearchSectionProps {
   searchTerm: string;
   onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  activeFilter: string;
-  onFilterChange: (filter: string) => void;
 }
 
 export default function SearchSection({
   searchTerm,
   onSearchChange,
-  activeFilter,
-  onFilterChange,
 }: SearchSectionProps) {
   return (
     <div className="w-full max-w-5xl mx-auto px-4 py-12 sm:py-16 text-center">
-      {/* 2. Aplique o TextEffect ao título principal */}
       <TextEffect
         as="h2"
         preset="fade-in-blur"
@@ -29,7 +24,6 @@ export default function SearchSection({
         Encontre seu Curso Ideal
       </TextEffect>
 
-      {/* 3. Aplique o TextEffect ao parágrafo, com um pequeno delay */}
       <TextEffect
         as="p"
         per="line"
@@ -41,12 +35,12 @@ export default function SearchSection({
         seus objetivos profissionais.
       </TextEffect>
 
-      {/* Barra de Busca (com cores ajustadas) */}
+      {/* Barra de Busca */}
       <div className="relative mt-10">
         <div className="flex w-full max-w-3xl mx-auto rounded-xl bg-white shadow-lg shadow-zinc-300/40 overflow-hidden ring-1 ring-zinc-200 focus-within:ring-2 focus-within:ring-red-600 transition-all duration-300">
           <input
             type="text"
-            placeholder="Buscar por área, curso ou palavra-chave..."
+            placeholder="Buscar por nome do curso..."
             className="flex-grow w-full px-5 py-4 bg-transparent text-lg outline-none text-zinc-800 placeholder-zinc-400"
             value={searchTerm}
             onChange={onSearchChange}
@@ -57,44 +51,7 @@ export default function SearchSection({
         </div>
       </div>
 
-      {/* Botões de Filtro (com cores ajustadas para a paleta vermelha) */}
-      <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-8">
-        <button
-          onClick={() => onFilterChange("todos")}
-          className={`flex items-center gap-2.5 pl-4 pr-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 shadow-sm ${
-            activeFilter === "todos"
-              ? "bg-zinc-800 text-white scale-105 shadow-md"
-              : "bg-white text-zinc-700 border border-zinc-300 hover:bg-zinc-50"
-          }`}
-        >
-          <List size={18} />
-          Todos os Cursos
-        </button>
-
-        <button
-          onClick={() => onFilterChange("mais_clicados")}
-          className={`flex items-center gap-2.5 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 shadow-sm ${
-            activeFilter === "mais_clicados"
-              ? "bg-red-700 text-white scale-105 border-transparent shadow-md"
-              : "bg-white border border-red-600/50 text-red-700 hover:bg-red-50"
-          }`}
-        >
-          <Flame size={18} />
-          Mais Procurados
-        </button>
-
-        <button
-          onClick={() => onFilterChange("lancamentos")}
-          className={`flex items-center gap-2.5 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 shadow-sm ${
-            activeFilter === "lancamentos"
-              ? "bg-amber-500 text-white scale-105 border-transparent shadow-md"
-              : "bg-white border border-amber-500/50 text-amber-600 hover:bg-amber-50"
-          }`}
-        >
-          <Star size={18} />
-          Lançamentos
-        </button>
-      </div>
+      {/* A DIV com os botões de filtro foi completamente removida daqui */}
     </div>
   );
 }

@@ -82,14 +82,14 @@ export default function CourseInformations({
       <div className="relative max-w-5xl mx-auto p-4 sm:p-6 md:p-8 z-10">
         {/* BOTÃO VOLTAR: Estilo unificado com a outra página para consistência */}
         <Link
-          href={categorySlug ? `/cursos/${categorySlug}` : "/"}
+          href={"/"}
           className="group mb-8 inline-flex items-center gap-1.5 text-zinc-600 hover:text-red-700 transition-colors duration-300 font-semibold"
         >
           <ChevronLeft
             size={20}
             className="transition-transform duration-300 group-hover:-translate-x-1"
           />
-          Voltar para {cardData?.subTitle || "Cursos"}
+          Voltar para Inicio
         </Link>
 
         {/* CARD PRINCIPAL: Fundo branco para contraste e sombra mais suave */}
