@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📚 Tecminas - Plataforma de Cursos
 
-## Getting Started
+Este projeto é um site de cursos desenvolvido para a **Tecminas**, utilizando **Next.js** e **TailwindCSS**.  
+A aplicação foi construída com foco em **performance, responsividade e escalabilidade**, integrando uma **API** para gerenciamento de dados.
 
-First, run the development server:
+---
+
+## 🚀 Tecnologias Utilizadas
+
+- [Next.js](https://nextjs.org/) - Framework React para produção
+- [TailwindCSS](https://tailwindcss.com/) - Estilização com classes utilitárias
+- [TypeScript](https://www.typescriptlang.org/) _(opcional, se você usou)_
+- [API REST](#) - Backend integrado para fornecer os dados dos cursos
+
+---
+
+## ⚙️ Funcionalidades
+
+- 📑 Listagem de cursos disponíveis
+- 🔍 Pesquisa e filtro de cursos
+- 📱 Layout 100% responsivo
+- 🎨 Interface moderna utilizando **TailwindCSS**
+- ⚡ Integração com API para exibição dinâmica dos conteúdos
+
+---
+
+## 📂 Estrutura do Projeto
+
+├── public/ # Arquivos estáticos
+├── src/
+│ ├── components/ # Componentes reutilizáveis
+│ ├── pages/ # Rotas do Next.js
+│ ├── styles/ # Estilos globais
+│ ├── lib/ # Funções utilitárias
+│ └── services/ # Conexão com a API
+└── package.json
+
+---
+
+## 🛠️ Como Rodar o Projeto
+
+### 1. Clone o repositório
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/seu-usuario/tecminas.git
+cd tecminas
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Instale as dependências
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# ou
 
-## Learn More
+yarn install
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Configure as variáveis de ambiente
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Crie um arquivo .env.local na raiz do projeto e adicione:
+API_URL=http://localhost:3000/api
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. Rode o servidor de desenvolvimento
 
-## Deploy on Vercel
+npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# ou
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+yarn dev
+|Acesse em: http://localhost:3000
+👨‍💻 Autor
+Pedro De Almeida Peixoto
+📧 [pedropeixotovz@gmail.com]
+💼 https://linkedin.com/in/Peixotim
+🐙 Github.com/Peixotim
