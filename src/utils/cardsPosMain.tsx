@@ -1,5 +1,3 @@
-// utils/storagedCourses.ts
-
 import { CourseCardProps } from "../components/courseCards";
 
 export default function CardsPosMain(): CourseCardProps[] {
