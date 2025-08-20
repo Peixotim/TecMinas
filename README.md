@@ -9,7 +9,7 @@ A aplicação foi construída com foco em **performance, responsividade e escala
 
 - [Next.js](https://nextjs.org/) - Framework React para produção
 - [TailwindCSS](https://tailwindcss.com/) - Estilização com classes utilitárias
-- [TypeScript](https://www.typescriptlang.org/) _(opcional, se você usou)_
+- [TypeScript](https://www.typescriptlang.org/) _(opcional, se utilizado)_
 - [API REST](#) - Backend integrado para fornecer os dados dos cursos
 
 ---
@@ -26,14 +26,16 @@ A aplicação foi construída com foco em **performance, responsividade e escala
 
 ## 📂 Estrutura do Projeto
 
-├── public/ # Arquivos estáticos
+```
+├── public/          # Arquivos estáticos
 ├── src/
-│ ├── components/ # Componentes reutilizáveis
-│ ├── pages/ # Rotas do Next.js
-│ ├── styles/ # Estilos globais
-│ ├── lib/ # Funções utilitárias
-│ └── services/ # Conexão com a API
+│   ├── components/  # Componentes reutilizáveis
+│   ├── pages/       # Rotas do Next.js
+│   ├── styles/      # Estilos globais
+│   ├── lib/         # Funções utilitárias
+│   └── services/    # Conexão com a API
 └── package.json
+```
 
 ---
 
@@ -42,33 +44,41 @@ A aplicação foi construída com foco em **performance, responsividade e escala
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/tecminas.git
+git clone https://github.com/Peixotim/tecminas.git
 cd tecminas
 ```
 
 ### 2. Instale as dependências
 
+```bash
 npm install
-
 # ou
-
 yarn install
+```
 
 ### 3. Configure as variáveis de ambiente
 
-Crie um arquivo .env.local na raiz do projeto e adicione:
+Crie um arquivo `.env.local` na raiz do projeto e adicione:
+
+```
 API_URL=http://localhost:3000/api
+```
 
 ### 4. Rode o servidor de desenvolvimento
 
+```bash
 npm run dev
-
 # ou
-
 yarn dev
-|Acesse em: http://localhost:3000
-👨‍💻 Autor
-Pedro De Almeida Peixoto
-📧 [pedropeixotovz@gmail.com]
-💼 https://linkedin.com/in/Peixotim
-🐙 Github.com/Peixotim
+```
+
+Acesse em: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 👨‍💻 Autor
+
+**Pedro De Almeida Peixoto**  
+📧 [pedropeixotovz@gmail.com](mailto:pedropeixotovz@gmail.com)  
+💼 [LinkedIn](https://linkedin.com/in/Peixotim)  
+🐙 [GitHub](https://github.com/Peixotim)
