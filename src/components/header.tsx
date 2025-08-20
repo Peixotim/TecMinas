@@ -11,7 +11,7 @@ import { motion, useScroll } from "framer-motion";
 // Importe os componentes do Modal que você já usa
 import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
-
+import { submitSubscription } from "@/lib/api";
 const menuItems = [
   { name: "Início", href: "#inicio" },
   { name: "Sobre Nós", href: "#sobrenos" },
@@ -39,12 +39,22 @@ export const Header = () => {
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormStatus("loading");
-    const formData = new FormData(event.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    console.log("Enviando dados do Header:", data);
+
     try {
-      // Simula o tempo de resposta da API
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const formData = new FormData(event.currentTarget);
+
+      // Monta o objeto de dados com os nomes corretos para a API
+      const data = {
+        fullerName: formData.get("name") as string,
+        phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
+        areaOfInterest: formData.get("interestArea") as string,
+        course: "Contato Geral (Header)",
+      };
+
+      console.log("Enviando dados do Header:", data);
+
+      await submitSubscription(data);
+
       setFormStatus("success");
     } catch (error) {
       console.error("Erro ao enviar o formulário:", error);

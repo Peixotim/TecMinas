@@ -52,7 +52,7 @@ export default function Home() {
       <section id="cursos" className="py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-[#05365F] mb-8 text-center">
-            Nossos Cursos Técnicos
+            Nossos Cursos Técnicos Por Competência
           </h2>
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {filteredCourses.slice(0, visibleCount).map((course, i) => (

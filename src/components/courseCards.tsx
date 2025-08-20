@@ -11,16 +11,15 @@ export interface CourseCardProps {
     alt: string;
   };
   rating: number;
-  flag?: string; // Ex: "🔥 Últimas Vagas", "⭐ Lançamento"
+  flag?: string;
 }
 
-// --- Componente Funcional com Estilo Premium ---
 export default function CourseCard({
   title,
   subTitle,
   img,
   rating,
-  flag, // Adicionada a nova prop
+  flag,
 }: CourseCardProps) {
   return (
     // --- Contêiner Principal do Card ---
@@ -75,7 +74,6 @@ export default function CourseCard({
         {/* Botão de Ação */}
         <Link
           href={`/cursos/${slugify(title)}`}
-          // BOTÃO: Estilo de CTA primário, consistente com o resto do site
           className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-red-700 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition-all duration-300 hover:scale-105 hover:bg-red-800 hover:shadow-xl hover:shadow-red-500/30"
         >
           <PlusCircle size={20} className="flex-shrink-0" />

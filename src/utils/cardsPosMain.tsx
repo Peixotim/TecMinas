@@ -5,7 +5,7 @@ import { CourseCardProps } from "../components/courseCards";
 export default function CardsPosMain(): CourseCardProps[] {
   return [
     {
-      title: "Técnico em Agente Comunitário de Saúde - por competência",
+      title: "Técnico em Agente Comunitário de Saúde",
       subTitle: "Saúde",
       rating: 5,
       img: {
@@ -14,7 +14,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Análises Clínicas - por competência",
+      title: "Técnico em Análises Clínicas",
       subTitle: "Saúde",
       rating: 5,
       img: {
@@ -23,7 +23,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Cuidados de Idosos - por competência",
+      title: "Técnico em Cuidados de Idosos",
       subTitle: "Saúde",
       rating: 5,
       img: {
@@ -32,7 +32,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Enfermagem - por competência",
+      title: "Técnico em Enfermagem",
       subTitle: "Saúde",
       rating: 5,
       img: {
@@ -41,7 +41,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Equipamentos Biomédicos - por competência",
+      title: "Técnico em Equipamentos Biomédicos",
       subTitle: "Saúde",
       rating: 5,
       img: {
@@ -50,7 +50,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Estética - por competência",
+      title: "Técnico em Estética",
       subTitle: "Saúde",
       rating: 5,
       img: {
@@ -59,7 +59,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Farmácia - por competência",
+      title: "Técnico em Farmácia",
       subTitle: "Saúde",
       rating: 5,
       img: {
@@ -68,7 +68,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Gerência em Saúde - por competência",
+      title: "Técnico em Gerência em Saúde",
       subTitle: "Saúde",
       rating: 5,
       img: {
@@ -77,7 +77,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Nutrição e Dietética - por competência",
+      title: "Técnico em Nutrição e Dietética",
       subTitle: "Saúde",
       rating: 5,
       img: {
@@ -86,7 +86,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Radiologia - por competência",
+      title: "Técnico em Radiologia",
       subTitle: "Saúde",
       rating: 5,
       img: {
@@ -95,7 +95,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Saúde Bucal - por competência",
+      title: "Técnico em Saúde Bucal",
       subTitle: "Saúde",
       rating: 5,
       img: {
@@ -104,7 +104,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Veterinária - por competência",
+      title: "Técnico em Veterinária",
       subTitle: "Saúde",
       rating: 5,
       img: {
@@ -113,7 +113,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Administração - por competência",
+      title: "Técnico em Administração",
       subTitle: "Finanças",
       rating: 5,
       img: {
@@ -122,7 +122,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Contabilidade - por competência",
+      title: "Técnico em Contabilidade",
       subTitle: "Finanças",
       rating: 5,
       img: {
@@ -131,7 +131,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Marketing - por competência",
+      title: "Técnico em Marketing",
       subTitle: "Finanças",
       rating: 5,
       img: {
@@ -140,7 +140,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Qualidade - por competência",
+      title: "Técnico em Qualidade",
       subTitle: "Serviços Gerais",
       rating: 5,
       img: {
@@ -149,7 +149,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Recursos Humanos - por competência",
+      title: "Técnico em Recursos Humanos",
       subTitle: "Finanças",
       rating: 5,
       img: {
@@ -158,7 +158,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Secretaria Escolar - por competência",
+      title: "Técnico em Secretaria Escolar",
       subTitle: "Serviços Gerais",
       rating: 5,
       img: {
@@ -167,7 +167,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Segurança do Trabalho - por competência",
+      title: "Técnico em Segurança do Trabalho",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -176,7 +176,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Serviços Jurídicos - por competência",
+      title: "Técnico em Serviços Jurídicos",
       subTitle: "Serviços Gerais",
       rating: 5,
       img: {
@@ -185,7 +185,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Transações Imobiliárias - por competência",
+      title: "Técnico em Transações Imobiliárias",
       subTitle: "Finanças",
       rating: 5,
       img: {
@@ -194,7 +194,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Vendas - por competência",
+      title: "Técnico em Vendas",
       subTitle: "Finanças",
       rating: 5,
       img: {
@@ -203,7 +203,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Curso Técnico em Eventos - por competência",
+      title: "Curso Técnico em Eventos",
       subTitle: "Serviços Gerais",
       rating: 5,
       img: {
@@ -212,7 +212,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Biotecnologia - por competência",
+      title: "Técnico em Biotecnologia",
       subTitle: "Tecnologia",
       rating: 5,
       img: {
@@ -221,7 +221,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Design Gráfico - por competência",
+      title: "Técnico em Design Gráfico",
       subTitle: "Tecnologia",
       rating: 5,
       img: {
@@ -230,7 +230,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Desenvolvimento de Sistemas - por competência",
+      title: "Técnico em Desenvolvimento de Sistemas",
       subTitle: "Tecnologia",
       rating: 5,
       img: {
@@ -239,7 +239,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Informática para Internet - por competência",
+      title: "Técnico em Informática para Internet",
       subTitle: "Tecnologia",
       rating: 5,
       img: {
@@ -248,7 +248,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Redes de Computadores - por competência",
+      title: "Técnico em Redes de Computadores",
       subTitle: "Tecnologia",
       rating: 5,
       img: {
@@ -257,7 +257,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Sistemas de Energia Renovável - por competência",
+      title: "Técnico em Sistemas de Energia Renovável",
       subTitle: "Tecnologia",
       rating: 5,
       img: {
@@ -266,7 +266,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Telecomunicações - por competência",
+      title: "Técnico em Telecomunicações",
       subTitle: "Tecnologia",
       rating: 5,
       img: {
@@ -275,7 +275,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Tradução e Interpretação de Libras - por competência",
+      title: "Técnico em Tradução e Interpretação de Libras",
       subTitle: "Serviços Gerais",
       rating: 5,
       img: {
@@ -284,7 +284,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Automação Industrial - por competência",
+      title: "Técnico em Automação Industrial",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -293,7 +293,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Eletromecânica - por competência",
+      title: "Técnico em Eletromecânica",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -302,7 +302,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Eletrotécnica - por competência",
+      title: "Técnico em Eletrotécnica",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -311,7 +311,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Eletrônica - por competência",
+      title: "Técnico em Eletrônica",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -320,7 +320,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Manutenção de Máquinas Industriais - por competência",
+      title: "Técnico em Manutenção de Máquinas Industriais",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -329,7 +329,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Máquinas Pesadas - por competência",
+      title: "Técnico em Máquinas Pesadas",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -338,7 +338,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Metalurgia - por competência",
+      title: "Técnico em Metalurgia",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -347,7 +347,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Refrigeração e Climatização - por competência",
+      title: "Técnico em Refrigeração e Climatização",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -356,7 +356,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Soldagem - por competência",
+      title: "Técnico em Soldagem",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -365,7 +365,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Manutenção de Máquinas Navais - por competência",
+      title: "Técnico em Manutenção de Máquinas Navais",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -374,7 +374,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Agrimensura - por competência",
+      title: "Técnico em Agrimensura",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -383,7 +383,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Edificações - por competência",
+      title: "Técnico em Edificações",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -392,7 +392,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Mineração - por competência",
+      title: "Técnico em Mineração",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -401,7 +401,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Prevenção e Combate ao Incêndio - por competência",
+      title: "Técnico em Prevenção e Combate ao Incêndio",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -410,7 +410,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Curso Técnico em Defesa Civil - por competência",
+      title: "Curso Técnico em Defesa Civil",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -419,7 +419,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Curso Técnico em Trânsito - por competência",
+      title: "Curso Técnico em Trânsito",
       subTitle: "Infraestrutura",
       rating: 5,
       img: {
@@ -428,7 +428,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Agricultura - por competência",
+      title: "Técnico em Agricultura",
       subTitle: "Meio Ambiente",
       rating: 5,
       img: {
@@ -437,7 +437,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Agropecuária - por competência",
+      title: "Técnico em Agropecuária",
       subTitle: "Meio Ambiente",
       rating: 5,
       img: {
@@ -446,7 +446,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Agroindústria - por competência",
+      title: "Técnico em Agroindústria",
       subTitle: "Meio Ambiente",
       rating: 5,
       img: {
@@ -455,7 +455,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Aquicultura - por competência",
+      title: "Técnico em Aquicultura",
       subTitle: "Meio Ambiente",
       rating: 5,
       img: {
@@ -464,7 +464,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Meio Ambiente - por competência",
+      title: "Técnico em Meio Ambiente",
       subTitle: "Meio Ambiente",
       rating: 5,
       img: {
@@ -473,7 +473,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Gastronomia - por competência",
+      title: "Técnico em Gastronomia",
       subTitle: "Serviços Gerais",
       rating: 5,
       img: {
@@ -482,7 +482,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Técnico em Óptica - por competência",
+      title: "Técnico em Óptica",
       subTitle: "Serviços Gerais",
       rating: 5,
       img: {
@@ -491,7 +491,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Curso Técnico em Designer de Interiores - por competência",
+      title: "Curso Técnico em Designer de Interiores",
       subTitle: "Serviços Gerais",
       rating: 5,
       img: {
@@ -500,7 +500,7 @@ export default function CardsPosMain(): CourseCardProps[] {
       },
     },
     {
-      title: "Curso Técnico no Guia em Turismo - por competência",
+      title: "Curso Técnico no Guia em Turismo",
       subTitle: "Serviços Gerais",
       rating: 5,
       img: {

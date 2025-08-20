@@ -1,6 +1,6 @@
 "use client";
 
-// --- Importações (sem alterações, mas adicionei Lucide para o botão voltar) ---
+// --- Importações ---
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -10,12 +10,12 @@ import {
   Target,
   Info,
   ChevronLeft,
-} from "lucide-react"; // Adicionado ChevronLeft
-import { slugify } from "@/utils/slugify";
-import { CourseCardProps } from "./courseCards";
+} from "lucide-react";
 import { useState, useCallback } from "react";
 import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
+import { CourseCardProps } from "./courseCards";
+import { submitSubscription } from "@/lib/api"; // ✅ 1. IMPORTAÇÃO DA FUNÇÃO DA API
 
 // --- Interfaces (sem alterações) ---
 export interface CourseSection {
@@ -34,12 +34,11 @@ interface ComponentProps {
   cardData?: CourseCardProps;
 }
 
-// --- Componente Principal Refatorado ---
+// --- Componente Principal ---
 export default function CourseInformations({
   course,
   cardData,
 }: ComponentProps) {
-  const categorySlug = cardData ? slugify(cardData.subTitle) : "";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formStatus, setFormStatus] = useState<"form" | "loading" | "success">(
     "form"
@@ -52,35 +51,44 @@ export default function CourseInformations({
 
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
+  // ✅ 2. FUNÇÃO DE ENVIO CORRIGIDA E FINAL
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormStatus("loading");
-    const formData = new FormData(event.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    console.log("Enviando os seguintes dados para a API:", data);
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const formData = new FormData(event.currentTarget);
+
+      // Monta o objeto de dados com os nomes corretos que a API espera
+      const data = {
+        fullerName: formData.get("name") as string,
+        phone: (formData.get("whatsapp") as string).replace(/\D/g, ""), // Limpa a formatação
+        areaOfInterest: formData.get("interestArea") as string,
+        course: course.title, // Adiciona o nome do curso para rastreamento
+      };
+
+      // Chama a função real que envia os dados para o backend
+      await submitSubscription(data);
+
+      // Se a chamada for bem-sucedida, muda o status para 'success'
       setFormStatus("success");
     } catch (error) {
       console.error("Erro ao enviar o formulário:", error);
       alert(
         "Houve um problema ao enviar sua inscrição. Por favor, tente novamente."
       );
-      setFormStatus("form");
+      setFormStatus("form"); // Volta para o formulário em caso de erro
     }
   };
 
   return (
-    // FUNDO: Trocado para o nosso padrão premium 'zinc-50'
     <div className="relative bg-zinc-50 min-h-screen text-zinc-800 font-sans overflow-hidden">
-      {/* EFEITO DE FUNDO: Gradiente sutil com a nova cor da marca */}
       <div
         className="absolute top-0 left-0 w-full h-1/2 bg-gradient-radial from-red-500/5 via-zinc-50/5 to-transparent pointer-events-none"
         aria-hidden="true"
       />
 
       <div className="relative max-w-5xl mx-auto p-4 sm:p-6 md:p-8 z-10">
-        {/* BOTÃO VOLTAR: Estilo unificado com a outra página para consistência */}
         <Link
           href={"/"}
           className="group mb-8 inline-flex items-center gap-1.5 text-zinc-600 hover:text-red-700 transition-colors duration-300 font-semibold"
@@ -92,15 +100,12 @@ export default function CourseInformations({
           Voltar para Inicio
         </Link>
 
-        {/* CARD PRINCIPAL: Fundo branco para contraste e sombra mais suave */}
         <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg">
           <header className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="flex flex-col gap-4">
-              {/* DESTAQUE: Usando a cor de destaque da marca */}
               <span className="font-semibold text-red-700">
                 {cardData?.subTitle}
               </span>
-              {/* TIPOGRAFIA: 'font-bold' em vez de 'extrabold' para mais elegância */}
               <h1 className="text-4xl sm:text-5xl font-bold text-zinc-800 tracking-tight">
                 {course.title}
               </h1>
@@ -134,7 +139,6 @@ export default function CourseInformations({
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                 </div>
               )}
-              {/* BOTÃO CTA: Cor principal da marca, com sombra e efeito de hover mais sofisticados */}
               <button
                 onClick={openModal}
                 className="mt-6 w-full flex flex-col items-center justify-center gap-1 bg-red-700 text-white p-4 rounded-lg font-bold text-lg transition-all duration-300 shadow-lg shadow-red-500/20 hover:shadow-xl hover:shadow-red-500/30 hover:scale-[1.03]"
@@ -152,9 +156,7 @@ export default function CourseInformations({
         </div>
 
         <main className="mt-16 md:mt-20 space-y-8">
-          {/* CARDS DE CONTEÚDO: Fundo branco e sombra suave */}
           <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg">
-            {/* HIERARQUIA VISUAL: Ícone com a cor de destaque, texto com a cor principal */}
             <h2 className="text-3xl font-bold text-zinc-800 mb-4 flex items-center gap-3">
               <Info className="text-red-700" /> Sobre o Curso
             </h2>
