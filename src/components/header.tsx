@@ -4,7 +4,7 @@
 import React, { useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, MessageCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, useScroll } from "framer-motion";
@@ -126,8 +126,9 @@ export const Header = () => {
               <div className="hidden lg:flex">
                 <Button
                   onClick={openModal} // Ação alterada de link para abrir o modal
-                  className="rounded-full bg-red-600 hover:bg-red-700 px-6 shadow-lg text-white"
+                  className="rounded-full bg-green-600 hover:bg-green-700 px-6 shadow-lg text-white"
                 >
+                  <MessageCircle className="w-4 h-4" />
                   WhatsApp
                 </Button>
               </div>
