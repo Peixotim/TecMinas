@@ -19,7 +19,7 @@ export default function Contact() {
     {
       icon: <Instagram className="w-6 h-6 text-pink-500" />,
       label: "Instagram",
-      value: "@empresa",
+      value: "tecminas.ead",
     },
     {
       icon: <MapPin className="w-6 h-6 text-green-600" />,

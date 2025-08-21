@@ -24,7 +24,7 @@ export async function submitSubscription(subscriptionData: SubscriptionData) {
       throw new Error("A URL da API não está configurada. Verifique o arquivo .env.local"); //Se nao possui a NEXT_BASE_URL 
     }
 
-    const endpoint = `${API_BASE_URL}/subscribe`;
+    const endpoint = `${API_BASE_URL}/subscribe`; //Adicionar o endpoint da API
     const response = await fetch(endpoint, {
       method: "POST",
       headers: {

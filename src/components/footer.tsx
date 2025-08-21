@@ -52,27 +52,42 @@ const Footer = () => {
             <h4 className="font-semibold text-white mb-4">Cursos</h4>
             <ul className="space-y-3 text-sm text-[#9CA3AF]">
               <li>
-                <a href="#" className="hover:text-[#DC2626] transition-colors">
+                <a
+                  href="#cursos"
+                  className="hover:text-[#DC2626] transition-colors"
+                >
                   Área da Saúde
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#DC2626] transition-colors">
+                <a
+                  href="#cursos"
+                  className="hover:text-[#DC2626] transition-colors"
+                >
                   Administração & Gestão
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#DC2626] transition-colors">
+                <a
+                  href="#cursos"
+                  className="hover:text-[#DC2626] transition-colors"
+                >
                   Tecnologia e Informática
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#DC2626] transition-colors">
+                <a
+                  href="#cursos"
+                  className="hover:text-[#DC2626] transition-colors"
+                >
                   Engenharia & Manutenção
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#DC2626] transition-colors">
+                <a
+                  href="#cursos"
+                  className="hover:text-[#DC2626] transition-colors"
+                >
                   Construção e Infraestrutura
                 </a>
               </li>
@@ -97,19 +112,22 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#DC2626] transition-colors">
-                  Blog
-                </a>
+                <a
+                  href="#"
+                  className="hover:text-[#DC2626] transition-colors"
+                ></a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#DC2626] transition-colors">
-                  Política de Privacidade
-                </a>
+                <a
+                  href="#"
+                  className="hover:text-[#DC2626] transition-colors"
+                ></a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#DC2626] transition-colors">
-                  Termos de Serviço
-                </a>
+                <a
+                  href="#"
+                  className="hover:text-[#DC2626] transition-colors"
+                ></a>
               </li>
             </ul>
           </div>
