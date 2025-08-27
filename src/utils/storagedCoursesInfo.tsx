@@ -4,7 +4,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
   return [
     // --- ÁREA DA SAÚDE ---
     {
-      title: "Técnico em Agente Comunitário de Saúde",
+      title: "Técnico em Agente Comunitário de Saúde - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/8942125/pexels-photo-8942125.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Profissional da saúde realizando visita domiciliar",
@@ -35,7 +35,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Análises Clínicas",
+      title: "Técnico em Análises Clínicas - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/3993243/pexels-photo-3993243.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Cientista em laboratório de análises clínicas com microscópio",
@@ -66,7 +66,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Cuidados de Idosos",
+      title: "Técnico em Cuidados de Idosos - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/4061442/pexels-photo-4061442.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Cuidador auxiliando uma pessoa idosa",
@@ -97,7 +97,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Enfermagem",
+      title: "Técnico em Enfermagem - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/3786126/pexels-photo-3786126.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnica de enfermagem sorrindo em ambiente hospitalar",
@@ -128,7 +128,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Equipamentos Biomédicos",
+      title: "Técnico em Equipamentos Biomédicos - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico realizando manutenção em equipamento biomédico",
@@ -159,7 +159,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Estética",
+      title: "Técnico em Estética - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/3762875/pexels-photo-3762875.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Profissional de estética realizando procedimento facial",
@@ -190,7 +190,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Farmácia",
+      title: "Técnico em Farmácia - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/7615469/pexels-photo-7615469.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnica em farmácia organizando medicamentos",
@@ -221,7 +221,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Gerência em Saúde",
+      title: "Técnico em Gerência em Saúde - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Pessoas em reunião de gestão em um ambiente de saúde",
@@ -252,7 +252,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Nutrição e Dietética",
+      title: "Técnico em Nutrição e Dietética - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Nutricionista com prato de comida saudável",
@@ -283,7 +283,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Radiologia",
+      title: "Técnico em Radiologia - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/2280568/pexels-photo-2280568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico em radiologia operando máquina de raio-x",
@@ -314,7 +314,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Saúde Bucal",
+      title: "Técnico em Saúde Bucal - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/6528859/pexels-photo-6528859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Assistente de saúde bucal auxiliando dentista",
@@ -345,7 +345,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Veterinária",
+      title: "Técnico em Veterinária - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/6235116/pexels-photo-6235116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico em veterinária cuidando de um cachorro",
@@ -377,7 +377,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
     },
     // --- ÁREA DE ADMINISTRAÇÃO E GESTÃO ---
     {
-      title: "Técnico em Administração",
+      title: "Técnico em Administração - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Equipa de administração em reunião de planeamento",
@@ -408,7 +408,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Contabilidade",
+      title: "Técnico em Contabilidade - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/7567433/pexels-photo-7567433.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Pessoa a trabalhar com calculadora e folhas de cálculo de contabilidade",
@@ -439,7 +439,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Marketing",
+      title: "Técnico em Marketing - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Gráficos e dados numa apresentação de marketing",
@@ -470,7 +470,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Qualidade",
+      title: "Técnico em Qualidade - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/3807744/pexels-photo-3807744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Inspetor de qualidade a analisar produto numa fábrica",
@@ -501,7 +501,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Recursos Humanos",
+      title: "Técnico em Recursos Humanos - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/3184454/pexels-photo-3184454.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Profissional de recursos humanos numa entrevista de emprego",
@@ -532,7 +532,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Secretaria Escolar",
+      title: "Técnico em Secretaria Escolar - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/5212353/pexels-photo-5212353.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Ambiente de uma secretaria escolar com arquivos e computador",
@@ -563,7 +563,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Serviços Jurídicos",
+      title: "Técnico em Serviços Jurídicos - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/5816283/pexels-photo-5816283.jpeg",
         alt: "Pessoa a trabalhar num escritório de advocacia com livros de direito",
@@ -594,7 +594,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Transações Imobiliárias",
+      title: "Técnico em Transações Imobiliárias - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/101808/pexels-photo-101808.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Corretor de imóveis a entregar as chaves de uma casa",
@@ -625,7 +625,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Vendas",
+      title: "Técnico em Vendas - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Vendedor a atender cliente numa loja",
@@ -656,7 +656,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Curso Técnico em Eventos",
+      title: "Curso Técnico em Eventos - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/2747901/pexels-photo-2747901.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Organizador de eventos a coordenar uma conferência",
@@ -688,7 +688,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
     },
     // --- ÁREA DE TECNOLOGIA E INFORMÁTICA ---
     {
-      title: "Técnico em Biotecnologia",
+      title: "Técnico em Biotecnologia - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Cientista a trabalhar com amostras em laboratório de biotecnologia",
@@ -719,7 +719,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Design Gráfico",
+      title: "Técnico em Design Gráfico - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Designer gráfico a trabalhar num computador com software de edição",
@@ -750,7 +750,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Desenvolvimento de Sistemas",
+      title: "Técnico em Desenvolvimento de Sistemas - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Desenvolvedor de sistemas a programar com código no ecrã",
@@ -781,7 +781,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Informática para Internet",
+      title: "Técnico em Informática para Internet - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Profissional de informática para internet a criar um website",
@@ -812,7 +812,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Redes de Computadores",
+      title: "Técnico em Redes de Computadores - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/5380649/pexels-photo-5380649.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico de redes a trabalhar num data center com servidores",
@@ -843,7 +843,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Sistemas de Energia Renovável",
+      title: "Técnico em Sistemas de Energia Renovável - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico a instalar painéis solares num telhado",
@@ -874,7 +874,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Telecomunicações",
+      title: "Técnico em Telecomunicações - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/53621/metal-industry-work-manufacturing-53621.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico a trabalhar numa torre de telecomunicações",
@@ -905,7 +905,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Tradução e Interpretação de Libras",
+      title: "Técnico em Tradução e Interpretação de Libras - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/4342401/pexels-photo-4342401.jpeg",
         alt: "Mãos a fazer um sinal da Língua Brasileira de Sinais (Libras)",
@@ -936,7 +936,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Automação Industrial",
+      title: "Técnico em Automação Industrial - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/4513940/pexels-photo-4513940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Braço robótico numa linha de produção industrial automatizada",
@@ -967,7 +967,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Eletromecânica",
+      title: "Técnico em Eletromecânica - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/8346066/pexels-photo-8346066.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico em eletromecânica a trabalhar num motor industrial",
@@ -998,7 +998,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Eletrotécnica",
+      title: "Técnico em Eletrotécnica - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/5849572/pexels-photo-5849572.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Eletricista a trabalhar num painel elétrico de alta tensão",
@@ -1029,7 +1029,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Eletrônica",
+      title: "Técnico em Eletrônica - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico em eletrónica a soldar componentes numa placa de circuito",
@@ -1060,7 +1060,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Manutenção de Máquinas Industriais",
+      title: "Técnico em Manutenção de Máquinas Industriais - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/4474043/pexels-photo-4474043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Mecânico a realizar manutenção numa máquina industrial pesada",
@@ -1091,7 +1091,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Máquinas Pesadas",
+      title: "Técnico em Máquinas Pesadas - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/1078884/pexels-photo-1078884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Operador numa escavadora num estaleiro de obras",
@@ -1122,7 +1122,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Metalurgia",
+      title: "Técnico em Metalurgia - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Trabalhador numa siderúrgica com metal derretido",
@@ -1153,7 +1153,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Refrigeração e Climatização",
+      title: "Técnico em Refrigeração e Climatização - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/585419/pexels-photo-585419.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico a realizar manutenção numa unidade de ar condicionado",
@@ -1184,7 +1184,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Soldagem",
+      title: "Técnico em Soldagem - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/209230/pexels-photo-209230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Soldador com máscara de proteção a trabalhar em estrutura metálica",
@@ -1215,7 +1215,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Manutenção de Máquinas Navais",
+      title: "Técnico em Manutenção de Máquinas Navais - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/2115367/pexels-photo-2115367.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Engenheiro naval a trabalhar na casa das máquinas de um navio",
@@ -1246,7 +1246,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Agrimensura",
+      title: "Técnico em Agrimensura - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/431722/pexels-photo-431722.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Agrimensor a utilizar um teodolito num campo",
@@ -1277,7 +1277,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Edificações",
+      title: "Técnico em Edificações - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/3139612/pexels-photo-3139612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico em edificações a analisar a planta de uma construção",
@@ -1308,7 +1308,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Mineração",
+      title: "Técnico em Mineração - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/8593455/pexels-photo-8593455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Mineiro com capacete e lanterna numa mina",
@@ -1339,7 +1339,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Segurança do Trabalho",
+      title: "Técnico em Segurança do Trabalho - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/1216559/pexels-photo-1216559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico de segurança do trabalho com capacete numa obra",
@@ -1370,7 +1370,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Prevenção e Combate ao Incêndio",
+      title: "Técnico em Prevenção e Combate ao Incêndio - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/69934/firefighters-fire-flames-outside-69934.jpeg",
         alt: "Bombeiro em ação a combater um incêndio",
@@ -1401,7 +1401,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Curso Técnico em Defesa Civil",
+      title: "Curso Técnico em Defesa Civil - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/933624/pexels-photo-933624.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Agente da defesa civil numa área de desastre",
@@ -1432,7 +1432,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Curso Técnico em Trânsito",
+      title: "Curso Técnico em Trânsito - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/2244746/pexels-photo-2244746.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Agente de trânsito a organizar o fluxo de veículos numa cidade",
@@ -1463,7 +1463,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Agricultura",
+      title: "Técnico em Agricultura - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/2132126/pexels-photo-2132126.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Agricultor a analisar a colheita num campo de cultivo",
@@ -1494,7 +1494,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Agropecuária",
+      title: "Técnico em Agropecuária - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/33325761/pexels-photo-33325761.jpeg",
         alt: "Técnico agropecuário a cuidar do gado num pasto",
@@ -1525,7 +1525,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Agroindústria",
+      title: "Técnico em Agroindústria - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/289387/pexels-photo-289387.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Linha de produção e processamento de alimentos numa agroindústria",
@@ -1556,7 +1556,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Aquicultura",
+      title: "Técnico em Aquicultura - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/816198/pexels-photo-816198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico em aquicultura a trabalhar em tanques de criação de peixes",
@@ -1587,7 +1587,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Meio Ambiente",
+      title: "Técnico em Meio Ambiente - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/159397/solar-panel-array-power-sun-electricity-159397.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico em meio ambiente com painéis solares ao fundo",
@@ -1618,7 +1618,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Gastronomia",
+      title: "Técnico em Gastronomia - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/3217157/pexels-photo-3217157.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Chef de cozinha a preparar um prato gourmet",
@@ -1649,7 +1649,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Técnico em Óptica",
+      title: "Técnico em Óptica - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/5215017/pexels-photo-5215017.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Técnico em ótica a ajustar um par de óculos",
@@ -1680,7 +1680,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Curso Técnico em Designer de Interiores",
+      title: "Curso Técnico em Designer de Interiores - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Ambiente de sala de estar moderno e bem decorado",
@@ -1711,7 +1711,7 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
       },
     },
     {
-      title: "Curso Técnico no Guia em Turismo",
+      title: "Curso Técnico no Guia em Turismo - Por Competência",
       img: {
         src: "https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         alt: "Guia de turismo a orientar um grupo de turistas num ponto turístico",
