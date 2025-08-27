@@ -15,7 +15,7 @@ import { useState, useCallback } from "react";
 import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
 import { CourseCardProps } from "./courseCards";
-import { submitSubscription } from "@/lib/api"; // ✅ 1. IMPORTAÇÃO DA FUNÇÃO DA API
+import { submitSubscription } from "./lib/api"; // ✅ 1. IMPORTAÇÃO DA FUNÇÃO DA API
 
 // --- Interfaces (sem alterações) ---
 export interface CourseSection {

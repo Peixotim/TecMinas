@@ -6,12 +6,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, MessageCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "./lib/utils";
 import { motion, useScroll } from "framer-motion";
 // Importe os componentes do Modal que você já usa
 import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
-import { submitSubscription } from "@/lib/api";
+import { submitSubscription } from "./lib/api";
 const menuItems = [
   { name: "Início", href: "#inicio" },
   { name: "Sobre Nós", href: "#sobrenos" },
@@ -126,7 +126,7 @@ export const Header = () => {
               <div className="hidden lg:flex">
                 <Button
                   onClick={openModal} // Ação alterada de link para abrir o modal
-                  className="rounded-full bg-green-600 hover:bg-green-700 px-6 shadow-lg text-white"
+                  className="rounded-full bg-white text-black transitions hover:text-white hover:bg-green-600 px-6 shadow-lg"
                 >
                   <MessageCircle className="w-4 h-4" />
                   WhatsApp

@@ -85,7 +85,7 @@ export default function HeroSection() {
                       size="lg"
                       className="rounded-xl px-5 text-base transition-colors hover:text-red-600"
                     >
-                      <Link href="#link">
+                      <Link href="#cursos">
                         <span className="text-nowrap transition-colors hover:text-red-700">
                           Comece Agora
                         </span>
