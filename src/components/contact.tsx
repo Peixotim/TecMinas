@@ -9,12 +9,12 @@ export default function Contact() {
     {
       icon: <Phone className="w-6 h-6 text-blue-600" />,
       label: "Telefone Suporte",
-      value: "(11) 99999-9999",
+      value: "(31) 97314-4070 ",
     },
     {
       icon: <Mail className="w-6 h-6 text-red-500" />,
       label: "E-mail",
-      value: "empresa@email.com",
+      value: "gerenciageraltecminas@gmail.com",
     },
     {
       icon: <Instagram className="w-6 h-6 text-pink-500" />,
@@ -24,7 +24,8 @@ export default function Contact() {
     {
       icon: <MapPin className="w-6 h-6 text-green-600" />,
       label: "Endereço",
-      value: "Rua Exemplo, 123 - SP",
+      value:
+        "R. Luiz Rodrigues dos Santos, 44 - Todos Os Santos, Cel. Fabriciano - MG",
     },
   ];
 

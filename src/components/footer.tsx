@@ -139,25 +139,26 @@ const Footer = () => {
               <li className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 mt-1 flex-shrink-0" />
                 <span>
-                  Rua Exemplo, 123, Bairro Centro, Coronel Fabriciano - MG
+                  R. Luiz Rodrigues dos Santos, 44 - Todos Os Santos, Cel.
+                  Fabriciano - MG
                 </span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5" />
                 <a
-                  href="mailto:contato@techcollege.com"
+                  href="mailto:gerenciageraltecminas@gmail.com"
                   className="hover:text-[#DC2626] transition-colors"
                 >
-                  contato@tecminas.com
+                  gerenciageraltecminas@gmail.com
                 </a>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="w-5 h-5" />
                 <a
-                  href="tel:+5531999999999"
+                  href="tel:+5531973144070"
                   className="hover:text-[#DC2626] transition-colors"
                 >
-                  (31) 99999-9999
+                  (31) 97314-4070
                 </a>
               </li>
             </ul>
