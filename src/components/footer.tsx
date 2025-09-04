@@ -146,7 +146,7 @@ const Footer = () => {
               <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5" />
                 <a
-                  href="mailto:gerenciageraltecminas@gmail.com"
+                  href="mailto:gerenciageraltecminas@gmail.comm"
                   className="hover:text-[#DC2626] transition-colors"
                 >
                   gerenciageraltecminas@gmail.com
