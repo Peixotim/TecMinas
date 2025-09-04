@@ -1,60 +1,45 @@
+// Salve em: components/modalContactsCourses/SubscriptionForm.tsx
+
 "use client";
 
 import { useState } from "react";
-import {
-  Send,
-  ChevronDown,
-  CheckCircle,
-  Loader2,
-  MessageSquare,
-} from "lucide-react";
-import { submitSubscription } from "../lib/api";
-import { number } from "framer-motion";
-// --- Componente de Loading ---
+import { Send, ChevronDown, CheckCircle, Loader2 } from "lucide-react";
+
+// --- Componentes de estado (sem alterações na aparência) ---
 const LoadingState = () => (
   <div className="flex flex-col items-center justify-center h-80 text-center">
-    <Loader2 className="h-12 w-12 text-[#8B1A3B] animate-spin" />
-    <p className="mt-4 text-lg font-medium text-slate-600">
+    <Loader2 className="h-12 w-12 text-red-700 animate-spin" />
+    <p className="mt-4 text-lg font-medium text-zinc-600">
       Enviando seus dados...
     </p>
-    <p className="text-sm text-slate-500">Aguarde um momento.</p>
   </div>
 );
-
-// --- Componente de Sucesso com Botão WhatsApp ---
-const SuccessState = ({
-  onClose,
-  onRedirect,
-}: {
-  onClose: () => void;
-  onRedirect: () => void;
-}) => (
+const SuccessState = ({ onClose }: { onClose: () => void }) => (
   <div className="flex flex-col items-center justify-center h-80 text-center">
-    <CheckCircle className="h-16 w-16 text-green-500" />
-    <h2 className="mt-4 text-3xl font-bold text-[#6A0E29]">Dados Recebidos!</h2>
-    <p className="mt-2 text-slate-600 max-w-sm">
-      Seu interesse foi registrado com sucesso. Clique no botão abaixo para
-      iniciar a conversa com um de nossos consultores.
+    <CheckCircle className="h-16 w-16 text-red-700" />
+    <h2 className="mt-4 text-3xl font-bold text-zinc-800">
+      Inscrição Enviada!
+    </h2>
+    <p className="mt-2 text-zinc-600">
+      Obrigado! Em breve nossa equipe entrará em contato com você.
     </p>
-    <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full">
-      <button
-        onClick={onClose}
-        className="w-full sm:w-auto px-6 py-3 text-slate-600 font-semibold rounded-lg hover:bg-slate-100 transition-colors"
-      >
-        Fechar
-      </button>
-      <button
-        onClick={onRedirect}
-        className="w-full flex-1 px-6 py-3 flex items-center justify-center gap-2 bg-green-600 text-white font-bold rounded-lg shadow-lg shadow-green-500/20 hover:bg-green-700 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-500/40 transition-all duration-300 ease-in-out"
-      >
-        <MessageSquare size={18} />
-        <span>Conversar no WhatsApp</span>
-      </button>
-    </div>
+    <button
+      onClick={onClose}
+      className="mt-8 w-full sm:w-auto px-8 py-3 bg-zinc-800 text-white font-semibold rounded-lg hover:bg-zinc-700 transition-colors"
+    >
+      Voltar para a página
+    </button>
   </div>
 );
 
-// --- Áreas de interesse ---
+// --- ✅ Definição correta das propriedades que o formulário ACEITA ---
+type SubscriptionFormProps = {
+  status: "form" | "loading" | "success";
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onCancel: () => void;
+  selectedContent: string;
+};
+
 const areasDeInteresse = [
   "Saúde",
   "Administração e Gestão",
@@ -65,95 +50,54 @@ const areasDeInteresse = [
   "Serviços",
 ];
 
-// --- Componente Principal ---
 export default function SubscriptionForm({
+  status,
+  onSubmit,
+  onCancel,
   selectedContent,
-}: {
-  selectedContent: string;
-}) {
-  const [status, setStatus] = useState<"form" | "loading" | "success">("form");
+}: SubscriptionFormProps) {
+  // Este estado é apenas para controlar a máscara do input, é uma lógica de UI que pode ficar aqui.
   const [whatsapp, setWhatsapp] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [interestArea, setInterestArea] = useState(selectedContent || "");
 
-  const inputStyle =
-    "w-full px-4 py-3 bg-slate-100 border-2 border-transparent rounded-lg placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#8B1A3B] focus:ring-4 focus:ring-[#8B1A3B]/20 transition-all duration-300";
-
-  // Formata o WhatsApp
   const handleWhatsappChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const rawValue = e.target.value.replace(/\D/g, "").substring(0, 11);
-    let formattedValue = rawValue;
-    if (rawValue.length > 2)
-      formattedValue = `(${rawValue.substring(0, 2)}) ${rawValue.substring(2)}`;
-    if (rawValue.length > 7)
-      formattedValue = `(${rawValue.substring(0, 2)}) ${rawValue.substring(
-        2,
-        7
-      )}-${rawValue.substring(7)}`;
+    const rawValue = e.target.value.replace(/\D/g, "");
+    let formattedValue = rawValue.substring(0, 11);
+    if (formattedValue.length > 2)
+      formattedValue = `(${formattedValue.substring(
+        0,
+        2
+      )}) ${formattedValue.substring(2)}`;
+    if (formattedValue.length > 8)
+      formattedValue = `(${formattedValue.substring(
+        0,
+        2
+      )}) ${formattedValue.substring(2, 7)}-${formattedValue.substring(7)}`;
     setWhatsapp(formattedValue);
   };
 
-  // --- Função de envio do formulário ---
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus("loading");
-
-    try {
-      await submitSubscription({
-        fullerName: fullName,
-        phone: whatsapp,
-        areaOfInterest: interestArea,
-        enterpriseId: 1,
-      });
-      setStatus("success");
-    } catch (error) {
-      alert("Ocorreu um erro ao enviar. Tente novamente.");
-      setStatus("form");
-      throw new Error("Verifique os dados");
-    }
-  };
-
-  const handleCancel = () => {
-    setFullName("");
-    setWhatsapp("");
-    setInterestArea(selectedContent || "");
-    setStatus("form");
-  };
-
-  const handleRedirectWhatsApp = () => {
-    // Link de exemplo para WhatsApp (ajuste o número)
-    window.open(`https://wa.me/5531999999999`, "_blank");
-  };
-
-  // --- Renderiza estados ---
+  // O componente agora obedece o 'status' que vem do pai
   if (status === "loading") return <LoadingState />;
-  if (status === "success")
-    return (
-      <SuccessState
-        onClose={handleCancel}
-        onRedirect={handleRedirectWhatsApp}
-      />
-    );
+  if (status === "success") return <SuccessState onClose={onCancel} />;
 
   return (
     <div className="text-center">
-      <h2 className="text-3xl font-bold text-[#6A0E29]">
-        Fale com um Consultor
-      </h2>
-      <p className="text-slate-500 mt-2 mb-6">
-        Preencha seus dados para iniciar o atendimento.
+      <h2 className="text-3xl font-bold text-zinc-800">Quero me Inscrever</h2>
+      <p className="text-zinc-500 mt-2 mb-6">
+        Preencha seus dados para garantir sua vaga.
       </p>
-      <div className="mb-8">
-        <span className="inline-block bg-amber-100 text-[#6A0E29] text-sm font-semibold px-4 py-1.5 rounded-full">
-          Área de Interesse: {selectedContent}
+      <div className="mb-6">
+        <span className="inline-block bg-zinc-100 text-zinc-700 text-sm font-medium px-4 py-1.5 rounded-full">
+          Curso: <strong>{selectedContent}</strong>
         </span>
       </div>
-      <form onSubmit={handleSubmit} className="text-left">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-5">
-          <div className="sm:col-span-2">
+
+      {/* O formulário agora chama a função 'onSubmit' que vem do pai */}
+      <form onSubmit={onSubmit} className="text-left">
+        <div className="space-y-5">
+          <div>
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-slate-600 mb-1"
+              className="block text-sm font-medium text-zinc-600 mb-1"
             >
               Nome Completo <span className="text-red-500">*</span>
             </label>
@@ -162,16 +106,14 @@ export default function SubscriptionForm({
               id="name"
               name="name"
               required
-              className={inputStyle}
+              className="w-full px-4 py-3 bg-zinc-100 border-2 border-transparent rounded-lg placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:border-red-500 focus:ring-4 focus:ring-red-500/20 transition-all"
               placeholder="Seu nome completo"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
             />
           </div>
           <div>
             <label
               htmlFor="whatsapp"
-              className="block text-sm font-medium text-slate-600 mb-1"
+              className="block text-sm font-medium text-zinc-600 mb-1"
             >
               WhatsApp <span className="text-red-500">*</span>
             </label>
@@ -180,8 +122,8 @@ export default function SubscriptionForm({
               id="whatsapp"
               name="whatsapp"
               required
-              className={inputStyle}
-              placeholder="(31) 99999-9999"
+              className="w-full px-4 py-3 bg-zinc-100 border-2 border-transparent rounded-lg placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:border-red-500 focus:ring-4 focus:ring-red-500/20 transition-all"
+              placeholder="(00) 00000-0000"
               value={whatsapp}
               onChange={handleWhatsappChange}
             />
@@ -189,7 +131,7 @@ export default function SubscriptionForm({
           <div>
             <label
               htmlFor="interestArea"
-              className="block text-sm font-medium text-slate-600 mb-1"
+              className="block text-sm font-medium text-zinc-600 mb-1"
             >
               Área de Interesse <span className="text-red-500">*</span>
             </label>
@@ -198,9 +140,8 @@ export default function SubscriptionForm({
                 id="interestArea"
                 name="interestArea"
                 required
-                value={interestArea}
-                onChange={(e) => setInterestArea(e.target.value)}
-                className="w-full appearance-none px-4 py-3 bg-slate-100 border-2 border-transparent rounded-lg focus:outline-none focus:bg-white focus:border-[#8B1A3B] focus:ring-4 focus:ring-[#8B1A3B]/20 transition-all duration-300"
+                defaultValue=""
+                className="w-full appearance-none px-4 py-3 bg-zinc-100 border-2 border-transparent rounded-lg focus:outline-none focus:bg-white focus:border-red-500 focus:ring-4 focus:ring-red-500/20"
               >
                 <option value="" disabled>
                   Selecione uma área
@@ -212,7 +153,7 @@ export default function SubscriptionForm({
                 ))}
               </select>
               <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
-                <ChevronDown className="h-5 w-5 text-slate-400" />
+                <ChevronDown className="h-5 w-5 text-zinc-400" />
               </div>
             </div>
           </div>
@@ -220,17 +161,17 @@ export default function SubscriptionForm({
         <div className="flex items-center gap-4 pt-8">
           <button
             type="button"
-            onClick={handleCancel}
-            className="w-full sm:w-auto px-6 py-3 text-slate-600 font-semibold rounded-lg hover:bg-slate-100 transition-colors"
+            onClick={onCancel}
+            className="w-full sm:w-auto px-6 py-3 text-zinc-600 font-semibold rounded-lg hover:bg-zinc-100 transition-colors"
           >
             Cancelar
           </button>
           <button
             type="submit"
-            className="w-full flex-1 px-6 py-3 flex items-center justify-center gap-2 bg-[#8B1A3B] text-white font-bold rounded-lg shadow-lg shadow-[#8B1A3B]/20 hover:bg-[#6A0E29] hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#6A0E29]/30 transition-all duration-300 ease-in-out"
+            className="w-full flex-1 px-6 py-3 flex items-center justify-center gap-2 bg-red-700 text-white font-bold rounded-lg shadow-lg hover:bg-red-800 transition-all"
           >
             <Send size={18} />
-            <span>Enviar Contato</span>
+            <span>Enviar Inscrição</span>
           </button>
         </div>
       </form>

@@ -48,7 +48,7 @@ export const Header = () => {
         fullerName: formData.get("name") as string,
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
         areaOfInterest: formData.get("interestArea") as string,
-        course: "Contato Geral (Header)",
+        enterpriseId: 1,
       };
 
       console.log("Enviando dados do Header:", data);

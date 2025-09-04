@@ -3,8 +3,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { TextEffect } from "@/components/ui/text-effect";
 import { AnimatedGroup } from "@/components/ui/animated-group";
+// ✅ 1. Importar o tipo 'Variants'
+import type { Variants } from "motion/react";
 
-const transitionVariants = {
+// ✅ 2. Aplicar o tipo ao objeto
+const transitionVariants: { item: Variants } = {
   item: {
     hidden: {
       opacity: 0,
@@ -16,7 +19,7 @@ const transitionVariants = {
       filter: "blur(0px)",
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring", // Agora o TypeScript entende que "spring" é válido
         bounce: 0.3,
         duration: 1.5,
       },

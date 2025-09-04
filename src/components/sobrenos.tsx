@@ -1,12 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import {
-  ArrowRight,
-  Briefcase,
-  GraduationCap,
-  Library,
-  Rocket,
-} from "lucide-react";
+import { Briefcase, GraduationCap, Library, Rocket } from "lucide-react";
 import Image from "next/image";
 import { TextEffect } from "@/components/ui/text-effect";
 

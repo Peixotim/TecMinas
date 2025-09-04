@@ -4,66 +4,75 @@ export type SubscriptionData = {
   fullerName: string;
   phone: string;
   areaOfInterest: string;
-  enterpriseId:number
+  enterpriseId: number;
 };
 
-// Renova token e salva no localStorage
 export async function refreshToken(): Promise<string> {
-  const response = await fetch(`${API_BASE_URL}/trocarRota`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      clientId: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
-    }),
-  });
-
-  if (!response.ok) { //Se response for diferente de ok retorna um dataerro
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Falha ao gerar token.");
+  try {
+    if (!API_BASE_URL || !process.env.NEXT_PUBLIC_CLIENT_ID || !process.env.NEXT_PUBLIC_CLIENT_SECRET) {
+      throw new Error("Variáveis de ambiente da API não configuradas. Verifique o .env.local");
+    }
+    const response = await fetch(`${API_BASE_URL}/trocarRota`, { // Verifique a rota do token
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+        clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
+      }),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Falha ao gerar token de acesso.");
+    }
+    const data = await response.json();
+    localStorage.setItem("apiToken", data.token);
+    localStorage.setItem("tokenExpiry", (Date.now() + 30 * 24 * 60 * 60 * 1000).toString());
+    return data.token;
+  } catch (error) {
+    console.error("Erro em refreshToken:", error);
+    throw error;
   }
-
-  const data = await response.json();
-  localStorage.setItem("apiToken", data.token);
-  localStorage.setItem(
-    "tokenExpiry",
-    (Date.now() + 30 * 24 * 60 * 60 * 1000).toString()
-  );
-  return data.token;
 }
 
 // Retorna token válido
 export async function getToken(): Promise<string> {
-  const token = localStorage.getItem("apiToken");
-  const expiry = Number(localStorage.getItem("tokenExpiry") || 0);
-
-  if (!token || Date.now() > expiry) {
-    return await refreshToken();
+  try {
+    const token = localStorage.getItem("apiToken");
+    const expiry = Number(localStorage.getItem("tokenExpiry") || 0);
+    if (!token || Date.now() > expiry) {
+      return await refreshToken();
+    }
+    return token;
+  } catch (error) {
+    console.error("Erro em getToken:", error);
+    throw error;
   }
-  return token;
 }
 
 // Envia dados do formulário para a API
 export async function submitSubscription(
   subscriptionData: SubscriptionData
 ): Promise<object> {
-  const token = await getToken(); // garante token válido
+  try {
+    const token = await getToken();
+    const endpoint = `${API_BASE_URL}/trocarRota`; // Verifique a rota de inscrição
 
-  const response = await fetch(`${API_BASE_URL}/trocarRota`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(subscriptionData),
-  });
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(subscriptionData),
+    });
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Falha ao enviar inscrição.");
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Falha ao enviar inscrição.");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Erro em submitSubscription:", error);
+    throw error;
   }
-  if(response.status == 404){
-    throw new Error("Verifique a API , veja se o token está gerado corretamente e o olhe tambem a importação do arquivo .env")
-  }
-  return await response.json();
 }
