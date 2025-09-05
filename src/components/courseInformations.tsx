@@ -1,5 +1,3 @@
-// Salve em: seu arquivo CourseInformations.tsx (nenhuma alteração necessária)
-
 "use client";
 
 import Link from "next/link";
@@ -11,7 +9,6 @@ import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
 import { CourseCardProps } from "./courseCards";
 import { submitSubscription } from "./lib/api";
 
-// --- Interfaces ---
 export interface CourseSection {
   title: string;
   content: string;

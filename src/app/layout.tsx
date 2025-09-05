@@ -24,6 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" className="scroll-smooth scroll-pt-24">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

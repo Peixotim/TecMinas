@@ -1,5 +1,3 @@
-// SearchSection.tsx
-
 import { Search } from "lucide-react";
 import { TextEffect } from "@/components/ui/text-effect";
 

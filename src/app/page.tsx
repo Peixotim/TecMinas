@@ -38,7 +38,7 @@ export default function Home() {
       <div id="inicio">
         <HeroSection />
       </div>
-      <div className="my-38 lg:my-40" />
+      <div className="my-10 sm:my-24" />
       <div id="sobrenos">
         <SobreNosTecMinas />
       </div>

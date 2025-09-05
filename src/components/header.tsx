@@ -1,6 +1,4 @@
 "use client";
-
-// --- 1. Importações Adicionais ---
 import React, { useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,7 +6,6 @@ import { Menu, MessageCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "./lib/utils";
 import { motion, useScroll } from "framer-motion";
-// Importe os componentes do Modal que você já usa
 import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
 import { submitSubscription } from "./lib/api";
@@ -23,14 +20,13 @@ export const Header = () => {
   const [menuState, setMenuState] = React.useState(false);
   const [hidden, setHidden] = React.useState(false);
 
-  // --- 2. Lógica do Modal (copiada e adaptada de CourseInformations) ---
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formStatus, setFormStatus] = useState<"form" | "loading" | "success">(
     "form"
   );
 
   const openModal = () => {
-    setFormStatus("form"); // Reseta o formulário sempre que abrir
+    setFormStatus("form");
     setIsModalOpen(true);
   };
 
@@ -42,8 +38,6 @@ export const Header = () => {
 
     try {
       const formData = new FormData(event.currentTarget);
-
-      // Monta o objeto de dados com os nomes corretos para a API
       const data = {
         fullerName: formData.get("name") as string,
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
@@ -100,7 +94,7 @@ export const Header = () => {
               >
                 <div className="relative w-40 h-20">
                   <Image
-                    src="/tecminasImagem.jpg"
+                    src="/tecminasImagem.png"
                     alt="TecMinas Logo"
                     fill
                     className="object-contain"
