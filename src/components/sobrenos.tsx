@@ -35,7 +35,7 @@ export function SobreNosTecMinas() {
         <div className="text-center max-w-4xl mx-auto mb-16">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
             <TextEffect as="span" preset="fade-in-blur" speedSegment={0.3}>
-              Sobre Nós: A
+              Sobre Nós:
             </TextEffect>
             {/* CORREÇÃO APLICADA AQUI: O espaço foi movido para dentro da string */}
             <TextEffect
@@ -45,7 +45,7 @@ export function SobreNosTecMinas() {
               delay={0.4}
               className="text-red-600"
             >
-              {" Faculdade TecMinas"}
+              {" Colegio Tecnico TecMinas"}
             </TextEffect>
           </h1>
 
