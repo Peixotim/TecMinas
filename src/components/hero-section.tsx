@@ -7,16 +7,16 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section className="w-screen min-h-[600px] h-[600px]">
+    <section className="w-full min-h-[600px] h-[600px]">
       <div>
         <picture className="absolute inset-0 -z-10 w-full h-full py-28 ">
+          <source srcSet="/1940x600.png" media="(min-width: 1940px)" />
           <source srcSet="/1920x600.png" media="(min-width: 1920px)" />
-
           <source srcSet="/768x690.png" media="(max-width: 768px)" />
           <Image
             src="/1920x600.png"
             alt="Hero Background"
-            width={1900}
+            width={1920}
             height={1000}
           />
         </picture>
@@ -24,7 +24,7 @@ export default function HeroSection() {
       <div className="flex flex-col items-start justify-end h-full">
         <div
           className="
-        flex flex-row items-center space-x-4 px-20 py-14 max-sm:hidden"
+         items-center space-x-4 px-20 hidden md:block max-sm:hidden"
         >
           <Button
             asChild
