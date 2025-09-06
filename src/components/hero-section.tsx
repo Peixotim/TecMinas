@@ -10,8 +10,9 @@ export default function HeroSection() {
     <section className="w-full min-h-[600px] h-[600px]">
       <div>
         <picture className="absolute inset-0 -z-10 w-full h-full py-28 ">
-          <source srcSet="/1940x600.png" media="(min-width: 1940px)" />
-          <source srcSet="/1920x600.png" media="(min-width: 1920px)" />
+          <source srcSet="/1940x600.png" media="(max-width: 1940px)" />
+          <source srcSet="/1920x600.png" media="(max-width: 1920px)" />
+          <source srcSet="/1024x600.png" media="(min-width: 1024px)" />
           <source srcSet="/768x690.png" media="(max-width: 768px)" />
           <Image
             src="/1920x600.png"
