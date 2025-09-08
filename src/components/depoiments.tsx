@@ -3,7 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { Star, Quote } from "lucide-react";
 import Image from "next/image";
 
-// O array de testimonials permanece o mesmo
 const testimonials = [
   {
     id: 1,
@@ -113,7 +112,7 @@ const Depoiments = () => {
           {/* Imagem de sucesso */}
           <div className="relative max-w-2xl mx-auto mb-8">
             <Image
-              src="/turmaGraduando.jpg"
+              src="/tg.webp"
               width={700}
               height={400}
               alt="Alunos formados comemorando sucesso"
