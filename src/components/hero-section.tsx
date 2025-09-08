@@ -7,26 +7,30 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section className="w-full min-h-[600px] h-[600px]">
-      <div>
-        <picture className="absolute inset-0 -z-10 w-full h-full py-28 ">
-          <source srcSet="/1940x600.png" media="(max-width: 1940px)" />
-          <source srcSet="/1920x600.png" media="(max-width: 1920px)" />
-          <source srcSet="/1024x600.png" media="(min-width: 1024px)" />
+    //Correcao a tag relative corrige o erro de responsividade
+    <section className="relative w-full h-[600px] overflow-hidden">
+      <div className="absolute inset-0 -z-10">
+        <picture>
           <source srcSet="/768x690.png" media="(max-width: 768px)" />
+          <source
+            srcSet="/1024x600.png"
+            media="(min-width: 769px) and (max-width: 1023px)"
+          />
+          <source
+            srcSet="/1920x600.png"
+            media="(min-width: 1024px) and (max-width: 1920px)"
+          />
+          <source srcSet="/1940x600.png" media="(min-width: 1921px)" />
           <Image
             src="/1920x600.png"
             alt="Hero Background"
-            width={1920}
-            height={1000}
+            className="object-bottom"
+            fill
           />
         </picture>
       </div>
-      <div className="flex flex-col items-start justify-end h-full">
-        <div
-          className="
-         items-center space-x-4 px-20 hidden md:block max-sm:hidden"
-        >
+      <div className="relative z-10 flex flex-col items-center md:items-start justify-end h-full text-center md:text-left p-4 sm:p-8 md:px-20">
+        <div className="flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12 hidden md:block">
           <Button
             asChild
             size="lg"
@@ -39,7 +43,7 @@ export default function HeroSection() {
             asChild
             size="lg"
             variant="outline"
-            className="bg-transparent border-none hover:bg-transparent text-white hover:text-white  font-bold text-lg px-8 py-6"
+            className="bg-transparent border-white hover:bg-white/10 text-white font-bold text-lg px-8 py-6"
           >
             <Link href="/#cursos">Cursos</Link>
           </Button>

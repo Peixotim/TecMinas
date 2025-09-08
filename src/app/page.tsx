@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div id="inicio">
+      <div id="inicio" className="pt-24">
         <HeroSection />
       </div>
       <div className="my-10 sm:my-24" />
