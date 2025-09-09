@@ -1,5 +1,5 @@
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Briefcase, GraduationCap, Library, Rocket } from "lucide-react";
+import { Briefcase, Library, Rocket } from "lucide-react";
 import Image from "next/image";
 import { TextEffect } from "@/components/ui/text-effect";
 
