@@ -27,7 +27,7 @@ export default function LgpdCheckbox() {
             onClick={() => setShowModal(true)}
             className="text-red-700 font-medium hover:underline"
           >
-            termos da LGPD
+            termos de Privacidade
           </button>
           .
         </span>

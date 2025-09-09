@@ -32,7 +32,7 @@ export default function CookieConsent() {
             href="/politica-de-privacidade"
             className="text-red-700 font-medium hover:underline"
           >
-            política de privacidade
+            política de privacidade e cookies
           </a>
           .
         </p>
