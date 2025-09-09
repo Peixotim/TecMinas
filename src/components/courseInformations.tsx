@@ -9,7 +9,6 @@ import {
   Info,
   ChevronLeft,
 } from "lucide-react";
-import { slugify } from "@/utils/slugify";
 import { CourseCardProps } from "./courseCards";
 import { useState, useCallback } from "react";
 import Modal from "./modalContactsCourses/modal";
@@ -38,7 +37,6 @@ export default function CourseInformations({
   course,
   cardData,
 }: ComponentProps) {
-  const categorySlug = cardData ? slugify(cardData.subTitle) : "";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formStatus, setFormStatus] = useState<"form" | "loading" | "success">(
     "form"

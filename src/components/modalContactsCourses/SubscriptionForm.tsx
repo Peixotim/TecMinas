@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send, ChevronDown, CheckCircle, Loader2 } from "lucide-react";
+import { Send, CheckCircle, Loader2 } from "lucide-react";
 
 // --- Componentes de estado (sem alterações na aparência) ---
 const LoadingState = () => (

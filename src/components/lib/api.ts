@@ -7,12 +7,19 @@ export type SubscriptionData = {
   enterpriseId: number;
 };
 
+// Tipo para o payload do JWT
+interface JwtPayload {
+  exp?: number;
+  iat?: number;
+  [key: string]: unknown; // permite campos extras do token
+}
+
 // Função para decodificar o payload do JWT
-function decodeJwt(token: string): any {
+function decodeJwt(token: string): JwtPayload | null {
   try {
     const base64Url = token.split(".")[1];
     const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    return JSON.parse(atob(base64));
+    return JSON.parse(atob(base64)) as JwtPayload;
   } catch {
     return null;
   }
@@ -34,7 +41,7 @@ export async function refreshToken(): Promise<string> {
     throw new Error(errorData.message || "Falha ao gerar token.");
   }
 
-  const data = await response.json();
+  const data: { token: string } = await response.json();
   const token = data.token;
 
   // decodifica e pega exp do token
