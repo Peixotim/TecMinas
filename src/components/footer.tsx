@@ -158,7 +158,7 @@ const Footer = () => {
             © {new Date().getFullYear()} TecMinas. Todos os direitos reservados.
           </p>
           <p className="text-sm text-[#9CA3AF]">
-            CNPJ: 00.000.000/0001-00 | Credenciada pelo MEC
+            CNPJ: 61.481.601/0001-58 | Credenciada pelo MEC
           </p>
         </div>
       </div>
