@@ -6,19 +6,14 @@ import { TextEffect } from "@/components/ui/text-effect";
 // Dados para a seção de Destaques
 const highlights = [
   {
-    icon: <GraduationCap className="w-8 h-8 text-red-600" />,
-    value: "+10 Anos",
-    label: "de Tradição no Ensino",
+    icon: <Library className="w-8 h-8 text-red-600" />,
+    value: "+60 Cursos",
+    label: "Técnicos e Profissionalizantes",
   },
   {
     icon: <Briefcase className="w-8 h-8 text-red-600" />,
     value: "94%",
     label: "de Empregabilidade",
-  },
-  {
-    icon: <Library className="w-8 h-8 text-red-600" />,
-    value: "+60 Cursos",
-    label: "Técnicos e Profissionalizantes",
   },
   {
     icon: <Rocket className="w-8 h-8 text-red-600" />,
@@ -65,7 +60,7 @@ export function SobreNosTecMinas() {
 
         {/* Seção de Destaques/Estatísticas */}
         <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg mb-20">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
             {highlights.map((item) => (
               <div key={item.value} className="flex flex-col items-center">
                 {item.icon}

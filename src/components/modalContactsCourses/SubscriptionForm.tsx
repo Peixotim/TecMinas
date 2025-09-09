@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send, CheckCircle, Loader2 } from "lucide-react";
+import { Send, CheckCircle, Loader2, X } from "lucide-react";
 
 // --- Componentes de estado (sem alterações na aparência) ---
 const LoadingState = () => (
@@ -12,6 +12,7 @@ const LoadingState = () => (
     </p>
   </div>
 );
+
 const SuccessState = ({ onClose }: { onClose: () => void }) => (
   <div className="flex flex-col items-center justify-center h-80 text-center">
     <CheckCircle className="h-16 w-16 text-red-700" />
@@ -30,7 +31,6 @@ const SuccessState = ({ onClose }: { onClose: () => void }) => (
   </div>
 );
 
-// --- ✅ Definição correta das propriedades que o formulário ACEITA ---
 type SubscriptionFormProps = {
   status: "form" | "loading" | "success";
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -44,8 +44,9 @@ export default function SubscriptionForm({
   onCancel,
   selectedContent,
 }: SubscriptionFormProps) {
-  // Este estado é apenas para controlar a máscara do input, é uma lógica de UI que pode ficar aqui.
   const [whatsapp, setWhatsapp] = useState("");
+  const [lgpdAccepted, setLgpdAccepted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleWhatsappChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value.replace(/\D/g, "");
@@ -64,7 +65,6 @@ export default function SubscriptionForm({
     setWhatsapp(formattedValue);
   };
 
-  // O componente agora obedece o 'status' que vem do pai
   if (status === "loading") return <LoadingState />;
   if (status === "success") return <SuccessState onClose={onCancel} />;
 
@@ -80,9 +80,9 @@ export default function SubscriptionForm({
         </span>
       </div>
 
-      {/* O formulário agora chama a função 'onSubmit' que vem do pai */}
       <form onSubmit={onSubmit} className="text-left">
         <div className="space-y-5">
+          {/* Nome */}
           <div>
             <label
               htmlFor="name"
@@ -99,6 +99,8 @@ export default function SubscriptionForm({
               placeholder="Seu nome completo"
             />
           </div>
+
+          {/* WhatsApp */}
           <div>
             <label
               htmlFor="whatsapp"
@@ -117,7 +119,57 @@ export default function SubscriptionForm({
               onChange={handleWhatsappChange}
             />
           </div>
+
+          {/* ✅ Checkbox LGPD estilizado */}
+          <div className="mt-4">
+            <label className="flex items-center gap-3 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={lgpdAccepted}
+                onChange={(e) => setLgpdAccepted(e.target.checked)}
+                className="peer hidden"
+                required
+              />
+              {/* Caixa customizada */}
+              <span
+                className="w-5 h-5 flex items-center justify-center rounded-md border-2 border-zinc-300 bg-white 
+                peer-checked:bg-red-700 peer-checked:border-red-700 transition-colors duration-200"
+              >
+                {lgpdAccepted && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={3}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                )}
+              </span>
+
+              {/* Texto do termo */}
+              <span className="text-sm text-zinc-700">
+                Eu li e aceito os{" "}
+                <button
+                  type="button"
+                  onClick={() => setShowModal(true)}
+                  className="text-red-700 font-medium hover:underline"
+                >
+                  termos da LGPD
+                </button>
+                .
+              </span>
+            </label>
+          </div>
         </div>
+
+        {/* Botões */}
         <div className="flex items-center gap-4 pt-8">
           <button
             type="button"
@@ -128,13 +180,65 @@ export default function SubscriptionForm({
           </button>
           <button
             type="submit"
-            className="w-full flex-1 px-6 py-3 flex items-center justify-center gap-2 bg-red-700 text-white font-bold rounded-lg shadow-lg hover:bg-red-800 transition-all"
+            disabled={!lgpdAccepted}
+            className="w-full flex-1 px-6 py-3 flex items-center justify-center gap-2 bg-red-700 text-white font-bold rounded-lg shadow-lg hover:bg-red-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Send size={18} />
             <span>Enviar Inscrição</span>
           </button>
         </div>
       </form>
+
+      {/* --- Modal LGPD --- */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white w-full max-w-lg rounded-2xl shadow-xl p-6 relative">
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-3 right-3 text-zinc-500 hover:text-zinc-800"
+            >
+              <X size={22} />
+            </button>
+            <h2 className="text-2xl font-bold text-zinc-800 mb-4">
+              Lei Geral de Proteção de Dados (LGPD)
+            </h2>
+            <div className="text-sm text-zinc-600 max-h-80 overflow-y-auto space-y-4">
+              <p>
+                A LGPD (Lei nº 13.709/2018) dispõe sobre o tratamento de dados
+                pessoais, inclusive nos meios digitais, por pessoa natural ou
+                jurídica, com o objetivo de proteger os direitos fundamentais de
+                liberdade, privacidade e o livre desenvolvimento da
+                personalidade da pessoa natural.
+              </p>
+              <p>
+                Ao aceitar, você autoriza o uso dos seus dados fornecidos neste
+                formulário para fins de inscrição, comunicação e contato por
+                nossa equipe.
+              </p>
+              <p>
+                Para mais detalhes, acesse a lei completa no{" "}
+                <a
+                  href="https://www.gov.br/cidadania/pt-br/acesso-a-informacao/lgpd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-red-700 font-medium hover:underline"
+                >
+                  site oficial do Governo
+                </a>
+                .
+              </p>
+            </div>
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-6 py-2 bg-red-700 text-white rounded-lg hover:bg-red-800 transition"
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
