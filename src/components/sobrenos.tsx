@@ -7,7 +7,7 @@ import { TextEffect } from "@/components/ui/text-effect";
 const highlights = [
   {
     icon: <GraduationCap className="w-8 h-8 text-red-600" />,
-    value: "+2 Anos",
+    value: "+10 Anos",
     label: "de Tradição no Ensino",
   },
   {
@@ -17,7 +17,7 @@ const highlights = [
   },
   {
     icon: <Library className="w-8 h-8 text-red-600" />,
-    value: "+30 Cursos",
+    value: "+60 Cursos",
     label: "Técnicos e Profissionalizantes",
   },
   {
@@ -45,7 +45,7 @@ export function SobreNosTecMinas() {
               delay={0.4}
               className="text-red-600"
             >
-              {" Colegio Tecnico TecMinas"}
+              {"Colégio Técnico TecMinas"}
             </TextEffect>
           </h1>
 

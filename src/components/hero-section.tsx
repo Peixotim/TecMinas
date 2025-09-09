@@ -34,7 +34,7 @@ export default function HeroSection() {
           <Button
             asChild
             size="lg"
-            className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-6"
+            className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-6 "
           >
             <Link href="/#cursos">Comece agora</Link>
           </Button>
@@ -43,7 +43,7 @@ export default function HeroSection() {
             asChild
             size="lg"
             variant="outline"
-            className="bg-transparent border-white hover:bg-white/10 text-white font-bold text-lg px-8 py-6"
+            className="bg-transparent border-white hover:bg-white text-white font-bold text-lg px-8 py-6"
           >
             <Link href="/#cursos">Cursos</Link>
           </Button>

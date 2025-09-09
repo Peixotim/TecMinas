@@ -1,5 +1,3 @@
-// Salve em: components/modalContactsCourses/SubscriptionForm.tsx
-
 "use client";
 
 import { useState } from "react";
@@ -40,16 +38,6 @@ type SubscriptionFormProps = {
   selectedContent: string;
 };
 
-const areasDeInteresse = [
-  "Saúde",
-  "Administração e Gestão",
-  "Tecnologia e Informática",
-  "Engenharia e Manutenção",
-  "Construção e Infraestrutura",
-  "Meio Ambiente e Agropecuária",
-  "Serviços",
-];
-
 export default function SubscriptionForm({
   status,
   onSubmit,
@@ -61,17 +49,18 @@ export default function SubscriptionForm({
 
   const handleWhatsappChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value.replace(/\D/g, "");
-    let formattedValue = rawValue.substring(0, 11);
-    if (formattedValue.length > 2)
-      formattedValue = `(${formattedValue.substring(
-        0,
-        2
-      )}) ${formattedValue.substring(2)}`;
-    if (formattedValue.length > 8)
-      formattedValue = `(${formattedValue.substring(
-        0,
-        2
-      )}) ${formattedValue.substring(2, 7)}-${formattedValue.substring(7)}`;
+    let formattedValue = rawValue;
+
+    if (rawValue.length > 2) {
+      formattedValue = `(${rawValue.substring(0, 2)}) ${rawValue.substring(2)}`;
+    }
+    if (rawValue.length > 7) {
+      formattedValue = `(${rawValue.substring(0, 2)}) ${rawValue.substring(
+        2,
+        rawValue.length > 10 ? 7 : 6
+      )}-${rawValue.substring(rawValue.length > 10 ? 7 : 6)}`;
+    }
+
     setWhatsapp(formattedValue);
   };
 
@@ -127,35 +116,6 @@ export default function SubscriptionForm({
               value={whatsapp}
               onChange={handleWhatsappChange}
             />
-          </div>
-          <div>
-            <label
-              htmlFor="interestArea"
-              className="block text-sm font-medium text-zinc-600 mb-1"
-            >
-              Área de Interesse <span className="text-red-500">*</span>
-            </label>
-            <div className="relative">
-              <select
-                id="interestArea"
-                name="interestArea"
-                required
-                defaultValue=""
-                className="w-full appearance-none px-4 py-3 bg-zinc-100 border-2 border-transparent rounded-lg focus:outline-none focus:bg-white focus:border-red-500 focus:ring-4 focus:ring-red-500/20"
-              >
-                <option value="" disabled>
-                  Selecione uma área
-                </option>
-                {areasDeInteresse.map((area) => (
-                  <option key={area} value={area}>
-                    {area}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
-                <ChevronDown className="h-5 w-5 text-zinc-400" />
-              </div>
-            </div>
           </div>
         </div>
         <div className="flex items-center gap-4 pt-8">

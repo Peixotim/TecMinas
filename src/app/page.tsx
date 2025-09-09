@@ -13,21 +13,44 @@ import Contact from "@/components/contact";
 const INITIAL_VISIBLE_COURSES = 6; // Quantos cursos aparecem inicialmente (Definir)
 const COURSES_INCREMENT = 3; // Quantos cursos são adicionados a cada clique (Definir)
 
+// Home.tsx
+
 export default function Home() {
   const allCourses = CardsPosMain();
-  const [searchTerm, setSearchTerm] = useState("");
 
+  // Cursos prioritários (em ordem fixa)
+  const priorityTitles = [
+    "Técnico em Segurança do Trabalho - Por Competência",
+    "Técnico em Enfermagem - Por Competência",
+    "Técnico em Eletrotécnica - Por Competência",
+    "Técnico em Logística - Por Competência", // <- precisa existir na sua lista
+    "Técnico em Mineração - Por Competência",
+    "Técnico em Soldagem - Por Competência",
+  ];
+
+  // Separar cursos prioritários e o restante
+  const priorityCourses = allCourses.filter((c) =>
+    priorityTitles.includes(c.title)
+  );
+
+  const otherCourses = allCourses.filter(
+    (c) => !priorityTitles.includes(c.title)
+  );
+
+  // Reordena colocando os prioritários primeiro
+  const orderedCourses = [...priorityCourses, ...otherCourses];
+
+  const [searchTerm, setSearchTerm] = useState("");
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COURSES);
 
-  const filteredCourses = allCourses.filter((course) => {
+  const filteredCourses = orderedCourses.filter((course) => {
     const searchTermLower = searchTerm.toLowerCase();
-    const matchesSearch =
+    return (
       (course.title || "").toLowerCase().includes(searchTermLower) ||
-      (course.subTitle || "").toLowerCase().includes(searchTermLower);
-    return matchesSearch;
+      (course.subTitle || "").toLowerCase().includes(searchTermLower)
+    );
   });
 
-  // ALTERADO: A lógica da função para adicionar 3 a cada clique
   const handleShowMore = () => {
     setVisibleCount((prevCount) => prevCount + COURSES_INCREMENT);
   };
@@ -51,7 +74,7 @@ export default function Home() {
       <hr className="max-w-5xl mx-auto border-slate-200" />
       <section id="cursos" className="py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-[#05365F] mb-8 text-center">
+          <h2 className="text-3xl font-bold text-red-700 mb-8 text-center">
             Nossos Cursos Técnicos Por Competência
           </h2>
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">

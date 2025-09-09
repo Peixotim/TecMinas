@@ -506,5 +506,14 @@ export default function CardsPosMain(): CourseCardProps[] {
         alt: "Guia de turismo orientando um grupo de turistas em um ponto turístico",
       },
     },
+    {
+      title: "Técnico em Logística - Por Competência",
+      subTitle: "Infraestrutura",
+      rating: 5,
+      img: {
+        src: "https://images.pexels.com/photos/906982/pexels-photo-906982.jpeg",
+        alt: "Profissional de logística organizando estoque",
+      },
+    },
   ];
 }

@@ -7,72 +7,77 @@ export type SubscriptionData = {
   enterpriseId: number;
 };
 
-export async function refreshToken(): Promise<string> {
+// Função para decodificar o payload do JWT
+function decodeJwt(token: string): any {
   try {
-    if (!API_BASE_URL || !process.env.NEXT_PUBLIC_CLIENT_ID || !process.env.NEXT_PUBLIC_CLIENT_SECRET) {
-      throw new Error("Variáveis de ambiente da API não configuradas. Verifique o .env.local");
-    }
-    const response = await fetch(`${API_BASE_URL}/trocarRota`, { // Verifique a rota do token
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
-        clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
-      }),
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Falha ao gerar token de acesso.");
-    }
-    const data = await response.json();
-    localStorage.setItem("apiToken", data.token);
-    localStorage.setItem("tokenExpiry", (Date.now() + 30 * 24 * 60 * 60 * 1000).toString());
-    return data.token;
-  } catch (error) {
-    console.error("Erro em refreshToken:", error);
-    throw error;
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    return JSON.parse(atob(base64));
+  } catch {
+    return null;
   }
+}
+
+// Pega token com clientId e clientSecret
+export async function refreshToken(): Promise<string> {
+  const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+      clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
+    }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Falha ao gerar token.");
+  }
+
+  const data = await response.json();
+  const token = data.token;
+
+  // decodifica e pega exp do token
+  const decoded = decodeJwt(token);
+  const expiry = decoded?.exp ? decoded.exp * 1000 : Date.now();
+
+  localStorage.setItem("apiToken", token);
+  localStorage.setItem("tokenExpiry", expiry.toString());
+
+  return token;
 }
 
 // Retorna token válido
 export async function getToken(): Promise<string> {
-  try {
-    const token = localStorage.getItem("apiToken");
-    const expiry = Number(localStorage.getItem("tokenExpiry") || 0);
-    if (!token || Date.now() > expiry) {
-      return await refreshToken();
-    }
-    return token;
-  } catch (error) {
-    console.error("Erro em getToken:", error);
-    throw error;
+  const token = localStorage.getItem("apiToken");
+  const expiry = Number(localStorage.getItem("tokenExpiry") || 0);
+
+  if (!token || Date.now() > expiry) {
+    return await refreshToken();
   }
+
+  return token;
 }
 
 // Envia dados do formulário para a API
 export async function submitSubscription(
   subscriptionData: SubscriptionData
 ): Promise<object> {
-  try {
-    const token = await getToken();
-    const endpoint = `${API_BASE_URL}/trocarRota`; // Verifique a rota de inscrição
+  const token = await getToken(); // garante token válido
 
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(subscriptionData),
-    });
+  const response = await fetch(`${API_BASE_URL}/subscriptions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(subscriptionData),
+  });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Falha ao enviar inscrição.");
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Erro em submitSubscription:", error);
-    throw error;
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Falha ao enviar inscrição.");
   }
+
+  return await response.json();
 }
