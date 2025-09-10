@@ -1,36 +1,6 @@
 "use client";
-
 import { ShieldCheck, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-
-export const metadata = {
-  title: "Política de Privacidade | Colégio Técnico TecMinas",
-  description:
-    "Leia a Política de Privacidade do Colégio Técnico TecMinas e saiba como tratamos e protegemos seus dados pessoais de acordo com a LGPD.",
-  keywords: [
-    "Política de Privacidade",
-    "LGPD TecMinas",
-    "Proteção de Dados",
-    "Termos de Privacidade",
-  ],
-  openGraph: {
-    title: "Política de Privacidade - TecMinas",
-    description:
-      "Compromisso com a transparência no uso e proteção dos seus dados pessoais.",
-    url: "https://colegiotecminas.com.br/politica-de-privacidade",
-    siteName: "TecMinas",
-    images: [
-      {
-        url: "https://colegiotecminas.com.br/images/privacidade.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Política de Privacidade TecMinas",
-      },
-    ],
-    locale: "pt_BR",
-    type: "website",
-  },
-};
 
 export default function PoliticaPrivacidade() {
   const router = useRouter();
