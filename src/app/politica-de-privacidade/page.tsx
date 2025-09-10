@@ -83,7 +83,7 @@ export default function PoliticaPrivacidade() {
                 href="mailto:contato@seudominio.com"
                 className="text-red-700 font-medium hover:underline"
               >
-                contato@seudominio.com
+                gerenciageraltecminas@gmail.com
               </a>
               .
             </p>
