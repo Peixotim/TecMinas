@@ -161,7 +161,7 @@ export default function SubscriptionForm({
                   onClick={() => setShowModal(true)}
                   className="text-red-700 font-medium hover:underline"
                 >
-                  termos da LGPD
+                  Termos de Privacidade
                 </button>
                 .
               </span>

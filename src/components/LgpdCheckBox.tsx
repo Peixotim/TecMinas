@@ -21,13 +21,13 @@ export default function LgpdCheckbox() {
           {checked && "✔"}
         </span>
         <span className="text-sm text-zinc-700">
-          Eu li e aceito os{" "}
+          Eu li e aceito as{" "}
           <button
             type="button"
             onClick={() => setShowModal(true)}
             className="text-red-700 font-medium hover:underline"
           >
-            termos de Privacidade
+            Políticas de Privacidades
           </button>
           .
         </span>
