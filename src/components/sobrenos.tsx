@@ -1,9 +1,11 @@
+"use client";
+
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Briefcase, Library, Rocket } from "lucide-react";
 import Image from "next/image";
 import { TextEffect } from "@/components/ui/text-effect";
 
-// Dados para a seção de Destaques
+
 const highlights = [
   {
     icon: <Library className="w-8 h-8 text-red-600" />,
@@ -26,13 +28,11 @@ export function SobreNosTecMinas() {
   return (
     <section className="w-full bg-white py-16 md:py-24">
       <div className="container mx-auto px-4">
-        {/* Seção de Título */}
         <div className="text-center max-w-4xl mx-auto mb-16">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
             <TextEffect as="span" preset="fade-in-blur" speedSegment={0.3}>
               Sobre Nós:
             </TextEffect>
-            {/* CORREÇÃO APLICADA AQUI: O espaço foi movido para dentro da string */}
             <TextEffect
               as="span"
               preset="fade-in-blur"
@@ -40,7 +40,7 @@ export function SobreNosTecMinas() {
               delay={0.4}
               className="text-red-600"
             >
-              {"Colégio Técnico TecMinas"}
+              {" Colégio Técnico TecMinas"}
             </TextEffect>
           </h1>
 
@@ -58,7 +58,6 @@ export function SobreNosTecMinas() {
           </TextEffect>
         </div>
 
-        {/* Seção de Destaques/Estatísticas */}
         <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg mb-20">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
             {highlights.map((item) => (
@@ -72,10 +71,17 @@ export function SobreNosTecMinas() {
             ))}
           </div>
         </div>
-
-        {/* Layout Zig-Zag 1: Nossa Filosofia */}
         <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
-          <div className="pr-0 md:pr-8">
+          <AspectRatio ratio={4 / 3}>
+            <Image
+              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop"
+              alt="Alunos da TecMinas colaborando em um projeto"
+              fill
+              className="rounded-lg object-cover shadow-lg"
+            />
+          </AspectRatio>
+
+          <div className="pl-0 md:pl-8">
             <TextEffect
               as="h2"
               preset="fade-in-blur"
@@ -92,14 +98,6 @@ export function SobreNosTecMinas() {
               relevante.
             </p>
           </div>
-          <AspectRatio ratio={4 / 3}>
-            <Image
-              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop"
-              alt="Alunos da TecMinas colaborando em um projeto"
-              fill
-              className="rounded-lg object-cover shadow-lg"
-            />
-          </AspectRatio>
         </div>
       </div>
     </section>
