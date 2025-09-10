@@ -1741,5 +1741,36 @@ export default function StoragedCoursesInfo(): CourseInformationsProps[] {
         cargo: "Guia de Turismo Regional",
       },
     },
+    {
+      title: "Técnico em Logística - Por Competência",
+      img: {
+        src: "https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        alt: "Profissional de logística organizando mercadorias em armazém",
+      },
+      sections: [
+        {
+          title: "Objetivos",
+          content:
+            "Formar profissionais capazes de atuar em toda a cadeia de suprimentos, desde o planejamento da compra até a entrega do produto final ao cliente. O curso foca em desenvolver habilidades de organização, gestão de estoque, transporte e distribuição, otimizando processos logísticos e reduzindo custos para empresas de diferentes segmentos.",
+        },
+        {
+          title: "Público Alvo",
+          content:
+            "Destina-se a pessoas com perfil organizado, visão estratégica e interesse em atuar em empresas de pequeno, médio e grande porte. Ideal para quem concluiu o ensino médio e deseja uma carreira sólida em áreas como transporte, armazenagem, comércio e indústria, com grande demanda no mercado de trabalho.",
+        },
+      ],
+      whatYouWillLearn: [
+        "Gerenciar o recebimento, armazenagem e distribuição de produtos",
+        "Aplicar técnicas de controle de estoque e inventário",
+        "Planejar rotas de transporte e otimizar custos logísticos",
+        "Utilizar sistemas informatizados de gestão logística",
+      ],
+      depoiments: {
+        texto:
+          "O curso de Logística ampliou minha visão sobre processos empresariais e abriu portas para oportunidades em grandes companhias. Hoje, aplico o que aprendi diariamente no meu trabalho.",
+        autor: "Fernanda Oliveira",
+        cargo: "Analista de Logística",
+      },
+    },
   ];
 }
