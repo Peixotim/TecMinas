@@ -3,6 +3,34 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Phone, Mail, Instagram, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+export const metadata = {
+  title: "Fale Conosco | Colégio Técnico TecMinas",
+  description:
+    "Entre em contato com o Colégio Técnico TecMinas. Telefone, WhatsApp, e-mail e endereço em Coronel Fabriciano - MG.",
+  keywords: [
+    "Contato TecMinas",
+    "Telefone TecMinas",
+    "E-mail TecMinas",
+    "Endereço TecMinas",
+  ],
+  openGraph: {
+    title: "Contato - Colégio Técnico TecMinas",
+    description:
+      "Fale com nossa equipe e tire suas dúvidas sobre cursos e matrículas.",
+    url: "https://colegiotecminas.com.br/contato",
+    siteName: "TecMinas",
+    images: [
+      {
+        url: "https://colegiotecminas.com.br/images/contato.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Contato TecMinas",
+      },
+    ],
+    locale: "pt_BR",
+    type: "website",
+  },
+};
 
 export default function Contact() {
   const contacts = [

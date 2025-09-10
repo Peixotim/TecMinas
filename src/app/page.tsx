@@ -12,18 +12,45 @@ import Contact from "@/components/contact";
 
 const INITIAL_VISIBLE_COURSES = 6; // Quantos cursos aparecem inicialmente (Definir)
 const COURSES_INCREMENT = 3; // Quantos cursos são adicionados a cada clique (Definir)
-
-// Home.tsx
+export const metadata = {
+  title: "Colégio Técnico TecMinas - Educação Técnica de Excelência em MG",
+  description:
+    "Cursos técnicos e profissionalizantes reconhecidos pelo MEC. Alta empregabilidade, inovação e foco no mercado. Estude no Colégio Técnico TecMinas em Coronel Fabriciano - MG.",
+  keywords: [
+    "Colégio Técnico TecMinas",
+    "Cursos Técnicos MG",
+    "Educação Profissional",
+    "Cursos EAD",
+    "TecMinas Coronel Fabriciano",
+  ],
+  openGraph: {
+    title: "Colégio Técnico TecMinas",
+    description:
+      "Transformando potencial em profissão. Cursos técnicos de qualidade no coração de Minas Gerais.",
+    url: "https://colegiotecminas.com.br",
+    siteName: "TecMinas",
+    images: [
+      {
+        url: "https://colegiotecminas.com.br/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Colégio Técnico TecMinas",
+      },
+    ],
+    locale: "pt_BR",
+    type: "website",
+  },
+};
 
 export default function Home() {
   const allCourses = CardsPosMain();
 
-  // Cursos prioritários (em ordem fixa)
+  //Prioridade de Cursos
   const priorityTitles = [
     "Técnico em Segurança do Trabalho - Por Competência",
     "Técnico em Enfermagem - Por Competência",
     "Técnico em Eletrotécnica - Por Competência",
-    "Técnico em Logística - Por Competência", // <- precisa existir na sua lista
+    "Técnico em Logística - Por Competência",
     "Técnico em Mineração - Por Competência",
     "Técnico em Soldagem - Por Competência",
   ];

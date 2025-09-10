@@ -14,6 +14,36 @@ export interface CourseCardProps {
   flag?: string;
 }
 
+export const metadata = {
+  title: "Cursos Técnicos e Profissionalizantes | Colégio Técnico TecMinas",
+  description:
+    "Descubra os cursos técnicos e profissionalizantes da TecMinas: Logística, Enfermagem, Saúde, Administração e muito mais. Ensino de qualidade com alta taxa de empregabilidade.",
+  keywords: [
+    "Cursos Técnicos",
+    "Cursos Profissionalizantes",
+    "Curso de Logística",
+    "Curso de Enfermagem",
+    "TecMinas Cursos",
+  ],
+  openGraph: {
+    title: "Cursos Técnicos da TecMinas",
+    description:
+      "Conheça nossos cursos técnicos e profissionalizantes, preparados para o mercado de trabalho.",
+    url: "https://colegiotecminas.com.br/cursos",
+    siteName: "TecMinas",
+    images: [
+      {
+        url: "https://colegiotecminas.com.br/images/cursos.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Cursos Técnicos da TecMinas",
+      },
+    ],
+    locale: "pt_BR",
+    type: "website",
+  },
+};
+
 export default function CourseCard({
   title,
   subTitle,
