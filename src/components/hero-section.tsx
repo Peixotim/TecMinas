@@ -11,18 +11,24 @@ export default function HeroSection() {
     <section className="relative w-full h-[600px] overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <picture>
-          <source srcSet="/768x690.png" media="(max-width: 768px)" />
           <source
-            srcSet="/1024x600.png"
+            srcSet="/imagesWebp/768x690.webp"
+            media="(max-width: 768px)"
+          />
+          <source
+            srcSet="/imagesWebp/1024x600.webp"
             media="(min-width: 769px) and (max-width: 1023px)"
           />
           <source
-            srcSet="/1920x600.png"
+            srcSet="/imagesWebp/1920x600.webp"
             media="(min-width: 1024px) and (max-width: 1920px)"
           />
-          <source srcSet="/1940x600.png" media="(min-width: 1921px)" />
+          <source
+            srcSet="/imagesWebp/1940x600.webp"
+            media="(min-width: 1921px)"
+          />
           <Image
-            src="/1920x600.png"
+            src="/imagesWebp/1920x600.webp"
             alt="Hero Background"
             className="object-bottom"
             fill

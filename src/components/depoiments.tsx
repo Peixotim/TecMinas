@@ -83,7 +83,6 @@ const Depoiments = () => {
   const primaryRed = "#DC2626"; // Um vermelho mais refinado (Tailwind red-600)
 
   return (
-    // AQUI ESTÁ A ALTERAÇÃO: Fundo da seção padronizado para branco
     <section id="depoimentos" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         {/* Header */}
@@ -94,17 +93,13 @@ const Depoiments = () => {
           </Badge>
           <h2 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-6">
             Veja o que nossos alunos
-            {/* O vermelho é usado aqui como o principal ponto de atenção */}
             <span style={{ color: primaryRed }} className="block">
               conquistaram depois do curso
             </span>
           </h2>
           <p className="text-xl text-gray-500 max-w-3xl mx-auto mb-8">
             Mais de{" "}
-            {/* O vermelho destaca o número mais importante do parágrafo */}
-            <strong style={{ color: primaryRed }}>
-              2.500 profissionais
-            </strong>{" "}
+            <strong style={{ color: primaryRed }}>2.500 profissionais</strong>{" "}
             já transformaram suas carreiras conosco. Veja alguns depoimentos
             reais de quem conseguiu emprego na área de tecnologia.
           </p>
