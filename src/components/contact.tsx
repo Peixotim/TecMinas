@@ -3,6 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Phone, Mail, Instagram, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+
 export const metadata = {
   title: "Fale Conosco | Colégio Técnico TecMinas",
   description:
@@ -57,7 +58,7 @@ export default function Contact() {
       label: "Endereço",
       value:
         "R. Luiz Rodrigues dos Santos, 44 - Todos Os Santos, Cel. Fabriciano - MG",
-      href: "https://maps.google.com/?q=R.+Luiz+Rodrigues+dos+Santos,+44+-+Todos+Os+Santos,+Cel.+Fabriciano+-+MG",
+      href: "https://maps.google.com/?q=R. Luiz Rodrigues dos Santos, 44 - Todos Os Santos, Cel. Fabriciano - MG",
     },
   ];
 
@@ -71,26 +72,28 @@ export default function Contact() {
       <CardContent>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {contacts.map((item, i) => (
-            <motion.div
+            <Link
               key={i}
-              whileHover={{ scale: 1.05, y: -3 }}
-              whileTap={{ scale: 0.97 }}
-              className="flex flex-col items-center justify-center gap-2 p-6 rounded-2xl border border-gray-200 bg-white/70 backdrop-blur-sm shadow-sm hover:shadow-[0_4px_20px_rgba(220,38,38,0.35)] transition-all duration-300"
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              // A MUDANÇA ESTÁ AQUI: Adicione 'block' e 'h-full'
+              className="block h-full group"
             >
-              <div className="p-3 rounded-full bg-gray-100">{item.icon}</div>
-              <p className="text-sm font-semibold text-gray-700">
-                {item.label}
-              </p>
-              {/* Link */}
-              <Link
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 text-center text-sm hover:text-red-600 transition-colors"
+              <motion.div
+                whileHover={{ scale: 1.05, y: -3 }}
+                whileTap={{ scale: 0.97 }}
+                className="flex flex-col items-center justify-center gap-2 p-6 rounded-2xl border border-gray-200 bg-white/70 backdrop-blur-sm shadow-sm hover:shadow-[0_4px_20px_rgba(220,38,38,0.35)] transition-all duration-300 h-full cursor-pointer"
               >
-                {item.value}
-              </Link>
-            </motion.div>
+                <div className="p-3 rounded-full bg-gray-100">{item.icon}</div>
+                <p className="text-sm font-semibold text-gray-700">
+                  {item.label}
+                </p>
+                <p className="text-gray-500 text-center text-sm group-hover:text-red-600 transition-colors">
+                  {item.value}
+                </p>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </CardContent>
