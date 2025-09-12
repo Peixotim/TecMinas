@@ -37,9 +37,9 @@ export default function Contact() {
   const contacts = [
     {
       icon: <Phone className="w-6 h-6 text-blue-600" />,
-      label: "Telefone Suporte",
+      label: "Telefone / WhatsApp",
       value: "(31) 97314-4070",
-      href: "tel:+5531973144070",
+      href: "https://wa.me/5531973144070?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20ajuda",
     },
     {
       icon: <Mail className="w-6 h-6 text-red-500" />,
@@ -58,7 +58,7 @@ export default function Contact() {
       label: "Endereço",
       value:
         "R. Luiz Rodrigues dos Santos, 44 - Todos Os Santos, Cel. Fabriciano - MG",
-      href: "https://maps.google.com/?q=R. Luiz Rodrigues dos Santos, 44 - Todos Os Santos, Cel. Fabriciano - MG",
+      href: "https://www.google.com/maps/search/?api=1&query=R.+Luiz+Rodrigues+dos+Santos,+44+-+Todos+Os+Santos,+Cel.+Fabriciano+-+MG",
     },
   ];
 
@@ -77,7 +77,6 @@ export default function Contact() {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              // A MUDANÇA ESTÁ AQUI: Adicione 'block' e 'h-full'
               className="block h-full group"
             >
               <motion.div
