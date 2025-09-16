@@ -55,13 +55,13 @@ export default function CourseInformations({
     const formData = new FormData(event.currentTarget);
     const name = formData.get("name") as string;
     const whatsapp = formData.get("whatsapp") as string;
-    const interestArea = formData.get("interestArea") as string;
+    const interestArea = " ";
 
     const subscriptionData = {
-      fullerName: name,
+      name: name,
       phone: whatsapp.replace(/\D/g, ""),
       areaOfInterest: interestArea,
-      enterpriseId: 1,
+      enterpriseId: 3,
     };
 
     try {

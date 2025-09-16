@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,7 +9,8 @@ import { cn } from "./lib/utils";
 import { motion, useScroll } from "framer-motion";
 import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
-import { submitSubscription } from "./lib/api";
+import { submitSubscription, buildSubscriptionFromForm } from "./lib/api";
+
 const menuItems = [
   { name: "Início", href: "#inicio" },
   { name: "Sobre Nós", href: "#sobrenos" },
@@ -35,18 +37,11 @@ export const Header = () => {
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormStatus("loading");
-
     try {
-      const formData = new FormData(event.currentTarget);
-      const data = {
-        fullerName: formData.get("name") as string,
-        phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
-        areaOfInterest: formData.get("interestArea") as string,
-        enterpriseId: 1,
-      };
+      // monta o payload a partir do formulário + .env
+      const data = buildSubscriptionFromForm(event.currentTarget);
 
-      console.log("Enviando dados do Header:", data);
-
+      // envia
       await submitSubscription(data);
 
       setFormStatus("success");
@@ -61,11 +56,8 @@ export const Header = () => {
   React.useEffect(() => {
     let lastScroll = 0;
     return scrollY.on("change", (latest) => {
-      if (latest > lastScroll && latest > 80) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
+      if (latest > lastScroll && latest > 80) setHidden(true);
+      else setHidden(false);
       lastScroll = latest;
     });
   }, [scrollY]);
@@ -104,8 +96,8 @@ export const Header = () => {
 
               {/* Menu Desktop */}
               <ul className="hidden lg:flex gap-10 font-medium text-[16px]">
-                {menuItems.map((item, index) => (
-                  <li key={index}>
+                {menuItems.map((item) => (
+                  <li key={item.href}>
                     <Link
                       href={item.href}
                       className="relative text-zinc-700 dark:text-zinc-200 hover:text-red-600 transition-colors duration-300 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-600 after:transition-all after:duration-300 hover:after:w-full"
@@ -116,10 +108,10 @@ export const Header = () => {
                 ))}
               </ul>
 
-              {/* --- 3. Botão WhatsApp Desktop (Modificado) --- */}
+              {/* Botão WhatsApp Desktop -> abre modal */}
               <div className="hidden lg:flex">
                 <Button
-                  onClick={openModal} // Ação alterada de link para abrir o modal
+                  onClick={openModal}
                   className="rounded-full bg-white text-black transitions hover:text-white hover:bg-green-600 px-6 shadow-lg"
                 >
                   <MessageCircle className="w-4 h-4" />
@@ -147,8 +139,8 @@ export const Header = () => {
               className="lg:hidden bg-white dark:bg-black border-t border-zinc-200 dark:border-zinc-800 shadow-md px-6 py-6"
             >
               <ul className="space-y-6 text-lg font-medium">
-                {menuItems.map((item, index) => (
-                  <li key={index}>
+                {menuItems.map((item) => (
+                  <li key={item.href}>
                     <Link
                       href={item.href}
                       onClick={() => setMenuState(false)}
@@ -160,11 +152,10 @@ export const Header = () => {
                 ))}
               </ul>
               <div className="mt-6">
-                {/* --- 4. Botão WhatsApp Mobile (Modificado) --- */}
                 <Button
                   onClick={() => {
                     openModal();
-                    setMenuState(false); // Fecha o menu ao abrir o modal
+                    setMenuState(false);
                   }}
                   className="w-full rounded-full bg-red-600 hover:bg-red-700 shadow-lg text-white"
                 >
@@ -176,13 +167,12 @@ export const Header = () => {
         </nav>
       </motion.header>
 
-      {/* --- 5. Renderização do Modal --- */}
+      {/* Modal */}
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <SubscriptionForm
           status={formStatus}
           onSubmit={handleFormSubmit}
           onCancel={closeModal}
-          // Passamos um contexto diferente para saber que este contato veio do header
           selectedContent="Area Desejada"
         />
       </Modal>
