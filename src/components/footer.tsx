@@ -100,9 +100,11 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/sistec"
                   className="hover:text-[#DC2626] transition-colors"
-                ></a>
+                >
+                  Sistec
+                </a>
               </li>
               <li>
                 <a

@@ -16,6 +16,7 @@ const menuItems = [
   { name: "Sobre Nós", href: "#sobrenos" },
   { name: "Cursos", href: "#cursos" },
   { name: "Contato", href: "#contato" },
+  { name: "SISTEC-MEC", href: "/sistec" },
 ];
 
 export const Header = () => {
