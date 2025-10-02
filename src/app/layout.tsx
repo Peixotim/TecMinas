@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Tecminas",
-  description: "Site tecminas criado por Pedro Peixoto",
+  description: "Uma nova jornada para o seu futuro. Cursos Tecnicos 100% EaD",
 };
 
 export default function RootLayout({
