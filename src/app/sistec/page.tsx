@@ -184,10 +184,15 @@ export default function PageSistecMecTecMinas() {
                   <strong>Consulta Pública de Instituição de Ensino</strong>
                 </>,
                 <>
-                  Selecione <strong>Minas Gerais</strong> e a cidade da unidade
+                  Selecione <strong>Pará</strong> e a cidade de{" "}
+                  <strong>Marabá</strong>
                 </>,
                 <>
-                  Procure por <strong>TecMinas</strong> e visualize os detalhes
+                  Procure por{" "}
+                  <strong>
+                    SISTEMA DE ENSINO INTEGRADO - MARABÁ [ 57209 ]
+                  </strong>{" "}
+                  e visualize os detalhes
                 </>,
               ].map((content, i) => (
                 <li key={i} className="flex items-start gap-3">
