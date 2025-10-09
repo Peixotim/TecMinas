@@ -28,6 +28,10 @@ export default function RootLayout({
     <html lang="pt-br" className="scroll-smooth scroll-pt-24">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta
+          name="google-site-verification"
+          content="BYCYPG48W2Xv8t_DEWQT72TW6Qweh1U8cFw-EK9goXY"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
