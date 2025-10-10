@@ -61,7 +61,7 @@ export default function CourseInformations({
       name: name,
       phone: whatsapp.replace(/\D/g, ""),
       areaOfInterest: interestArea,
-      enterpriseId: 3,
+      enterpriseId: Number(process.env.NEXT_PUBLIC_ENTERPRISE_ID),
     };
 
     try {
