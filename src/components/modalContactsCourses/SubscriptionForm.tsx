@@ -48,21 +48,33 @@ export default function SubscriptionForm({
   const [lgpdAccepted, setLgpdAccepted] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+  // --- 🔧 Formatação do número de WhatsApp ---
   const handleWhatsappChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const rawValue = e.target.value.replace(/\D/g, "");
-    let formattedValue = rawValue;
+    let value = e.target.value.replace(/\D/g, ""); // remove tudo que não for número
 
-    if (rawValue.length > 2) {
-      formattedValue = `(${rawValue.substring(0, 2)}) ${rawValue.substring(2)}`;
+    // Limita o número a 11 dígitos (DDD + 9 + número)
+    if (value.length > 11) {
+      value = value.substring(0, 11);
     }
-    if (rawValue.length > 7) {
-      formattedValue = `(${rawValue.substring(0, 2)}) ${rawValue.substring(
+
+    // Formata conforme o padrão (31) 97361-3727
+    if (value.length <= 2) {
+      value = `(${value}`;
+    } else if (value.length <= 6) {
+      value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
+    } else if (value.length <= 10) {
+      value = `(${value.substring(0, 2)}) ${value.substring(
         2,
-        rawValue.length > 10 ? 7 : 6
-      )}-${rawValue.substring(rawValue.length > 10 ? 7 : 6)}`;
+        6
+      )}-${value.substring(6)}`;
+    } else {
+      value = `(${value.substring(0, 2)}) ${value.substring(
+        2,
+        7
+      )}-${value.substring(7, 11)}`;
     }
 
-    setWhatsapp(formattedValue);
+    setWhatsapp(value);
   };
 
   if (status === "loading") return <LoadingState />;
