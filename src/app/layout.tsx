@@ -4,6 +4,8 @@ import "./globals.css";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CookieConsent from "@/components/CookieBanner";
 import SchemaOrg from "./seo/SchemaOrg";
+import { Suspense } from "react";
+import AnalyticsScripts from "@/components/AnalyticsScripts"; // ✅ import correto
 
 // ===== Fontes =====
 const geistSans = Geist({
@@ -24,8 +26,8 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.ico", sizes: "32x32", type: "image/png" },
-      { url: "/favicon.ico", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
     apple: "/apple-touch-icon.png",
     shortcut: "/favicon.ico",
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
     siteName: "TecMinas",
     images: [
       {
-        url: "og.webp", // opcional: crie uma imagem 1200x630 para aparecer nos compartilhamentos
+        url: "/og.webp", // Imagem recomendada para compartilhamento
         width: 1200,
         height: 630,
         alt: "Colégio Técnico TecMinas",
@@ -49,10 +51,11 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://www.colegiotecminas.com.br"),
   verification: {
-    google: "BYCYPG48W2Xv8t_DEWQT72TW6Qweh1U8cFw-EK9goXY", // ✅ continua funcionando
+    google: "BYCYPG48W2Xv8t_DEWQT72TW6Qweh1U8cFw-EK9goXY", // Google Search Console
   },
 };
 
+// ===== Layout Principal =====
 export default function RootLayout({
   children,
 }: {
@@ -60,19 +63,39 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br" className="scroll-smooth scroll-pt-24">
-      <header>
-        <meta
-          name="google-site-verification"
-          content="pK1ocOVUJwzzdju6scROwYpzYBv0qZ5vA4DeWYtm-FM"
-        />
-      </header>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* === Google Tag Manager (NoScript) === */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
+
+        {/* === Facebook Pixel (NoScript) === */}
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}&ev=PageView&noscript=1`}
+          />
+        </noscript>
+
+        {/* === Conteúdo Principal === */}
         {children}
         <SchemaOrg />
         <WhatsAppButton />
         <CookieConsent />
+
+        {/* === Scripts de Análise === */}
+        <Suspense fallback={null}>
+          <AnalyticsScripts />
+        </Suspense>
       </body>
     </html>
   );
