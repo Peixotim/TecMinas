@@ -5,7 +5,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import CookieConsent from "@/components/CookieBanner";
 import SchemaOrg from "./seo/SchemaOrg";
 import { Suspense } from "react";
-import AnalyticsScripts from "@/components/AnalyticsScripts"; // ✅ import correto
+import AnalyticsScripts from "@/components/AnalyticsScripts";
 
 // ===== Fontes =====
 const geistSans = Geist({
