@@ -151,7 +151,7 @@ export default function CourseInformations({
                     fill
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>
                 </div>
               )}
               <button
@@ -195,7 +195,7 @@ export default function CourseInformations({
                 {course.whatYouWillLearn.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <CheckCircle
-                      className="text-red-600 mt-1 flex-shrink-0"
+                      className="text-red-600 mt-1 shrink-0"
                       size={20}
                     />
                     <span className="text-red-900">{item}</span>

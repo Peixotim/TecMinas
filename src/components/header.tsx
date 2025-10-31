@@ -86,7 +86,7 @@ export const Header = () => {
               <ul className="hidden lg:flex gap-10 font-medium text-[16px]">
                 {menuItems.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} className="relative text-zinc-700 dark:text-zinc-200 hover:text-red-600 transition-colors duration-300 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-600 after:transition-all after:duration-300 hover:after:w-full">
+                    <Link href={item.href} className="relative text-zinc-700 dark:text-zinc-200 hover:text-red-600 transition-colors duration-300 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-red-600 after:transition-all after:duration-300 hover:after:w-full">
                       {item.name}
                     </Link>
                   </li>
