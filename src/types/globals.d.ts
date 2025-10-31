@@ -6,7 +6,7 @@ declare global {
     fbq?: (
       event: string,
       action: string,
-      options?: Record<string, any>
+      options?: Record<string, unknown>
     ) => void;
   }
 }

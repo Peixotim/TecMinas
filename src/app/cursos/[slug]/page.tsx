@@ -21,6 +21,20 @@ export default function CursosSlugPage() {
     (course) => slugify(course.subTitle) === decodedSlug
   );
 
+  const allCourseDetails = StoragedCoursesInfo();
+  const course = allCourseDetails.find(
+    (c: CourseInformationsProps) => slugify(c.title) === decodedSlug
+  );
+
+  // Tracking: ViewContent (visualização de página de curso)
+  // Hooks devem ser chamados antes de qualquer return condicional
+  useEffect(() => {
+    if (course) {
+      trackViewContent(course.title);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [course?.title]);
+
   // --- 1. PÁGINA DE CATEGORIA DE CURSOS ---
   if (filteredByCategory.length > 0) {
     return (
@@ -62,18 +76,6 @@ export default function CursosSlugPage() {
       </div>
     );
   }
-
-  const allCourseDetails = StoragedCoursesInfo();
-  const course = allCourseDetails.find(
-    (c: CourseInformationsProps) => slugify(c.title) === decodedSlug
-  );
-
-  // Tracking: ViewContent (visualização de página de curso)
-  useEffect(() => {
-    if (course) {
-      trackViewContent(course.title);
-    }
-  }, [course]);
 
   if (course) {
     const cardData = allCoursesForCards.find((c) => c.title === course.title);

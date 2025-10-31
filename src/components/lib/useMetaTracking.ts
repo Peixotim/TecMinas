@@ -22,7 +22,7 @@ export function useScrollTracking() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    let scrollPercentagesTracked: Set<25 | 50 | 75 | 100> = new Set();
+    const scrollPercentagesTracked: Set<25 | 50 | 75 | 100> = new Set();
 
     const handleScroll = () => {
       const windowHeight = window.innerHeight;

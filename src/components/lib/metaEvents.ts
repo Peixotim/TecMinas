@@ -41,7 +41,7 @@ export interface MetaEvent {
   eventId?: string;
   eventTime?: number;
   userData?: MetaUserData;
-  customData?: Record<string, any>;
+  customData?: Record<string, unknown>;
 }
 
 interface MetaApiResponse {
@@ -68,6 +68,25 @@ const META_API_BASE_URL = `https://graph.facebook.com/${META_API_VERSION}`;
 // ===== FUNÇÕES UTILITÁRIAS =====
 
 /**
+ * Gera hash SHA256 de uma string
+ * A API do Meta requer que email e telefone sejam hasheados
+ */
+async function hashSHA256(value: string): Promise<string> {
+  if (typeof window === "undefined") {
+    // Servidor-side: usa crypto nativo do Node.js
+    const crypto = await import("crypto");
+    return crypto.createHash("sha256").update(value.toLowerCase().trim()).digest("hex");
+  }
+  
+  // Cliente-side: usa Web Crypto API
+  const encoder = new TextEncoder();
+  const data = encoder.encode(value.toLowerCase().trim());
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+/**
  * Gera um ID único para o evento
  */
 export function generateEventId(): string {
@@ -77,6 +96,34 @@ export function generateEventId(): string {
   }
   // Servidor: apenas timestamp (melhor performance)
   return `${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+}
+
+/**
+ * Converte nosso formato de userData para o esperado pela Meta Conversions API
+ */
+async function convertUserDataToMeta(userData: MetaUserData): Promise<Record<string, unknown>> {
+  const out: Record<string, unknown> = {};
+
+  // Já enviamos email/phone hasheados em getAutoUserData
+  if (userData.email) out.em = userData.email; // SHA256
+  if (userData.phone) out.ph = userData.phone; // SHA256
+
+  // Nomes/cidade/estado/CEP: se vierem, hashear agora
+  if (userData.first_name) out.fn = await hashSHA256(userData.first_name);
+  if (userData.last_name) out.ln = await hashSHA256(userData.last_name);
+  if (userData.city) out.ct = await hashSHA256(userData.city);
+  if (userData.region) out.st = await hashSHA256(userData.region);
+  if (userData.postal) out.zp = await hashSHA256(userData.postal);
+
+  if (userData.country) out.country = String(userData.country).toLowerCase();
+  if (userData.external_id) out.external_id = userData.external_id; // já hash
+
+  if (userData.client_ip) out.client_ip_address = userData.client_ip;
+  if (userData.user_agent) out.client_user_agent = userData.user_agent;
+  if (userData.fbp) out.fbp = userData.fbp;
+  if (userData.fbc) out.fbc = userData.fbc;
+
+  return out;
 }
 
 /**
@@ -107,7 +154,9 @@ function getFbc(): string | undefined {
 
 /**
  * Obtém IP do cliente (via API ou header)
+ * Nota: Função disponível para uso futuro se necessário
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function getClientIp(): Promise<string | undefined> {
   try {
     // Usa serviço externo para obter IP (apenas se necessário)
@@ -124,6 +173,7 @@ async function getClientIp(): Promise<string | undefined> {
 
 /**
  * Obtém dados do usuário automaticamente
+ * Email e telefone são hasheados (SHA256) conforme requerido pela API do Meta
  */
 export async function getAutoUserData(
   formData?: {
@@ -144,15 +194,21 @@ export async function getAutoUserData(
     userData.last_name = nameParts.slice(1).join(" ") || undefined;
   }
 
+  // Email deve ser hasheado (SHA256)
   if (formData?.email) {
-    userData.email = formData.email.trim().toLowerCase();
+    const emailNormalized = formData.email.trim().toLowerCase();
+    userData.email = await hashSHA256(emailNormalized);
   }
 
+  // Telefone deve ser hasheado (SHA256) - apenas dígitos
   if (formData?.phone) {
     // Remove formatação e normaliza
-    userData.phone = formData.phone.replace(/\D/g, "");
-    if (userData.phone && !userData.phone.startsWith("55")) {
-      userData.phone = `55${userData.phone}`;
+    let phoneNormalized = formData.phone.replace(/\D/g, "");
+    if (phoneNormalized && !phoneNormalized.startsWith("55")) {
+      phoneNormalized = `55${phoneNormalized}`;
+    }
+    if (phoneNormalized) {
+      userData.phone = await hashSHA256(phoneNormalized);
     }
   }
 
@@ -183,7 +239,7 @@ export async function getAutoUserData(
 
   // Remove campos undefined
   return Object.fromEntries(
-    Object.entries(userData).filter(([_, v]) => v !== undefined)
+    Object.entries(userData).filter(([, v]) => v !== undefined)
   ) as MetaUserData;
 }
 
@@ -227,8 +283,11 @@ export function normalizePhoneForMeta(phone: string): string {
 export async function sendMetaEventClient(
   event: MetaEvent
 ): Promise<MetaApiResponse | null> {
-  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+  const pixelIdRaw = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+  // Sanitiza Pixel ID: deve conter apenas dígitos
+  const pixelId = pixelIdRaw?.match(/\d+/)?.[0];
   const accessToken = process.env.NEXT_PUBLIC_META_ACCESS_TOKEN;
+  const testEventCode = process.env.NEXT_PUBLIC_META_TEST_EVENT_CODE;
 
   if (!pixelId || !accessToken) {
     console.warn(
@@ -249,20 +308,53 @@ export async function sendMetaEventClient(
   const eventId = event.eventId || generateEventId();
   const eventTime = event.eventTime || Math.floor(Date.now() / 1000);
 
-  const payload = {
-    data: [
-      {
-        event_name: event.eventName,
-        event_id: eventId,
-        event_time: eventTime,
-        event_source_url: typeof window !== "undefined" ? window.location.href : undefined,
-        action_source: "website",
-        user_data: event.userData || {},
-        custom_data: event.customData || {},
-      },
-    ],
+  // Converte e limpa user_data para o formato da Meta
+  const convertedUserData = event.userData ? await convertUserDataToMeta(event.userData) : {};
+  const cleanUserData = Object.fromEntries(
+    Object.entries(convertedUserData).filter(([, v]) => v !== undefined && v !== "")
+  );
+
+  // Remove campos undefined do custom_data
+  const cleanCustomData = event.customData
+    ? Object.fromEntries(
+        Object.entries(event.customData).filter(([, v]) => v !== undefined && v !== "")
+      )
+    : {};
+
+  // Constrói o payload do evento
+  const eventPayload: Record<string, unknown> = {
+    event_name: event.eventName,
+    event_id: eventId,
+    event_time: eventTime,
+    action_source: "website",
+  };
+
+  // Adiciona event_source_url apenas se disponível
+  if (typeof window !== "undefined" && window.location.href) {
+    eventPayload.event_source_url = window.location.href;
+  }
+
+  // Garante client_user_agent caso não haja fbp
+  if (!cleanUserData.fbp && typeof window !== "undefined") {
+    cleanUserData.client_user_agent = cleanUserData.client_user_agent || navigator.userAgent;
+  }
+
+  // Adiciona user_data (sempre, pois Meta normalmente requer ao menos client_user_agent/fbp)
+  eventPayload.user_data = cleanUserData;
+
+  // Adiciona custom_data apenas se houver dados
+  if (Object.keys(cleanCustomData).length > 0) {
+    eventPayload.custom_data = cleanCustomData;
+  }
+
+  const payload: Record<string, unknown> = {
+    data: [eventPayload],
     access_token: accessToken,
   };
+  // Inclui test_event_code quando fornecido (útil para depuração no Events Manager)
+  if (testEventCode) {
+    payload.test_event_code = testEventCode;
+  }
 
   try {
     const response = await fetch(
@@ -279,7 +371,14 @@ export async function sendMetaEventClient(
     const data: MetaApiResponse = await response.json();
 
     if (!response.ok) {
-      console.error("[Meta Events] Erro ao enviar evento:", data);
+      // Log mais detalhado do erro
+      console.error("[Meta Events] Erro ao enviar evento:", {
+        status: response.status,
+        statusText: response.statusText,
+        error: data,
+        event: event.eventName,
+        payload: JSON.stringify(payload, null, 2),
+      });
       return data;
     }
 
@@ -379,8 +478,9 @@ export async function trackLead(data: {
     zip: data.zip,
   });
 
+  // External ID deve ser hasheado se fornecido
   if (data.externalId) {
-    userData.external_id = data.externalId;
+    userData.external_id = await hashSHA256(data.externalId);
   }
 
   await sendMetaEvent({
@@ -409,8 +509,9 @@ export async function trackCompleteRegistration(data: {
     phone: data.phone,
   });
 
+  // External ID deve ser hasheado se fornecido
   if (data.externalId) {
-    userData.external_id = data.externalId;
+    userData.external_id = await hashSHA256(data.externalId);
   }
 
   await sendMetaEvent({
