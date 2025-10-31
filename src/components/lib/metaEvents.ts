@@ -277,32 +277,50 @@ export function normalizePhoneForMeta(phone: string): string {
 // ===== ENVIO DE EVENTOS =====
 
 /**
+ * Verifica se o Meta Events está configurado e habilitado
+ */
+function isMetaEventsEnabled(): boolean {
+  const pixelIdRaw = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+  const pixelId = pixelIdRaw?.match(/\d+/)?.[0];
+  const accessToken = process.env.NEXT_PUBLIC_META_ACCESS_TOKEN;
+  
+  // Verifica se há configuração válida
+  if (!pixelId || !accessToken) {
+    return false;
+  }
+
+  // Verifica consentimento de cookies (apenas no cliente)
+  if (typeof window !== "undefined") {
+    const consent = localStorage.getItem("cookieConsent");
+    if (consent !== "accepted") {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+/**
  * Envia evento para a API do Meta (cliente-side)
  * Nota: Para produção, recomenda-se usar servidor-side
  */
 export async function sendMetaEventClient(
   event: MetaEvent
 ): Promise<MetaApiResponse | null> {
+  // Validação prévia: retorna silenciosamente se não estiver configurado
+  if (!isMetaEventsEnabled()) {
+    return null;
+  }
+
   const pixelIdRaw = process.env.NEXT_PUBLIC_META_PIXEL_ID;
   // Sanitiza Pixel ID: deve conter apenas dígitos
   const pixelId = pixelIdRaw?.match(/\d+/)?.[0];
   const accessToken = process.env.NEXT_PUBLIC_META_ACCESS_TOKEN;
   const testEventCode = process.env.NEXT_PUBLIC_META_TEST_EVENT_CODE;
 
+  // Validação dupla para garantir
   if (!pixelId || !accessToken) {
-    console.warn(
-      "[Meta Events] Pixel ID ou Access Token não configurados"
-    );
     return null;
-  }
-
-  // Verifica consentimento de cookies
-  if (typeof window !== "undefined") {
-    const consent = localStorage.getItem("cookieConsent");
-    if (consent !== "accepted") {
-      console.warn("[Meta Events] Consentimento de cookies não aceito");
-      return null;
-    }
   }
 
   const eventId = event.eventId || generateEventId();
@@ -334,12 +352,22 @@ export async function sendMetaEventClient(
     eventPayload.event_source_url = window.location.href;
   }
 
-  // Garante client_user_agent caso não haja fbp
-  if (!cleanUserData.fbp && typeof window !== "undefined") {
-    cleanUserData.client_user_agent = cleanUserData.client_user_agent || navigator.userAgent;
+  // Garante pelo menos um identificador (Meta requer fbp, fbc ou client_user_agent)
+  if (typeof window !== "undefined") {
+    if (!cleanUserData.fbp && !cleanUserData.fbc) {
+      cleanUserData.client_user_agent = cleanUserData.client_user_agent || navigator.userAgent;
+    }
   }
 
-  // Adiciona user_data (sempre, pois Meta normalmente requer ao menos client_user_agent/fbp)
+  // Valida se há pelo menos algum dado de identificação
+  const hasIdentifier = cleanUserData.fbp || cleanUserData.fbc || cleanUserData.client_user_agent || cleanUserData.em || cleanUserData.ph;
+  
+  if (!hasIdentifier && Object.keys(cleanUserData).length === 0) {
+    // Sem dados de identificação, não envia evento
+    return null;
+  }
+
+  // Adiciona user_data (Meta requer pelo menos um identificador)
   eventPayload.user_data = cleanUserData;
 
   // Adiciona custom_data apenas se houver dados
@@ -371,20 +399,41 @@ export async function sendMetaEventClient(
     const data: MetaApiResponse = await response.json();
 
     if (!response.ok) {
-      // Log mais detalhado do erro
-      console.error("[Meta Events] Erro ao enviar evento:", {
-        status: response.status,
-        statusText: response.statusText,
-        error: data,
-        event: event.eventName,
-        payload: JSON.stringify(payload, null, 2),
-      });
+      // Verifica se é erro 400 (Bad Request) - geralmente configuração incorreta
+      if (response.status === 400) {
+        const errorMessage = data.error?.message || "Bad Request";
+        // Só loga em desenvolvimento ou se não for erro de ID inválido conhecido
+        const isDev = process.env.NODE_ENV === "development";
+        if (isDev && !errorMessage.includes("Unsupported post request")) {
+          console.warn("[Meta Events] Erro 400 - Verifique Pixel ID e Access Token:", {
+            status: response.status,
+            error: data.error,
+            event: event.eventName,
+          });
+        }
+      } else {
+        // Outros erros (401, 403, 500, etc.) - sempre loga
+        console.error("[Meta Events] Erro ao enviar evento:", {
+          status: response.status,
+          statusText: response.statusText,
+          error: data,
+          event: event.eventName,
+        });
+      }
       return data;
+    }
+
+    // Sucesso - apenas loga em desenvolvimento
+    if (process.env.NODE_ENV === "development") {
+      console.log(`[Meta Events] ✅ Evento "${event.eventName}" enviado com sucesso`);
     }
 
     return data;
   } catch (error) {
-    console.error("[Meta Events] Erro ao enviar evento:", error);
+    // Erro de rede ou JSON parsing - apenas loga em desenvolvimento
+    if (process.env.NODE_ENV === "development") {
+      console.warn("[Meta Events] Erro de rede ao enviar evento:", error);
+    }
     return null;
   }
 }
@@ -448,6 +497,11 @@ export async function sendMetaEvent(
   event: MetaEvent,
   useServer: boolean = false
 ): Promise<MetaApiResponse | null> {
+  // Verifica se está habilitado antes de tentar enviar
+  if (!isMetaEventsEnabled() && !useServer) {
+    return null;
+  }
+
   if (useServer || typeof window === "undefined") {
     return sendMetaEventServer(event);
   }
