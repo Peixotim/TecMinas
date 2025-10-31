@@ -14,9 +14,13 @@ import { useState, useCallback } from "react";
 import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
 import { submitSubscription } from "./lib/api";
-import { trackLead, trackCompleteRegistration, trackInitiateCheckout } from "./lib/metaEvents";
+import {
+  trackLead,
+  trackCompleteRegistration,
+  trackInitiateCheckout,
+} from "./lib/metaEvents";
 
-// --- Definição de Tipos (Interfaces) ---
+// --- Tipos ---
 export interface CourseSection {
   title: string;
   content: string;
@@ -46,9 +50,11 @@ export default function CourseInformations({
   const openModal = () => {
     setFormStatus("form");
     setIsModalOpen(true);
-    // Tracking: Inicia checkout (abre modal)
-    trackInitiateCheckout(course.title);
+
+    // Tracking: inicia checkout (abriu modal de inscrição)
+    trackInitiateCheckout(undefined, { course_name: course.title });
   };
+
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -56,42 +62,36 @@ export default function CourseInformations({
     setFormStatus("loading");
 
     const formData = new FormData(event.currentTarget);
-    const name = formData.get("name") as string;
-    const whatsapp = formData.get("whatsapp") as string;
+    const name = (formData.get("name") as string)?.trim();
+    const whatsapp = (formData.get("whatsapp") as string)?.replace(/\D/g, "");
     const interestArea = " ";
 
     const subscriptionData = {
-      name: name,
-      phone: whatsapp.replace(/\D/g, ""),
+      name,
+      phone: whatsapp,
       areaOfInterest: interestArea,
-      enterpriseId: Number(process.env.NEXT_PUBLIC_ENTERPRISE_ID),
+      enterpriseId: Number(process.env.NEXT_PUBLIC_ENTERPRISE_ID) || 3,
     };
 
     try {
-      // Tracking: Lead (enviando formulário)
-      await trackLead({
-        name,
-        phone: whatsapp,
-        courseName: course.title,
-        externalId: subscriptionData.phone,
-      });
+      // Tracking: Lead (formulário enviado)
+      await trackLead(
+        { first_name: name, phone: whatsapp, external_id: whatsapp },
+        { course_name: course.title }
+      );
 
       await submitSubscription(subscriptionData);
 
-      // Tracking: CompleteRegistration (sucesso)
-      await trackCompleteRegistration({
-        name,
-        phone: whatsapp,
-        courseName: course.title,
-        externalId: subscriptionData.phone,
-      });
+      // Tracking: CompleteRegistration (inscrição concluída)
+      await trackCompleteRegistration(
+        { first_name: name, phone: whatsapp, external_id: whatsapp },
+        { course_name: course.title }
+      );
 
       setFormStatus("success");
     } catch (error) {
       console.error("Erro ao enviar o formulário:", error);
-      alert(
-        "Houve um problema ao enviar sua inscrição. Por favor, tente novamente."
-      );
+      alert("Houve um problema ao enviar sua inscrição. Por favor, tente novamente.");
       setFormStatus("form");
     }
   };
@@ -114,7 +114,8 @@ export default function CourseInformations({
           />
           Voltar para Início
         </Link>
-        <div className="bg-white rounded-xl p-8 shadow-lg shadow-red-900/20">
+
+        <div className="bg-white rounded-xl p-8 shadow-lg shadow-red-900/20 mt-6">
           <header className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="flex flex-col gap-4">
               <span className="font-semibold text-red-600">
@@ -140,6 +141,7 @@ export default function CourseInformations({
                 </div>
               )}
             </div>
+
             <div className="relative">
               {course.img && (
                 <div className="aspect-square relative rounded-2xl overflow-hidden shadow-lg shadow-red-900/20">
@@ -167,6 +169,8 @@ export default function CourseInformations({
             </div>
           </header>
         </div>
+
+        {/* Conteúdo do curso */}
         <main className="mt-16 md:mt-24 space-y-8">
           <div className="bg-white rounded-xl p-8 shadow-lg shadow-red-900/20">
             <h2 className="text-2xl font-bold text-red-700 mb-4 flex items-center gap-3">
@@ -181,6 +185,7 @@ export default function CourseInformations({
               aprendizado completa e eficaz.
             </p>
           </div>
+
           {course.whatYouWillLearn && course.whatYouWillLearn.length > 0 && (
             <div className="bg-white rounded-xl p-8 shadow-lg shadow-red-900/20">
               <h2 className="text-2xl font-bold text-red-700 mb-6 flex items-center gap-3">
@@ -199,6 +204,7 @@ export default function CourseInformations({
               </ul>
             </div>
           )}
+
           {course.sections.map((section, index) => (
             <div
               key={index}
@@ -213,6 +219,7 @@ export default function CourseInformations({
               </p>
             </div>
           ))}
+
           {course.depoiments && (
             <div className="bg-white rounded-xl p-8 shadow-lg shadow-red-900/20">
               <blockquote className="text-center">
@@ -232,8 +239,9 @@ export default function CourseInformations({
           )}
         </main>
       </div>
-      <Modal 
-        isOpen={isModalOpen} 
+
+      <Modal
+        isOpen={isModalOpen}
         onClose={closeModal}
         modalType="subscription"
         courseName={course.title}

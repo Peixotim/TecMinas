@@ -67,7 +67,7 @@ export default function CourseCard({
         )}
       </div>
 
-      <div className="flex flex-grow flex-col p-6">
+      <div className="flex grow flex-col p-6">
         <div className="mb-3 flex items-center justify-between">
           <p className="text-sm font-medium text-red-700">{subTitle}</p>
           <div className="flex items-center gap-1 text-amber-500">
@@ -85,12 +85,12 @@ export default function CourseCard({
           Curso reconhecido nacionalmente. Avance na sua carreira com
           flexibilidade!
         </p>
-        <div className="flex-grow" />
+        <div className="grow" />
         <Link
           href={`/cursos/${slugify(title)}`}
           className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-red-700 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition-all duration-300 hover:scale-105 hover:bg-red-800 hover:shadow-xl hover:shadow-red-500/30"
         >
-          <PlusCircle size={20} className="flex-shrink-0" />
+          <PlusCircle size={20} className="shrink-0" />
           Ver Mais Detalhes
         </Link>
       </div>

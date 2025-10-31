@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Send, CheckCircle, Loader2, X } from "lucide-react";
+import { trackCompleteRegistration } from "@/components/lib/metaEvents"; // ✅ rastreia o envio do formulário
 
-// --- Componentes de estado (sem alterações na aparência) ---
 const LoadingState = () => (
   <div className="flex flex-col items-center justify-center h-80 text-center">
     <Loader2 className="h-12 w-12 text-red-700 animate-spin" />
@@ -48,33 +48,42 @@ export default function SubscriptionForm({
   const [lgpdAccepted, setLgpdAccepted] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  // --- 🔧 Formatação do número de WhatsApp ---
   const handleWhatsappChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, ""); // remove tudo que não for número
+    let value = e.target.value.replace(/\D/g, "");
 
-    // Limita o número a 11 dígitos (DDD + 9 + número)
-    if (value.length > 11) {
-      value = value.substring(0, 11);
-    }
+    if (value.length > 11) value = value.substring(0, 11);
 
-    // Formata conforme o padrão (31) 97361-3727
     if (value.length <= 2) {
       value = `(${value}`;
     } else if (value.length <= 6) {
       value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
     } else if (value.length <= 10) {
-      value = `(${value.substring(0, 2)}) ${value.substring(
-        2,
-        6
-      )}-${value.substring(6)}`;
+      value = `(${value.substring(0, 2)}) ${value.substring(2, 6)}-${value.substring(6)}`;
     } else {
-      value = `(${value.substring(0, 2)}) ${value.substring(
-        2,
-        7
-      )}-${value.substring(7, 11)}`;
+      value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`;
     }
 
     setWhatsapp(value);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const name = formData.get("name") as string;
+
+    // ✅ Rastreia conversão do Meta Pixel / API
+    await trackCompleteRegistration(
+      {
+        first_name: name,
+        phone: whatsapp,
+        external_id: whatsapp.replace(/\D/g, ""),
+      },
+      {
+        course_name: selectedContent,
+      }
+    );
+
+    onSubmit(event);
   };
 
   if (status === "loading") return <LoadingState />;
@@ -86,20 +95,18 @@ export default function SubscriptionForm({
       <p className="text-zinc-500 mt-2 mb-6">
         Preencha seus dados para garantir sua vaga.
       </p>
+
       <div className="mb-6">
         <span className="inline-block bg-zinc-100 text-zinc-700 text-sm font-medium px-4 py-1.5 rounded-full">
           Curso: <strong>{selectedContent}</strong>
         </span>
       </div>
 
-      <form onSubmit={onSubmit} className="text-left">
+      <form onSubmit={handleSubmit} className="text-left">
         <div className="space-y-5">
           {/* Nome */}
           <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-zinc-600 mb-1"
-            >
+            <label htmlFor="name" className="block text-sm font-medium text-zinc-600 mb-1">
               Nome Completo <span className="text-red-500">*</span>
             </label>
             <input
@@ -114,10 +121,7 @@ export default function SubscriptionForm({
 
           {/* WhatsApp */}
           <div>
-            <label
-              htmlFor="whatsapp"
-              className="block text-sm font-medium text-zinc-600 mb-1"
-            >
+            <label htmlFor="whatsapp" className="block text-sm font-medium text-zinc-600 mb-1">
               WhatsApp <span className="text-red-500">*</span>
             </label>
             <input
@@ -132,7 +136,7 @@ export default function SubscriptionForm({
             />
           </div>
 
-          {/* ✅ Checkbox LGPD estilizado */}
+          {/* LGPD */}
           <div className="mt-4">
             <label className="flex items-center gap-3 cursor-pointer select-none">
               <input
@@ -142,7 +146,6 @@ export default function SubscriptionForm({
                 className="peer hidden"
                 required
               />
-              {/* Caixa customizada */}
               <span
                 className="w-5 h-5 flex items-center justify-center rounded-md border-2 border-zinc-300 bg-white 
                 peer-checked:bg-red-700 peer-checked:border-red-700 transition-colors duration-200"
@@ -156,16 +159,10 @@ export default function SubscriptionForm({
                     stroke="currentColor"
                     strokeWidth={3}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 )}
               </span>
-
-              {/* Texto do termo */}
               <span className="text-sm text-zinc-700">
                 Eu li e aceito os{" "}
                 <button
@@ -201,7 +198,7 @@ export default function SubscriptionForm({
         </div>
       </form>
 
-      {/* --- Modal LGPD --- */}
+      {/* Modal LGPD */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white w-full max-w-lg rounded-2xl shadow-xl p-6 relative">
@@ -217,8 +214,7 @@ export default function SubscriptionForm({
             <div className="text-sm text-zinc-600 max-h-80 overflow-y-auto space-y-4">
               <p>
                 A LGPD (Lei nº 13.709/2018) dispõe sobre o tratamento de dados
-                pessoais, inclusive nos meios digitais, por pessoa natural ou
-                jurídica, com o objetivo de proteger os direitos fundamentais de
+                pessoais, inclusive nos meios digitais, com o objetivo de proteger os direitos fundamentais de
                 liberdade, privacidade e o livre desenvolvimento da
                 personalidade da pessoa natural.
               </p>

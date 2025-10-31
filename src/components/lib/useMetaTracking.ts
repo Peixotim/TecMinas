@@ -4,59 +4,51 @@
 
 import { useEffect, useCallback } from "react";
 import {
-  trackScroll,
   trackPageView,
-  trackModalOpen,
-  trackModalClose,
   trackLead,
   trackCompleteRegistration,
   trackInitiateCheckout,
-  trackFormField,
   trackViewContent,
+  trackScroll,
+  trackFormField,
+  trackModalOpen,
+  trackModalClose,
 } from "./metaEvents";
 
 /**
- * Hook para tracking de scroll
+ * Tipo para as porcentagens de scroll
+ */
+type ScrollMilestone = 25 | 50 | 75 | 100;
+
+/**
+ * Hook para tracking de scroll (25%, 50%, 75%, 100%)
  */
 export function useScrollTracking() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    let scrollPercentagesTracked: Set<25 | 50 | 75 | 100> = new Set();
+    const tracked: Set<ScrollMilestone> = new Set();
 
     const handleScroll = () => {
+      const { scrollTop, scrollHeight } = document.documentElement;
       const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const percent = Math.min(
+        Math.round(((scrollTop + windowHeight) / scrollHeight) * 100),
+        100
+      ) as ScrollMilestone | number;
 
-      const scrollPercentage = Math.round(
-        ((scrollTop + windowHeight) / documentHeight) * 100
-      );
+      const milestones: ScrollMilestone[] = [25, 50, 75, 100];
 
-      // Tracka 25%, 50%, 75%, 100%
-      if (scrollPercentage >= 25 && !scrollPercentagesTracked.has(25)) {
-        scrollPercentagesTracked.add(25);
-        trackScroll(25);
-      }
-      if (scrollPercentage >= 50 && !scrollPercentagesTracked.has(50)) {
-        scrollPercentagesTracked.add(50);
-        trackScroll(50);
-      }
-      if (scrollPercentage >= 75 && !scrollPercentagesTracked.has(75)) {
-        scrollPercentagesTracked.add(75);
-        trackScroll(75);
-      }
-      if (scrollPercentage >= 100 && !scrollPercentagesTracked.has(100)) {
-        scrollPercentagesTracked.add(100);
-        trackScroll(100);
+      for (const milestone of milestones) {
+        if (percent >= milestone && !tracked.has(milestone)) {
+          tracked.add(milestone);
+          trackScroll(milestone);
+        }
       }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 }
 
@@ -74,7 +66,7 @@ export function useFormFieldTracking() {
 }
 
 /**
- * Funções de tracking expostas
+ * Funções de tracking expostas para uso global
  */
 export const metaTracking = {
   trackLead,
@@ -87,4 +79,3 @@ export const metaTracking = {
   trackFormField,
   trackScroll,
 };
-
