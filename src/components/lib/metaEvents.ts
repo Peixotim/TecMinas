@@ -377,16 +377,16 @@ export async function sendMetaEventClient(
 
   const payload: Record<string, unknown> = {
     data: [eventPayload],
-    access_token: accessToken,
   };
-  // Inclui test_event_code quando fornecido (útil para depuração no Events Manager)
-  if (testEventCode) {
-    payload.test_event_code = testEventCode;
-  }
 
   try {
+    // Monta URL com access_token e test_event_code na querystring
+    const url = new URL(`${META_API_BASE_URL}/${pixelId}/events`);
+    url.searchParams.set("access_token", accessToken);
+    if (testEventCode) url.searchParams.set("test_event_code", String(testEventCode));
+
     const response = await fetch(
-      `${META_API_BASE_URL}/${pixelId}/events`,
+      url.toString(),
       {
         method: "POST",
         headers: {
