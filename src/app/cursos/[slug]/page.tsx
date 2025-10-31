@@ -43,7 +43,7 @@ export default function CursosSlugPage() {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-zinc-800 leading-tight">
             Explore os melhores cursos de{" "}
             {/* Efeito de texto em gradiente para um toque premium */}
-            <span className="bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-red-600 to-red-800 bg-clip-text text-transparent">
               {filteredByCategory[0].subTitle}
             </span>
           </h1>
