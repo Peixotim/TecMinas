@@ -1,6 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useEffect } from "react";
 import CardsPosMain from "@/utils/cardsPosMain";
 import StoragedCoursesInfo from "@/utils/storagedCoursesInfo";
 import { slugify } from "@/utils/slugify";
@@ -9,6 +10,7 @@ import CourseInformations from "@/components/courseInformations";
 import CourseCard from "@/components/courseCards";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react"; // Usando um ícone mais limpo
+import { trackViewContent } from "@/components/lib/metaEvents";
 
 export default function CursosSlugPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -66,8 +68,16 @@ export default function CursosSlugPage() {
     (c: CourseInformationsProps) => slugify(c.title) === decodedSlug
   );
 
+  // Tracking: ViewContent (visualização de página de curso)
+  useEffect(() => {
+    if (course) {
+      trackViewContent(course.title);
+    }
+  }, [course]);
+
   if (course) {
     const cardData = allCoursesForCards.find((c) => c.title === course.title);
+    
     // Este componente já possui seu próprio estilo premium, então o mantemos.
     return <CourseInformations course={course} cardData={cardData} />;
   }

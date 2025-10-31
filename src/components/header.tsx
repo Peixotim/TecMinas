@@ -10,6 +10,7 @@ import { motion, useScroll } from "framer-motion";
 import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
 import { submitSubscription, buildSubscriptionFromForm } from "./lib/api";
+import { trackLead, trackCompleteRegistration, trackInitiateCheckout } from "./lib/metaEvents";
 
 const menuItems = [
   { name: "Início", href: "#inicio" },
@@ -31,6 +32,8 @@ export const Header = () => {
   const openModal = () => {
     setFormStatus("form");
     setIsModalOpen(true);
+    // Tracking: Inicia checkout (abre modal)
+    trackInitiateCheckout("Area Desejada");
   };
 
   const closeModal = useCallback(() => setIsModalOpen(false), []);
@@ -38,12 +41,33 @@ export const Header = () => {
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormStatus("loading");
+    
     try {
       // monta o payload a partir do formulário + .env
+      const formData = new FormData(event.currentTarget);
+      const name = (formData.get("name") as string) || "";
+      const whatsapp = (formData.get("whatsapp") as string) || "";
+
       const data = buildSubscriptionFromForm(event.currentTarget);
 
-      // envia
+      // Tracking: Lead (enviando formulário)
+      await trackLead({
+        name,
+        phone: whatsapp,
+        courseName: "Area Desejada",
+        externalId: data.phone, // Usa telefone como external_id
+      });
+
+      // envia para API
       await submitSubscription(data);
+
+      // Tracking: CompleteRegistration (sucesso)
+      await trackCompleteRegistration({
+        name,
+        phone: whatsapp,
+        courseName: "Area Desejada",
+        externalId: data.phone,
+      });
 
       setFormStatus("success");
     } catch (error) {
@@ -169,7 +193,12 @@ export const Header = () => {
       </motion.header>
 
       {/* Modal */}
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      <Modal 
+        isOpen={isModalOpen} 
+        onClose={closeModal}
+        modalType="subscription"
+        courseName="Area Desejada"
+      >
         <SubscriptionForm
           status={formStatus}
           onSubmit={handleFormSubmit}

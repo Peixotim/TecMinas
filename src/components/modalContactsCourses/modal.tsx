@@ -2,15 +2,37 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackModalOpen, trackModalClose } from "@/components/lib/metaEvents";
 
 type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  modalType?: string;
+  courseName?: string;
 };
 
-export default function Modal({ isOpen, onClose, children }: ModalProps) {
+export default function Modal({ isOpen, onClose, children, modalType = "subscription", courseName }: ModalProps) {
   const modalContentRef = useRef<HTMLDivElement>(null);
+  const hasTrackedOpen = useRef(false);
+
+  // Tracking de abertura do modal
+  useEffect(() => {
+    if (isOpen && !hasTrackedOpen.current) {
+      hasTrackedOpen.current = true;
+      trackModalOpen(modalType, courseName);
+    } else if (!isOpen) {
+      hasTrackedOpen.current = false;
+    }
+  }, [isOpen, modalType, courseName]);
+
+  // Tracking de fechamento do modal (apenas quando fechado após ter sido aberto)
+  useEffect(() => {
+    if (!isOpen && hasTrackedOpen.current) {
+      trackModalClose(modalType);
+      hasTrackedOpen.current = false;
+    }
+  }, [isOpen, modalType]);
 
   // Efeito para fechar com a tecla 'Escape'
   useEffect(() => {

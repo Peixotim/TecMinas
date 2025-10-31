@@ -3,15 +3,24 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
+import { useScrollTracking } from './lib/useMetaTracking';
+import { trackPageView } from './lib/metaEvents';
 
 export default function AnalyticsScripts() {
   const pathname = usePathname();
+  
+  // Tracking de scroll
+  useScrollTracking();
 
-  // Dispara evento do Facebook Pixel a cada mudança de rota
+  // Dispara evento do Facebook Pixel e Meta API a cada mudança de rota
   useEffect(() => {
+    // Facebook Pixel (cliente-side)
     if (process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID && window.fbq) {
       window.fbq('track', 'PageView');
     }
+    
+    // Meta API (PageView)
+    trackPageView(pathname);
   }, [pathname]);
 
   return (

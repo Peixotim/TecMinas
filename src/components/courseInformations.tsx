@@ -14,6 +14,7 @@ import { useState, useCallback } from "react";
 import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
 import { submitSubscription } from "./lib/api";
+import { trackLead, trackCompleteRegistration, trackInitiateCheckout } from "./lib/metaEvents";
 
 // --- Definição de Tipos (Interfaces) ---
 export interface CourseSection {
@@ -45,6 +46,8 @@ export default function CourseInformations({
   const openModal = () => {
     setFormStatus("form");
     setIsModalOpen(true);
+    // Tracking: Inicia checkout (abre modal)
+    trackInitiateCheckout(course.title);
   };
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
@@ -65,7 +68,24 @@ export default function CourseInformations({
     };
 
     try {
+      // Tracking: Lead (enviando formulário)
+      await trackLead({
+        name,
+        phone: whatsapp,
+        courseName: course.title,
+        externalId: subscriptionData.phone,
+      });
+
       await submitSubscription(subscriptionData);
+
+      // Tracking: CompleteRegistration (sucesso)
+      await trackCompleteRegistration({
+        name,
+        phone: whatsapp,
+        courseName: course.title,
+        externalId: subscriptionData.phone,
+      });
+
       setFormStatus("success");
     } catch (error) {
       console.error("Erro ao enviar o formulário:", error);
@@ -212,7 +232,12 @@ export default function CourseInformations({
           )}
         </main>
       </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      <Modal 
+        isOpen={isModalOpen} 
+        onClose={closeModal}
+        modalType="subscription"
+        courseName={course.title}
+      >
         <SubscriptionForm
           status={formStatus}
           onSubmit={handleFormSubmit}
