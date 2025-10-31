@@ -448,23 +448,71 @@ export async function sendMetaEventServer(
   const apiUrl = process.env.NEXT_PUBLIC_META_API_URL;
 
   if (!apiUrl) {
-    console.warn(
-      "[Meta Events] NEXT_PUBLIC_META_API_URL não configurado. Use proxy servidor."
-    );
+    // Silencia em produção, apenas loga em desenvolvimento
+    if (process.env.NODE_ENV === "development") {
+      console.warn(
+        "[Meta Events] NEXT_PUBLIC_META_API_URL não configurado. Configure para usar servidor-side."
+      );
+    }
     return null;
   }
 
   const eventId = event.eventId || generateEventId();
   const eventTime = event.eventTime || Math.floor(Date.now() / 1000);
 
-  const payload = {
+  // Converte e limpa user_data para o formato da Meta
+  const convertedUserData = event.userData ? await convertUserDataToMeta(event.userData) : {};
+  const cleanUserData = Object.fromEntries(
+    Object.entries(convertedUserData).filter(([, v]) => v !== undefined && v !== "")
+  );
+
+  // Remove campos undefined do custom_data
+  const cleanCustomData = event.customData
+    ? Object.fromEntries(
+        Object.entries(event.customData).filter(([, v]) => v !== undefined && v !== "")
+      )
+    : {};
+
+  // Constrói o payload do evento no formato esperado pelo servidor
+  const eventPayload: Record<string, unknown> = {
     event_name: event.eventName,
     event_id: eventId,
     event_time: eventTime,
-    event_source_url: event.customData?.source_url,
     action_source: "website",
-    user_data: event.userData || {},
-    custom_data: event.customData || {},
+  };
+
+  // Adiciona event_source_url se disponível
+  if (event.customData?.source_url) {
+    eventPayload.event_source_url = event.customData.source_url;
+  } else if (typeof window !== "undefined" && window.location.href) {
+    eventPayload.event_source_url = window.location.href;
+  }
+
+  // Garante pelo menos um identificador
+  if (typeof window !== "undefined") {
+    if (!cleanUserData.fbp && !cleanUserData.fbc) {
+      cleanUserData.client_user_agent = cleanUserData.client_user_agent || navigator.userAgent;
+    }
+  }
+
+  // Valida se há pelo menos algum dado de identificação
+  const hasIdentifier = cleanUserData.fbp || cleanUserData.fbc || cleanUserData.client_user_agent || cleanUserData.em || cleanUserData.ph;
+  
+  if (!hasIdentifier && Object.keys(cleanUserData).length === 0) {
+    // Sem dados de identificação, não envia evento
+    return null;
+  }
+
+  eventPayload.user_data = cleanUserData;
+
+  // Adiciona custom_data apenas se houver dados
+  if (Object.keys(cleanCustomData).length > 0) {
+    eventPayload.custom_data = cleanCustomData;
+  }
+
+  // Payload no formato esperado pelo endpoint servidor
+  const payload = {
+    data: [eventPayload],
   };
 
   try {
@@ -479,32 +527,57 @@ export async function sendMetaEventServer(
     const data: MetaApiResponse = await response.json();
 
     if (!response.ok) {
-      console.error("[Meta Events] Erro ao enviar evento:", data);
+      // Log apenas em desenvolvimento
+      if (process.env.NODE_ENV === "development") {
+        console.warn("[Meta Events] Erro ao enviar evento via servidor:", {
+          status: response.status,
+          error: data.error,
+          event: event.eventName,
+        });
+      }
       return data;
+    }
+
+    // Log de sucesso apenas em desenvolvimento
+    if (process.env.NODE_ENV === "development") {
+      console.log(`[Meta Events] ✅ Evento "${event.eventName}" enviado via servidor com sucesso`);
     }
 
     return data;
   } catch (error) {
-    console.error("[Meta Events] Erro ao enviar evento:", error);
+    // Log apenas em desenvolvimento
+    if (process.env.NODE_ENV === "development") {
+      console.warn("[Meta Events] Erro de rede ao enviar evento via servidor:", error);
+    }
     return null;
   }
 }
 
 /**
  * Envia evento (wrapper que escolhe cliente ou servidor)
+ * Por padrão, usa servidor-side quando disponível
  */
 export async function sendMetaEvent(
   event: MetaEvent,
-  useServer: boolean = false
+  useServer: boolean = true // Por padrão usa servidor
 ): Promise<MetaApiResponse | null> {
-  // Verifica se está habilitado antes de tentar enviar
-  if (!isMetaEventsEnabled() && !useServer) {
+  // Prioriza servidor-side se estiver disponível
+  const apiUrl = process.env.NEXT_PUBLIC_META_API_URL;
+  if (useServer && apiUrl) {
+    return sendMetaEventServer(event);
+  }
+
+  // Fallback para cliente-side apenas se servidor não estiver configurado
+  if (typeof window === "undefined") {
+    // Servidor-side sem API URL configurada
     return null;
   }
 
-  if (useServer || typeof window === "undefined") {
-    return sendMetaEventServer(event);
+  // Verifica se está habilitado antes de tentar enviar (cliente-side)
+  if (!isMetaEventsEnabled()) {
+    return null;
   }
+
   return sendMetaEventClient(event);
 }
 
