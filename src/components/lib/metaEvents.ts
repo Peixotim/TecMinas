@@ -1,8 +1,6 @@
-// src/lib/metaEvents.ts
 "use server";
 import crypto from "crypto";
 
-// ===== TIPOS =====
 export type MetaEventName =
   | "PageView"
   | "Lead"
@@ -24,8 +22,8 @@ export interface MetaUserData {
   country?: string;
   postal?: string;
   external_id?: string;
-  fbp?: string;
-  fbc?: string;
+  fbp?: string; // 👈 Aceita 'fbp' vindo do cliente
+  fbc?: string; // 👈 Aceita 'fbc' vindo do cliente
 }
 
 export interface MetaEvent {
@@ -34,7 +32,10 @@ export interface MetaEvent {
   eventTime?: number;
   userData?: MetaUserData;
   customData?: Record<string, unknown>;
+  event_source_url?: string; // 👈 ALTERADO: Parâmetro de evento
+  user_agent?: string; // 👈 ALTERADO: Parâmetro de evento
 }
+
 
 interface MetaApiResponse {
   events_received?: number;
@@ -48,13 +49,15 @@ interface MetaApiResponse {
   };
 }
 
+
 // ===== CONFIG =====
 const META_API_VERSION = "v21.0";
 const META_API_BASE_URL = `https://graph.facebook.com/${META_API_VERSION}`;
-const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
-const ACCESS_TOKEN = process.env.NEXT_PUBLIC_META_ACCESS_TOKEN;
 
-// ===== UTILS =====
+
+const PIXEL_ID = process.env.META_PIXEL_ID;
+const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
+
 function sha256(value: string): string {
   return crypto.createHash("sha256").update(value.trim().toLowerCase()).digest("hex");
 }
@@ -63,24 +66,10 @@ function generateEventId(): string {
   return `${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
 }
 
-function getFbp(): string | undefined {
-  if (typeof document === "undefined") return;
-  const match = document.cookie.match(/_fbp=([^;]+)/);
-  return match ? match[1] : undefined;
-}
 
-function getFbc(): string | undefined {
-  if (typeof window === "undefined") return;
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get("_fbc") || undefined;
-}
-
-// Aplica hash em todos os campos sensíveis conforme regras do Meta
 async function getAutoUserData(data?: Partial<MetaUserData>): Promise<Record<string, string>> {
   const base: MetaUserData = {
     ...data,
-    fbp: getFbp(),
-    fbc: getFbc(),
     country: "br",
   };
 
@@ -95,7 +84,6 @@ async function getAutoUserData(data?: Partial<MetaUserData>): Promise<Record<str
     }
   }
 
-  // Renomeia para os parâmetros aceitos pela API
   const normalized: Record<string, string> = {};
   if (hashed.email) normalized.em = hashed.email;
   if (hashed.phone) normalized.ph = hashed.phone;
@@ -126,13 +114,20 @@ export async function sendMetaEvent(event: MetaEvent): Promise<MetaApiResponse |
         event_time: Math.floor(Date.now() / 1000),
         event_id: event.eventId || generateEventId(),
         action_source: "website",
-        event_source_url:
-          typeof window !== "undefined" ? window.location.href : undefined,
+        event_source_url: event.event_source_url, 
         user_data: event.userData || {},
-        custom_data: event.customData || {},
+        custom_data: {
+          ...event.customData,
+          client_user_agent: event.user_agent 
+        },
       },
     ],
   };
+
+  console.log(
+    `[Meta Events] 🚀 Enviando Evento: ${event.eventName}`,
+    JSON.stringify(payload, null, 2)
+  );
 
   try {
     const response = await fetch(
@@ -153,92 +148,140 @@ export async function sendMetaEvent(event: MetaEvent): Promise<MetaApiResponse |
   }
 }
 
-// ===== EVENTOS =====
-export async function trackPageView(): Promise<void> {
+
+export async function trackPageView(
+  event_source_url?: string,
+  user_agent?: string
+): Promise<void> {
   const userData = await getAutoUserData();
-  const customData = {
-    user_agent: typeof navigator !== "undefined" ? navigator.userAgent : undefined,
-  };
-  await sendMetaEvent({ eventName: "PageView", userData, customData });
+  await sendMetaEvent({
+    eventName: "PageView",
+    userData,
+    event_source_url,
+    user_agent,
+  });
 }
 
 export async function trackLead(
   data: MetaUserData,
-  customData?: Record<string, unknown>
+  customData?: Record<string, unknown>,
+  event_source_url?: string,
+  user_agent?: string
 ): Promise<void> {
   const userData = await getAutoUserData(data);
-  await sendMetaEvent({ eventName: "Lead", userData, customData });
+  await sendMetaEvent({
+    eventName: "Lead",
+    userData,
+    customData,
+    event_source_url,
+    user_agent,
+  });
 }
 
 export async function trackCompleteRegistration(
   data: MetaUserData,
-  customData?: Record<string, unknown>
+  customData?: Record<string, unknown>,
+  event_source_url?: string,
+  user_agent?: string
 ): Promise<void> {
   const userData = await getAutoUserData(data);
-  const custom = {
-    ...(customData || {}),
-    event_source_url: typeof window !== "undefined" ? window.location.href : undefined,
-  };
-
   await sendMetaEvent({
     eventName: "CompleteRegistration",
     userData,
-    customData: custom,
+    customData,
+    event_source_url,
+    user_agent,
   });
 }
 
 export async function trackInitiateCheckout(
   data?: MetaUserData,
-  customData?: Record<string, unknown>
+  customData?: Record<string, unknown>,
+  event_source_url?: string,
+  user_agent?: string
 ): Promise<void> {
   const userData = await getAutoUserData(data);
-  await sendMetaEvent({ eventName: "InitiateCheckout", userData, customData });
+  await sendMetaEvent({
+    eventName: "InitiateCheckout",
+    userData,
+    customData,
+    event_source_url,
+    user_agent,
+  });
 }
 
-export async function trackViewContent(name: string): Promise<void> {
+export async function trackViewContent(
+  name: string,
+  event_source_url?: string,
+  user_agent?: string
+): Promise<void> {
   const userData = await getAutoUserData();
   await sendMetaEvent({
     eventName: "ViewContent",
     userData,
     customData: { content_name: name },
+    event_source_url,
+    user_agent,
   });
 }
 
-export async function trackScroll(percent: number): Promise<void> {
+export async function trackScroll(
+  percent: number,
+  event_source_url?: string,
+  user_agent?: string
+): Promise<void> {
   const userData = await getAutoUserData();
   await sendMetaEvent({
     eventName: "Scroll",
     userData,
     customData: { scroll_percent: percent },
+    event_source_url,
+    user_agent,
   });
 }
 
 export async function trackFormField(
   fieldName: string,
-  hasValue: boolean
+  hasValue: boolean,
+  event_source_url?: string,
+  user_agent?: string
 ): Promise<void> {
   const userData = await getAutoUserData();
   await sendMetaEvent({
     eventName: "FormField",
     userData,
     customData: { field_name: fieldName, filled: hasValue },
+    event_source_url,
+    user_agent,
   });
 }
 
-export async function trackModalOpen(modalName?: string): Promise<void> {
+export async function trackModalOpen(
+  modalName?: string,
+  event_source_url?: string,
+  user_agent?: string
+): Promise<void> {
   const userData = await getAutoUserData();
   await sendMetaEvent({
     eventName: "ModalOpen",
     userData,
     customData: { modal_name: modalName },
+    event_source_url,
+    user_agent,
   });
 }
 
-export async function trackModalClose(modalName?: string): Promise<void> {
+export async function trackModalClose(
+  modalName?: string,
+  event_source_url?: string,
+  user_agent?: string
+): Promise<void> {
   const userData = await getAutoUserData();
   await sendMetaEvent({
     eventName: "ModalClose",
     userData,
     customData: { modal_name: modalName },
+    event_source_url,
+    user_agent,
   });
 }

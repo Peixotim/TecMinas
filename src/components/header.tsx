@@ -9,13 +9,17 @@ import { cn } from "./lib/utils";
 import { motion, useScroll } from "framer-motion";
 import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
-// 👈 CORRIGIDO: Removido 'buildSubscriptionFromForm' que causava o erro
 import { submitSubscription } from "./lib/api";
+
+// 1. IMPORTAÇÕES ATUALIZADAS
+// (Verifique se estes caminhos estão corretos para seu projeto)
 import {
   trackLead,
   trackCompleteRegistration,
   trackInitiateCheckout,
-} from "./lib/metaEvents";
+} from "./lib/metaEvents"; // Funções do Servidor
+import { getClientBrowserData } from "./lib/metaClient"; // Helper do Cliente
+import { trackEvent } from "./lib/analytics"; // Tracker do Navegador
 
 const menuItems = [
   { name: "Início", href: "#inicio" },
@@ -34,50 +38,76 @@ export const Header = () => {
     "form"
   );
 
+  // 2. FUNÇÃO 'openModal' ATUALIZADA
   const openModal = () => {
     setFormStatus("form");
     setIsModalOpen(true);
-    trackInitiateCheckout();
+    
+    const clientData = getClientBrowserData();
+
+    // Dispara o evento do NAVEGADOR primeiro
+    trackEvent("InitiateCheckout");
+
+    // Dispara o evento do SERVIDOR (CAPI)
+    trackInitiateCheckout(
+      { fbp: clientData.fbp, fbc: clientData.fbc },
+      undefined, // Sem custom data
+      clientData.event_source_url,
+      clientData.user_agent
+    );
   };
 
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
-  // 👈 CORRIGIDO: A função agora recebe 'formData' diretamente.
+  // 3. FUNÇÃO 'handleFormSubmit' ATUALIZADA
   const handleFormSubmit = async (formData: FormData) => {
     setFormStatus("loading");
 
     try {
-      // 👈 CORRIGIDO: Extrai os dados do 'formData' recebido.
+      // Coleta dados do formulário
       const name = (formData.get("name") as string) || "";
-      const email = (formData.get("email") as string) || ""; // Captura o email
+      const email = (formData.get("email") as string) || "";
       const whatsappRaw = (formData.get("whatsapp") as string) || "";
       const whatsappClean = whatsappRaw.replace(/\D/g, "");
 
-      // 👈 CORRIGIDO: Objeto de dados criado manualmente, igual ao outro componente.
+      // Coleta dados do navegador
+      const clientData = getClientBrowserData();
+
+      // Combina todos os dados do usuário para a Meta
+      const userData = {
+        first_name: name,
+        phone: whatsappRaw,
+        email: email,
+        external_id: whatsappClean,
+        fbp: clientData.fbp, // Dado de melhoria
+        fbc: clientData.fbc, // Dado de melhoria
+      };
+
+      // Dados para seu banco de dados
       const subscriptionData = {
         name: name,
-        phone: whatsappClean, // Envia o número limpo para o DB
-        areaOfInterest: "Area Desejada", // Valor padrão do seu modal
+        phone: whatsappClean,
+        areaOfInterest: "Area Desejada",
         enterpriseId: Number(process.env.NEXT_PUBLIC_ENTERPRISE_ID) || 3,
       };
 
-      // 👈 CORRIGIDO: Envia 'email' e 'whatsapp' (raw/clean) para o tracking.
-      await trackLead({
-        first_name: name,
-        phone: whatsappRaw,
-        email: email,
-        external_id: whatsappClean,
-      });
+      // Opcional: trackEvent("Lead");
+      await trackLead(
+        userData,
+        undefined, // Sem custom data
+        clientData.event_source_url, // Dado de melhoria
+        clientData.user_agent // Dado de melhoria
+      );
 
       await submitSubscription(subscriptionData);
 
-      // 👈 CORRIGIDO: Envia 'email' e 'whatsapp' (raw/clean) para o tracking.
-      await trackCompleteRegistration({
-        first_name: name,
-        phone: whatsappRaw,
-        email: email,
-        external_id: whatsappClean,
-      });
+      // Opcional: trackEvent("CompleteRegistration");
+      await trackCompleteRegistration(
+        userData,
+        undefined, // Sem custom data
+        clientData.event_source_url, // Dado de melhoria
+        clientData.user_agent // Dado de melhoria
+      );
 
       setFormStatus("success");
     } catch (error) {

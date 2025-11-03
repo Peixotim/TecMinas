@@ -1,7 +1,3 @@
-/**
- * Hook para facilitar o uso do tracking do Meta
- */
-
 import { useEffect, useCallback } from "react";
 import {
   trackPageView,
@@ -15,14 +11,10 @@ import {
   trackModalClose,
 } from "./metaEvents";
 
-/**
- * Tipo para as porcentagens de scroll
- */
+
 type ScrollMilestone = 25 | 50 | 75 | 100;
 
-/**
- * Hook para tracking de scroll (25%, 50%, 75%, 100%)
- */
+
 export function useScrollTracking() {
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -52,9 +44,7 @@ export function useScrollTracking() {
   }, []);
 }
 
-/**
- * Hook para tracking de preenchimento de formulário
- */
+
 export function useFormFieldTracking() {
   const trackField = useCallback((fieldName: string, hasValue: boolean) => {
     if (hasValue) {

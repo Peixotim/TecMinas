@@ -14,11 +14,16 @@ import { useState, useCallback } from "react";
 import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
 import { submitSubscription } from "./lib/api";
+
+// 1. IMPORTAÇÕES ATUALIZADAS
+// (Verifique se estes caminhos estão corretos para seu projeto)
 import {
   trackLead,
   trackCompleteRegistration,
   trackInitiateCheckout,
-} from "./lib/metaEvents";
+} from "./lib/metaEvents"; // Funções do Servidor
+import { getClientBrowserData } from "./lib/metaClient"; // Helper do Cliente
+import { trackEvent } from "./lib/analytics"; // Tracker do Navegador
 
 // --- Tipos ---
 export interface CourseSection {
@@ -47,59 +52,79 @@ export default function CourseInformations({
     "form"
   );
 
+  // 2. FUNÇÃO 'openModal' ATUALIZADA
   const openModal = () => {
     setFormStatus("form");
     setIsModalOpen(true);
 
-    // Tracking: inicia checkout (abriu modal de inscrição)
-    trackInitiateCheckout(undefined, { course_name: course.title });
+    const clientData = getClientBrowserData();
+    const customData = { course_name: course.title };
+
+    // Dispara o evento do NAVEGADOR primeiro
+    trackEvent("InitiateCheckout", customData);
+
+    // Dispara o evento do SERVIDOR (CAPI)
+    trackInitiateCheckout(
+      { fbp: clientData.fbp, fbc: clientData.fbc }, // Envia fbp/fbc
+      customData,
+      clientData.event_source_url,
+      clientData.user_agent
+    );
   };
 
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
-  // 👈 CORRIGIDO: A função agora recebe 'formData' diretamente.
+  // 3. FUNÇÃO 'handleFormSubmit' ATUALIZADA
   const handleFormSubmit = async (formData: FormData) => {
     setFormStatus("loading");
 
-    // 👈 CORRIGIDO: Extrai os dados do 'formData' recebido.
+    // Coleta dados do formulário
     const name = (formData.get("name") as string)?.trim();
-    const email = (formData.get("email") as string)?.trim(); // Captura o email
+    const email = (formData.get("email") as string)?.trim();
     const whatsappRaw = (formData.get("whatsapp") as string) || "";
     const whatsappClean = whatsappRaw.replace(/\D/g, "");
-    const interestArea = " ";
 
+    // Coleta dados do navegador
+    const clientData = getClientBrowserData();
+
+    // Combina todos os dados do usuário para a Meta
+    const userData = {
+      first_name: name,
+      phone: whatsappRaw, // Número com máscara para correspondência
+      email: email,
+      external_id: whatsappClean, // Número limpo como ID externo
+      fbp: clientData.fbp, // Dado de melhoria
+      fbc: clientData.fbc, // Dado de melhoria
+    };
+
+    // Dados customizados do evento
+    const customData = { course_name: course.title };
+
+    // Dados para seu banco de dados
     const subscriptionData = {
       name,
       phone: whatsappClean, // Envia o número limpo para o DB
-      areaOfInterest: interestArea,
+      areaOfInterest: " ",
       enterpriseId: Number(process.env.NEXT_PUBLIC_ENTERPRISE_ID) || 3,
     };
 
     try {
-      // Tracking: Lead (formulário enviado)
-      // 👈 CORRIGIDO: Envia 'email' e 'whatsapp' (raw/clean) para o tracking.
+      // Opcional: trackEvent("Lead", customData);
       await trackLead(
-        {
-          first_name: name,
-          phone: whatsappRaw, // Envia o número com máscara
-          email: email,
-          external_id: whatsappClean, // Envia o número limpo
-        },
-        { course_name: course.title }
+        userData,
+        customData,
+        clientData.event_source_url, // Dado de melhoria
+        clientData.user_agent // Dado de melhoria
       );
 
       await submitSubscription(subscriptionData);
 
-      // Tracking: CompleteRegistration (inscrição concluída)
-      // 👈 CORRIGIDO: Envia 'email' e 'whatsapp' (raw/clean) para o tracking.
+      // Opcional: trackEvent("CompleteRegistration", customData);
       await trackCompleteRegistration(
-        {
-          first_name: name,
-          phone: whatsappRaw,
-          email: email,
-          external_id: whatsappClean,
-        },
-        { course_name: course.title }
+        userData,
+        customData,
+        clientData.event_source_url, // Dado de melhoria
+        clientData.user_agent // Dado de melhoria
       );
 
       setFormStatus("success");
