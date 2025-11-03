@@ -33,7 +33,8 @@ const SuccessState = ({ onClose }: { onClose: () => void }) => (
 
 type SubscriptionFormProps = {
   status: "form" | "loading" | "success";
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  // 👈 ALTERADO: A prop 'onSubmit' agora espera receber o objeto FormData, não o evento.
+  onSubmit: (formData: FormData) => void;
   onCancel: () => void;
   selectedContent: string;
 };
@@ -70,12 +71,14 @@ export default function SubscriptionForm({
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const name = formData.get("name") as string;
+    const email = formData.get("email") as string; // 👈 ALTERADO: Captura o novo campo de email
 
     // ✅ Rastreia conversão do Meta Pixel / API
     await trackCompleteRegistration(
       {
         first_name: name,
         phone: whatsapp,
+        email: email, // 👈 ALTERADO: Envia o email para a API da Meta
         external_id: whatsapp.replace(/\D/g, ""),
       },
       {
@@ -83,7 +86,9 @@ export default function SubscriptionForm({
       }
     );
 
-    onSubmit(event);
+    // 👈 ALTERADO: Passa o objeto 'formData' diretamente para o componente pai.
+    // Isso corrige o erro 'Failed to construct FormData'.
+    onSubmit(formData);
   };
 
   if (status === "loading") return <LoadingState />;
@@ -116,6 +121,21 @@ export default function SubscriptionForm({
               required
               className="w-full px-4 py-3 bg-zinc-100 border-2 border-transparent rounded-lg placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:border-red-500 focus:ring-4 focus:ring-red-500/20 transition-all"
               placeholder="Seu nome completo"
+            />
+          </div>
+
+          {/* 👈 ALTERADO: Campo de Email Adicionado */}
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-zinc-600 mb-1">
+              Email <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              className="w-full px-4 py-3 bg-zinc-100 border-2 border-transparent rounded-lg placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:border-red-500 focus:ring-4 focus:ring-red-500/20 transition-all"
+              placeholder="seu.email@exemplo.com"
             />
           </div>
 

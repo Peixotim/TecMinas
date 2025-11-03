@@ -1,12 +1,3 @@
-/**
- * ========================================
- * API Route: Proxy para Meta Conversion API
- * ========================================
- * 
- * Endpoint servidor-side que faz proxy para a API do Meta
- * Mantém o Access Token seguro no servidor
- */
-
 import { NextRequest, NextResponse } from 'next/server';
 
 const META_API_VERSION = 'v21.0';

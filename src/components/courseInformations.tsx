@@ -57,41 +57,57 @@ export default function CourseInformations({
 
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
-  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  // 👈 CORRIGIDO: A função agora recebe 'formData' diretamente.
+  const handleFormSubmit = async (formData: FormData) => {
     setFormStatus("loading");
 
-    const formData = new FormData(event.currentTarget);
+    // 👈 CORRIGIDO: Extrai os dados do 'formData' recebido.
     const name = (formData.get("name") as string)?.trim();
-    const whatsapp = (formData.get("whatsapp") as string)?.replace(/\D/g, "");
+    const email = (formData.get("email") as string)?.trim(); // Captura o email
+    const whatsappRaw = (formData.get("whatsapp") as string) || "";
+    const whatsappClean = whatsappRaw.replace(/\D/g, "");
     const interestArea = " ";
 
     const subscriptionData = {
       name,
-      phone: whatsapp,
+      phone: whatsappClean, // Envia o número limpo para o DB
       areaOfInterest: interestArea,
       enterpriseId: Number(process.env.NEXT_PUBLIC_ENTERPRISE_ID) || 3,
     };
 
     try {
       // Tracking: Lead (formulário enviado)
+      // 👈 CORRIGIDO: Envia 'email' e 'whatsapp' (raw/clean) para o tracking.
       await trackLead(
-        { first_name: name, phone: whatsapp, external_id: whatsapp },
+        {
+          first_name: name,
+          phone: whatsappRaw, // Envia o número com máscara
+          email: email,
+          external_id: whatsappClean, // Envia o número limpo
+        },
         { course_name: course.title }
       );
 
       await submitSubscription(subscriptionData);
 
       // Tracking: CompleteRegistration (inscrição concluída)
+      // 👈 CORRIGIDO: Envia 'email' e 'whatsapp' (raw/clean) para o tracking.
       await trackCompleteRegistration(
-        { first_name: name, phone: whatsapp, external_id: whatsapp },
+        {
+          first_name: name,
+          phone: whatsappRaw,
+          email: email,
+          external_id: whatsappClean,
+        },
         { course_name: course.title }
       );
 
       setFormStatus("success");
     } catch (error) {
       console.error("Erro ao enviar o formulário:", error);
-      alert("Houve um problema ao enviar sua inscrição. Por favor, tente novamente.");
+      alert(
+        "Houve um problema ao enviar sua inscrição. Por favor, tente novamente."
+      );
       setFormStatus("form");
     }
   };
@@ -106,7 +122,7 @@ export default function CourseInformations({
         <Link
           href="/"
           className="group inline-flex items-center gap-2 bg-red-700 hover:bg-red-800 text-white
-          px-6 py-3 rounded-lg font-bold text-base transition-all duration-300 hover:scale-105 shadow-lg shadow-red-500/20 hover:shadow-xl hover:shadow-red-500/30"
+           px-6 py-3 rounded-lg font-bold text-base transition-all duration-300 hover:scale-105 shadow-lg shadow-red-500/20 hover:shadow-xl hover:shadow-red-500/30"
         >
           <ChevronLeft
             size={20}
