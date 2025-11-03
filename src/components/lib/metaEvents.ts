@@ -32,8 +32,8 @@ export interface MetaEvent {
   eventTime?: number;
   userData?: MetaUserData;
   customData?: Record<string, unknown>;
-  event_source_url?: string; // 👈 ALTERADO: Parâmetro de evento
-  user_agent?: string; // 👈 ALTERADO: Parâmetro de evento
+  event_source_url?: string; // 👈 Parâmetro de evento
+  user_agent?: string; // 👈 Parâmetro de evento
 }
 
 
@@ -57,6 +57,8 @@ const META_API_BASE_URL = `https://graph.facebook.com/${META_API_VERSION}`;
 
 const PIXEL_ID = process.env.META_PIXEL_ID;
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
+// 👈 1. LÊ O CÓDIGO DE TESTE DO ARQUIVO .ENV
+const TEST_EVENT_CODE = process.env.META_TEST_EVENT_CODE;
 
 function sha256(value: string): string {
   return crypto.createHash("sha256").update(value.trim().toLowerCase()).digest("hex");
@@ -122,6 +124,8 @@ export async function sendMetaEvent(event: MetaEvent): Promise<MetaApiResponse |
         },
       },
     ],
+    // 👈 2. ADICIONA O CÓDIGO DE TESTE AO PAYLOAD SE ELE EXISTIR
+    test_event_code: TEST_EVENT_CODE || undefined,
   };
 
   console.log(

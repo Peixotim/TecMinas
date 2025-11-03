@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// ===== SEO & Favicon Metadata =====
+
 export const metadata: Metadata = {
   title: "Colégio Técnico TecMinas",
   description:
@@ -26,10 +26,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
-    apple: "/apple-touch-icon.png",
     shortcut: "/favicon.ico",
   },
   openGraph: {
@@ -40,7 +37,7 @@ export const metadata: Metadata = {
     siteName: "TecMinas",
     images: [
       {
-        url: "/og.webp", // Imagem recomendada para compartilhamento
+        url: "/og.webp",
         width: 1200,
         height: 630,
         alt: "Colégio Técnico TecMinas",
@@ -51,7 +48,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://www.colegiotecminas.com.br"),
   verification: {
-    google: "BYCYPG48W2Xv8t_DEWQT72TW6Qweh1U8cFw-EK9goXY", // Google Search Console
+    google: "BYCYPG48W2Xv8t_DEWQT72TW6Qweh1U8cFw-EK9goXY",
   },
 };
 
@@ -62,11 +59,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+    
     <html lang="pt-br" className="scroll-smooth scroll-pt-24">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* === Google Tag Manager (NoScript) === */}
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
@@ -75,10 +72,7 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
-
-        {/* === Facebook Pixel (NoScript) === */}
         <noscript>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             height="1"
             width="1"
@@ -87,14 +81,14 @@ export default function RootLayout({
             src={`https://www.facebook.com/tr?id=${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}&ev=PageView&noscript=1`}
           />
         </noscript>
-
-        {/* === Conteúdo Principal === */}
         {children}
         <SchemaOrg />
+            <meta
+      name="facebook-domain-verification"
+      content="xxxxxxxxxxx"
+    />
         <WhatsAppButton />
         <CookieConsent />
-
-        {/* === Scripts de Análise === */}
         <Suspense fallback={null}>
           <AnalyticsScripts />
         </Suspense>
