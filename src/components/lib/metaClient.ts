@@ -9,7 +9,7 @@ import {
   trackModalClose,
   trackLead,
   trackCompleteRegistration,
-  trackInitiateCheckout,
+
   trackViewContent,
 } from "./metaEvents"; 
 
@@ -93,13 +93,9 @@ export function getClientBrowserData() {
   };
 }
 
-/**
- * Funções de tracking expostas para uso global
- */
 export const metaTracking = {
   trackLead,
   trackCompleteRegistration,
-  trackInitiateCheckout,
   trackPageView,
   trackViewContent,
   trackModalOpen,

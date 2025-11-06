@@ -11,15 +11,13 @@ import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
 import { submitSubscription } from "./lib/api";
 
-// 1. IMPORTAÇÕES ATUALIZADAS
-// (Verifique se estes caminhos estão corretos para seu projeto)
+
 import {
   trackLead,
   trackCompleteRegistration,
-  trackInitiateCheckout,
+
 } from "./lib/metaEvents"; // Funções do Servidor
 import { getClientBrowserData } from "./lib/metaClient"; // Helper do Cliente
-import { trackEvent } from "./lib/analytics"; // Tracker do Navegador
 
 const menuItems = [
   { name: "Início", href: "#inicio" },
@@ -42,19 +40,8 @@ export const Header = () => {
   const openModal = () => {
     setFormStatus("form");
     setIsModalOpen(true);
-    
-    const clientData = getClientBrowserData();
-
-    // Dispara o evento do NAVEGADOR primeiro
-    trackEvent("InitiateCheckout");
-
-    // Dispara o evento do SERVIDOR (CAPI)
-    trackInitiateCheckout(
-      { fbp: clientData.fbp, fbc: clientData.fbc },
-      undefined, // Sem custom data
-      clientData.event_source_url,
-      clientData.user_agent
-    );
+  
+ 
   };
 
   const closeModal = useCallback(() => setIsModalOpen(false), []);

@@ -5,7 +5,6 @@ export type MetaEventName =
   | "PageView"
   | "Lead"
   | "CompleteRegistration"
-  | "InitiateCheckout"
   | "ViewContent"
   | "Scroll"
   | "ModalOpen"
@@ -198,21 +197,7 @@ export async function trackCompleteRegistration(
   });
 }
 
-export async function trackInitiateCheckout(
-  data?: MetaUserData,
-  customData?: Record<string, unknown>,
-  event_source_url?: string,
-  user_agent?: string
-): Promise<void> {
-  const userData = await getAutoUserData(data);
-  await sendMetaEvent({
-    eventName: "InitiateCheckout",
-    userData,
-    customData,
-    event_source_url,
-    user_agent,
-  });
-}
+
 
 export async function trackViewContent(
   name: string,

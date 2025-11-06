@@ -111,10 +111,6 @@ META_ACCESS_TOKEN=seu_access_token_seguro
 - **Onde**: `header.tsx`, `courseInformations.tsx`
 - **Status**: ✅ Implementado
 
-### 4. InitiateCheckout
-- **Quando**: Ao abrir modal de inscrição
-- **Onde**: `header.tsx`, `courseInformations.tsx`
-- **Status**: ✅ Implementado
 
 ### 5. ViewContent
 - **Quando**: Ao visualizar página de curso

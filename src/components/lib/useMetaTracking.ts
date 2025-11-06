@@ -3,7 +3,6 @@ import {
   trackPageView,
   trackLead,
   trackCompleteRegistration,
-  trackInitiateCheckout,
   trackViewContent,
   trackScroll,
   trackFormField,
@@ -55,13 +54,10 @@ export function useFormFieldTracking() {
   return { trackField };
 }
 
-/**
- * Funções de tracking expostas para uso global
- */
+
 export const metaTracking = {
   trackLead,
   trackCompleteRegistration,
-  trackInitiateCheckout,
   trackPageView,
   trackViewContent,
   trackModalOpen,

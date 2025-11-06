@@ -15,16 +15,11 @@ import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
 import { submitSubscription } from "./lib/api";
 
-// 1. IMPORTAÇÕES ATUALIZADAS
-// (Verifique se estes caminhos estão corretos para seu projeto)
 import {
   trackLead,
   trackCompleteRegistration,
-  trackInitiateCheckout,
 } from "./lib/metaEvents"; // Funções do Servidor
 import { getClientBrowserData } from "./lib/metaClient"; // Helper do Cliente
-import { trackEvent } from "./lib/analytics"; // Tracker do Navegador
-
 // --- Tipos ---
 export interface CourseSection {
   title: string;
@@ -51,30 +46,14 @@ export default function CourseInformations({
   const [formStatus, setFormStatus] = useState<"form" | "loading" | "success">(
     "form"
   );
-
-  // 2. FUNÇÃO 'openModal' ATUALIZADA
+  
   const openModal = () => {
     setFormStatus("form");
     setIsModalOpen(true);
-
-    const clientData = getClientBrowserData();
-    const customData = { course_name: course.title };
-
-    // Dispara o evento do NAVEGADOR primeiro
-    trackEvent("InitiateCheckout", customData);
-
-    // Dispara o evento do SERVIDOR (CAPI)
-    trackInitiateCheckout(
-      { fbp: clientData.fbp, fbc: clientData.fbc }, // Envia fbp/fbc
-      customData,
-      clientData.event_source_url,
-      clientData.user_agent
-    );
-  };
+  }; // 👈 ESTE ERA O '}' FALTANTE
 
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
-  // 3. FUNÇÃO 'handleFormSubmit' ATUALIZADA
   const handleFormSubmit = async (formData: FormData) => {
     setFormStatus("loading");
 
@@ -296,4 +275,5 @@ export default function CourseInformations({
       </Modal>
     </div>
   );
-}
+} // 👈 ESTE É O '}' QUE FECHA O COMPONENTE
+// (O '}' extra foi removido)
