@@ -38,8 +38,8 @@ export default function Contact() {
     {
       icon: <Phone className="w-6 h-6 text-blue-600" />,
       label: "Telefone / WhatsApp",
-      value: "(31) 97314-4070",
-      href: "https://wa.me/5531973144070?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20ajuda",
+      value: "(31) 98107 - 6323",
+      href: "https://wa.me/5531981076323?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20ajuda",
     },
     {
       icon: <Mail className="w-6 h-6 text-red-500" />,
